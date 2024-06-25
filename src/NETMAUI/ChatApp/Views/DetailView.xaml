@@ -197,22 +197,16 @@
                                 <Ellipse
                                     Fill="{StaticResource PrimaryBrush}"
                                     Style="{StaticResource SearchButtonEllipseStyle}"/>
-                                <!-- FontImageSource not rendering correctly -->
-                                <!--
-                                <Image
-                                    Margin="6">
-                                    <Image.Source>
-                                        <FontImageSource   
-                                            FontFamily="Material Icons"
-                                            Glyph="&#xe163;"
-                                            Color="White"
-                                            Size="12" />
-                                    </Image.Source>
-                                </Image>
-                                -->
                                 <Image   
                                     Source="send.png"
                                     Style="{StaticResource SearchButtonImageStyle}"/>
+                                           <ImageButton Grid.Column="0"
+                                                x:Name="ImgBackBtn"
+                                                Source="left_arrow_icon"
+                                                HeightRequest="30"
+                                                WidthRequest="30"
+                                                HorizontalOptions="Center"
+                                                Clicked="ImgBackBtn_Clicked"/>
                             </Grid>
                         </Grid>
                     </Frame>
