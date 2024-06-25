@@ -1,4 +1,5 @@
-﻿using ChatApp.Models;
+﻿using System.Collections.ObjectModel;
+using ChatApp.Models;
 
 namespace ChatApp.Services
 {
@@ -78,6 +79,51 @@ namespace ChatApp.Services
             Color = Color.FromArgb("#FF95A2")
         };
 
+       
+       public System.Collections.ObjectModel.ObservableCollection<Message> User1MessageList { get; }
+
+        public MessageService() {
+
+            User1MessageList = new System.Collections.ObjectModel.ObservableCollection<Message> {
+                new Message
+                {
+                    Sender = null,
+                    Time = "18:42",
+                    Text = "Yeah I know. I\'m in the same position 😂",
+                },
+                new Message
+                {
+                    Sender = user1,
+                    Time = "18:39",
+                    Text = "It\'s hard to be productive, man 😞",
+                },
+                new Message
+                {
+                    Sender = user1,
+                    Time = "18:39",
+                    Text =
+                        "Same here! Been watching YouTube for the past 5 hours despite of having so much to do! 😅",
+                },
+                new Message
+                {
+                    Sender = null,
+                    Time = "18:36",
+                    Text = "Nothing. Just chilling and watching YouTube. What about you?",
+                },
+                new Message
+                {
+                    Sender= user1,
+                    Time = "18:35",
+                    Text= "Hey there! What\'s up?",
+                },
+            };
+        }
+ 
+
+
+
+
+
         public List<User> GetUsers()
         {
             return new List<User>
@@ -122,41 +168,14 @@ namespace ChatApp.Services
             };
         }
 
-        public List<Message> GetMessages(User sender)
+        public System.Collections.ObjectModel.ObservableCollection<Message> GetMessages(User sender)
         {
-            return new List<Message> {
-              new Message
-              {
-                Sender = null,
-                Time = "18:42",
-                Text = "Yeah I know. I\'m in the same position 😂",
-              },
-              new Message
-              {
-                Sender = sender,
-                Time = "18:39",
-                Text = "It\'s hard to be productive, man 😞",
-              },
-              new Message
-              {
-                Sender = sender,
-                Time = "18:39",
-                Text =
-                    "Same here! Been watching YouTube for the past 5 hours despite of having so much to do! 😅",
-              },
-              new Message
-              {
-                Sender = null,
-                Time = "18:36",
-                Text = "Nothing. Just chilling and watching YouTube. What about you?",
-              },
-              new Message
-              {
-                Sender= sender,
-                Time = "18:35",
-                Text= "Hey there! What\'s up?",
-              },
-            };
+            return _instance.User1MessageList;
         }
+
+        // public List<ChatApp.Models.Message> GetMessages(User sender)
+        // {
+        //     return new List<ChatApp.Models.Message>(_instance.User1MessageList);
+        // }
     }
 }

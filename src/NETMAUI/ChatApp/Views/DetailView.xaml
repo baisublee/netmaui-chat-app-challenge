@@ -190,7 +190,9 @@
                             ColumnDefinitions="*, Auto">
                             <controls:BorderlessEntry
                                 Placeholder="Type your message..."
-                                Style="{StaticResource ChatEntryStyle}"/>
+                                Style="{StaticResource ChatEntryStyle}"
+                                x:Name="MessageEntry"
+                                Text="{Binding MessageText, Mode=TwoWay}" />
                             <Grid 
                                 Grid.Column="1"
                                 Style="{StaticResource SearchButtonContainerStyle}">
@@ -206,7 +208,7 @@
                                                 HeightRequest="30"
                                                 WidthRequest="30"
                                                 HorizontalOptions="Center"
-                                                Clicked="ImgBackBtn_Clicked"/>
+                                                Clicked="ImgSendBtn_Clicked"/>
                             </Grid>
                         </Grid>
                     </Frame>

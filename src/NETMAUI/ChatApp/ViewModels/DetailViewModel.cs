@@ -37,7 +37,8 @@ namespace ChatApp.ViewModels
             if (navigationData is Message message)
             {
                 User = message.Sender;
-                Messages = new ObservableCollection<Message>(MessageService.Instance.GetMessages(User));
+                // Messages = new ObservableCollection<Message>(MessageService.Instance.GetMessages(User));
+                Messages = MessageService.Instance.User1MessageList;
             }
 
             return base.InitializeAsync(navigationData);
