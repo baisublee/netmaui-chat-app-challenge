@@ -136,11 +136,11 @@
                                 Command="{Binding BackCommand}" />
                         </Label.GestureRecognizers>
                     </Label>
-                    <Label                    
+                    <!-- <Label                    
                         Grid.Column="1"
                         Text="Search"
                         HorizontalOptions="End"
-                        Style="{StaticResource NavigationButtonStyle}"/>
+                        Style="{StaticResource NavigationButtonStyle}"/> -->
                 </Grid>
                 <Grid 
                     Grid.Row="1"
@@ -148,26 +148,14 @@
                     <Label
                         Text="{Binding User.Name}" 
                         Style="{StaticResource UsernameTextStyle}"/>
-                    <StackLayout 
+                    
+                    <!-- <StackLayout 
                         Grid.Column="1" 
                         Style="{StaticResource ButtonsContainerStyle}">
                         <Grid>
                             <BoxView
                                 Color="{StaticResource CircularButtonEllipseColor}"
                                 Style="{StaticResource CircularButtonEllipseStyle}" />
-                            <!-- FontImageSource not rendering correctly -->
-                            <!--
-                            <Image    
-                                Margin="8">
-                                <Image.Source>
-                                    <FontImageSource   
-                                        FontFamily="Material Icons"
-                                        Glyph="&#xe0b0;"
-                                        Color="White"
-                                        Size="12" />
-                                </Image.Source>
-                            </Image>
-                            -->
                             <Image   
                                 Source="call.png"
                                 Style="{StaticResource CircularButtonImageStyle}"/>
@@ -176,24 +164,11 @@
                             <BoxView
                                 Color="{StaticResource CircularButtonEllipseColor}"
                                 Style="{StaticResource CircularButtonEllipseStyle}" />
-                            <!-- FontImageSource not rendering correctly -->
-                            <!--
-                            <Image       
-                                Margin="8">
-                                <Image.Source>
-                                    <FontImageSource   
-                                        FontFamily="Material Icons"
-                                        Glyph="&#xe04b;"
-                                        Color="White"
-                                        Size="12" />
-                                </Image.Source>
-                            </Image>
-                            -->
                             <Image   
                                 Source="record.png"
                                 Style="{StaticResource CircularButtonImageStyle}"/>
                         </Grid>
-                    </StackLayout>
+                    </StackLayout> -->
                 </Grid>
             </Grid>
             <Grid
