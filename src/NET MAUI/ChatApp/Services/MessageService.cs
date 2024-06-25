@@ -19,9 +19,9 @@ namespace ChatApp.Services
 
         readonly User user1 = new User
         {
-            Name = "Alaya Cordova",
-            Image = "emoji1.png",
-            Color = Color.FromArgb("#FFE0EC")
+            Name = "Rachel Green",
+            Image = "rachel_green.png",
+            Color = Color.FromArgb("#FFD6C4")
         };
         readonly User user2 = new()
         {
@@ -31,9 +31,9 @@ namespace ChatApp.Services
         };
         readonly User user3 = new()
         {
-            Name = "Rachel Green",
-            Image = "rachel_green.png",
-            Color = Color.FromArgb("#FFD6C4")
+            Name = "Alaya Cordova",
+            Image = "emoji1.png",
+            Color = Color.FromArgb("#FFE0EC")
         };
         readonly User user4 = new()
         {
@@ -91,13 +91,13 @@ namespace ChatApp.Services
             {
                 new Message
                 {
-                  Sender = user6,
+                  Sender = user1,
                   Time = "18:32",
                   Text = "Hey there! What\'s up? Is everything ok?",
                 },
               new Message
               {
-                Sender = user1,
+                Sender = user6,
                 Time = "14:05",
                 Text = "Can I call you back later?, I\'m in a meeting.",
               },

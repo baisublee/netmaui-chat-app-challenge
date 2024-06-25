@@ -57,13 +57,13 @@
                     ColumnDefinitions="Auto, *"
                     Style="{StaticResource SuggestedContainerStyle}">
                     <!-- SEARCH -->
-                    <Grid     
+                    <!-- <Grid     
                         Style="{StaticResource SearchContainerStyle}">
                         <Ellipse   
                             Fill="{StaticResource SearchBackgroundColor}"/>
                         <Image   
                             Source="search.png"/>
-                    </Grid>
+                    </Grid> -->
                     <!-- SUGGESTED CONTACTS -->
                     <ScrollView
                         Grid.Column="1"
