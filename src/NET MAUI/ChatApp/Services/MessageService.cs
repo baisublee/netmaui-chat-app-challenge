@@ -31,8 +31,8 @@ namespace ChatApp.Services
         };
         readonly User user3 = new()
         {
-            Name = "Eathan Sheridan",
-            Image = "emoji3.png",
+            Name = "Rachel Green",
+            Image = "rachel_green.png",
             Color = Color.FromArgb("#FFD6C4")
         };
         readonly User user4 = new()
