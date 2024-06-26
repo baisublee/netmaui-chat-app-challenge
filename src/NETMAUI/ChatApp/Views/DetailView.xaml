@@ -179,6 +179,7 @@
                     RowDefinitions="*, Auto">
                     <Grid>
                         <CollectionView 
+                            x:Name="MessagesCollectionView"
                             ItemsSource="{Binding Messages}"
                             ItemTemplate="{StaticResource MessageDataTemplateSelector}"
                             Style="{StaticResource ChatCollectionStyle}" />

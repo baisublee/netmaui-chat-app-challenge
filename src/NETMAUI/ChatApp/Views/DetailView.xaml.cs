@@ -1,4 +1,5 @@
-﻿using ChatApp.Models;
+﻿using System.Runtime.CompilerServices;
+using ChatApp.Models;
 using ChatApp.Services;
 
 namespace ChatApp.Views
@@ -24,23 +25,47 @@ namespace ChatApp.Views
 
             // Use the 'message' variable to process the entered text
 
-              var msg = new Message
-              {
+            var msg = new Message
+            {
                 Sender = null,
-                Time= "12:11",
-                Text= message, 
-              };
+                Time = "12:11",
+                Text = message,
+            };
 
             //   MessageService.Instance.User1MessageList.Add(msg);
 
-                  MessageService.Instance.User1MessageList.Add(msg);
+            //   MessageService.Instance.User1MessageList.Add(msg);
+
+            await AddMessage(msg);
+
+            // Device.BeginInvokeOnMainThread(() =>
+            // {
+            //     MessageService.Instance.User1MessageList.Add(msg);
+            // });
+
+            // await ChatApp.Views.MessagesCollectionView.ScrollToAsync(msg, position: ScrollToPosition.End, animate: true);
+
+            // ChatApp.Views.DetailView.
+        }
+
+        private async Task AddMessage(Message msg)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                MessageService.Instance.User1MessageList.Add(msg);
+
+                var lastItem = MessageService.Instance.User1MessageList.LastOrDefault();
+                if (lastItem != null)
+                {
+                    MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: true);
+                }
+
+            });
+
+            // Now that MessagesCollectionView is directly accessible, use it to scroll
+            // await MessagesCollectionView.ScrollToAsync(msg, position: ScrollToPosition.End, animate: true);
 
 
-            //   Device.BeginInvokeOnMainThread(() => {
-            //       MessageService.Instance.User1MessageList.Add(msg);
-            //   });
-
-            
         }
     }
 }
