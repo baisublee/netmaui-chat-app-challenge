@@ -27,8 +27,9 @@ namespace ChatApp.Views
 
             var msg = new Message
             {
-                Sender = null,
-                Time = "12:11",
+                Sender = MessageService.Instance.user1,
+                // Time = "12:11",
+                Time = DateTime.Now.ToString("HH:mm"),
                 Text = message,
             };
 

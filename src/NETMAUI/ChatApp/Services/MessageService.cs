@@ -18,7 +18,7 @@ namespace ChatApp.Services
             }
         }
 
-        readonly User user1 = new User
+        public readonly User user1 = new User
         {
             Name = "Rachel Green",
             Image = "rachel_green.png",
