@@ -145,6 +145,7 @@
                 <Grid 
                     Grid.Row="1"
                     ColumnDefinitions="*, Auto">
+                    <Image Source="rachel_green.png" Aspect="AspectFit" x:Name="ProfileImage" />
                     <Label
                         Text="{Binding User.Name}" 
                         Style="{StaticResource UsernameTextStyle}"/>

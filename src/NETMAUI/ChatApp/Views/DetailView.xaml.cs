@@ -68,5 +68,10 @@ namespace ChatApp.Views
 
 
         }
+
+        private void ChangeImage(string imageName)
+        {
+            ProfileImage.Source = imageName;
+        }
     }
 }
