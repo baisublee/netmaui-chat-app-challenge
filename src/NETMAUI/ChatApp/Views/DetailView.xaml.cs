@@ -27,7 +27,7 @@ namespace ChatApp.Views
 
             var msg = new Message
             {
-                Sender = MessageService.Instance.user1,
+                Sender = null,
                 // Time = "12:11",
                 Time = DateTime.Now.ToString("HH:mm"),
                 Text = message,
@@ -39,6 +39,21 @@ namespace ChatApp.Views
 
             await AddMessage(msg);
 
+
+            string response = await GetChatbotResponseAsync(message);
+            Console.WriteLine($"Chatbot response: {response}");
+
+            var resp = new Message
+            {
+                Sender = MessageService.Instance.user1,
+                // Time = "12:11",
+                Time = DateTime.Now.ToString("HH:mm"),
+                Text = response,
+            };
+
+            await AddMessage(resp);
+
+
             // Device.BeginInvokeOnMainThread(() =>
             // {
             //     MessageService.Instance.User1MessageList.Add(msg);
@@ -48,6 +63,17 @@ namespace ChatApp.Views
 
             // ChatApp.Views.DetailView.
         }
+
+        // This method simulates getting user text, calling the chatbot service, and returning the response.
+        private async Task<string> GetChatbotResponseAsync(string userInput)
+        {
+            // Call the ChatBotService to generate a response
+            string response = await ChatBotService.Instance.GenerateResponseAsync(userInput);
+            return response;
+        }
+
+
+
 
         private async Task AddMessage(Message msg)
         {
