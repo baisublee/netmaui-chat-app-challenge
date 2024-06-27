@@ -53,6 +53,10 @@ namespace ChatApp.Views
 
             await AddMessage(resp);
 
+            string text = response;
+            string voiceresponse = await VoiceService.Instance.GenerateVoiceAsync(text);
+            Console.WriteLine($"Response from server: {voiceresponse}");
+
 
             // Device.BeginInvokeOnMainThread(() =>
             // {
