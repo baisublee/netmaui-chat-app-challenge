@@ -53,9 +53,11 @@ namespace ChatApp.Views
 
             await AddMessage(resp);
 
-            string text = response;
-            string voiceresponse = await VoiceService.Instance.GenerateVoiceAsync(text);
-            Console.WriteLine($"Response from server: {voiceresponse}");
+            if(VoiceCheckBox.IsChecked == true) {
+                string text = response;
+                string voiceresponse = await VoiceService.Instance.GenerateVoiceAsync(text);
+                Console.WriteLine($"Response from server: {voiceresponse}");
+            }
 
 
             // Device.BeginInvokeOnMainThread(() =>
@@ -81,14 +83,24 @@ namespace ChatApp.Views
 
         private async Task AddMessage(Message msg)
         {
+            
             Device.BeginInvokeOnMainThread(() =>
             {
-                MessageService.Instance.User1MessageList.Add(msg);
 
-                var lastItem = MessageService.Instance.User1MessageList.LastOrDefault();
-                if (lastItem != null)
+                try {
+
+                    MessageService.Instance.User1MessageList.Add(msg);
+
+                    var lastItem = MessageService.Instance.User1MessageList.LastOrDefault();
+                    if (lastItem != null)
+                    {
+                        MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: true);
+                    }
+                  }
+                catch (Exception ex)
                 {
-                    MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: true);
+                    // Handle the exception here
+                    Console.WriteLine($"Exception caught: {ex.Message}");
                 }
 
             });

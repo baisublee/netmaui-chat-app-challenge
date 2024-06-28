@@ -7,7 +7,7 @@
         <ResourceDictionary>
 
             <Style x:Key="MessageContainerStyle" TargetType="Grid">
-                <Setter Property="Margin" Value="8" />
+                <Setter Property="Margin" Value="20" />
             </Style>
             
             <Style x:Key="SenderContainerStyle" TargetType="Grid">
@@ -37,7 +37,7 @@
             </Style>
 
             <Style x:Key="MessageTextStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="12" />
+                <Setter Property="FontSize" Value="22" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
                 <Setter Property="TextColor" Value="Black" />
                 <Setter Property="VerticalOptions" Value="Center" />
@@ -45,7 +45,7 @@
             </Style>
 
             <Style x:Key="TimeTextStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontSize" Value="20" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
                 <Setter Property="TextColor" Value="Gray" />
                 <Setter Property="VerticalOptions" Value="Center" />
