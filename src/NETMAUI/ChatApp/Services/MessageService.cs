@@ -89,33 +89,14 @@ namespace ChatApp.Services
                 {
                     Sender = null,
                     Time = "18:42",
-                    Text = "Yeah I know. I\'m in the same position 😂",
+                    Text = "Hi",
                 },
                 new Message
                 {
                     Sender = user1,
                     Time = "18:39",
-                    Text = "It\'s hard to be productive, man 😞",
-                },
-                new Message
-                {
-                    Sender = user1,
-                    Time = "18:39",
-                    Text =
-                        "Same here! Been watching YouTube for the past 5 hours despite of having so much to do! 😅",
-                },
-                new Message
-                {
-                    Sender = null,
-                    Time = "18:36",
-                    Text = "Nothing. Just chilling and watching YouTube. What about you?",
-                },
-                new Message
-                {
-                    Sender= user1,
-                    Time = "18:35",
-                    Text= "Hey there! What\'s up?",
-                },
+                    Text ="Hi! Just a quick \"hi\"? I'm used to more excitement than that. You know, like a \"hi\" followed by a long, passionate story about my recent shopping spree or a hilarious anecdote from my waitressing days.",
+                }
             };
         }
  
@@ -139,7 +120,7 @@ namespace ChatApp.Services
                 {
                   Sender = user1,
                   Time = "18:32",
-                  Text = "Hey there! What\'s up? Is everything ok?",
+                  Text = "Hi",
                 },
               new Message
               {
