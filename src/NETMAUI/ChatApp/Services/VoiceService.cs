@@ -2,6 +2,8 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 public class VoiceService
 {
@@ -28,9 +30,22 @@ public class VoiceService
     // Method to send text to the voice generation API
     public async Task<string> GenerateVoiceAsync(string text)
     {
-        var jsonPayload = new StringContent($"{{\"text\": \"{text}\"}}", Encoding.UTF8, "application/json");
+        // var escapedText = System.Web.HttpUtility.JavaScriptStringEncode(text);
+        // var escapedText = JsonSerializer.Serialize(text);
+        // var jsonPayload = new StringContent($"{{\"text\": \"{escapedText}\"}}", Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await httpClient.PostAsync(ApiUrl, jsonPayload);
+        // HttpResponseMessage response = await httpClient.PostAsync(ApiUrl, jsonPayload);
+
+        var payload = new
+        {
+            text = text,
+        };
+
+        // Serialize the payload to JSON
+        var jsonPayload = JsonSerializer.Serialize(payload);
+        var jsonPayloadContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await httpClient.PostAsync(ApiUrl, jsonPayloadContent);
 
         if (response.IsSuccessStatusCode)
         {
@@ -43,3 +58,4 @@ public class VoiceService
         }
     }
 }
+
