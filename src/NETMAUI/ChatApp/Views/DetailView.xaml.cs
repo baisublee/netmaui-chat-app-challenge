@@ -56,6 +56,10 @@ namespace ChatApp.Views
 
             await AddMessage(resp);
 
+            var imageUrl = await ImageSearchService.Instance.SearchImageAsync(response);
+            Console.WriteLine("Best matching image URL: " + imageUrl);
+
+
             if(VoiceCheckBox.IsChecked == true) {
                 string text = response;
                 string voiceresponse = await VoiceService.Instance.GenerateVoiceAsync(text);
