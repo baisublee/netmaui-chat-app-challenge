@@ -11,34 +11,37 @@ namespace ChatApp.Views
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
+
+            // MessageEntry.Completed += MessageEntry_Completed;
+
+        }
+
+        private void MessageEntry_Completed(object sender, EventArgs e)
+        {
+            // Call the method directly or adapt if it requires parameters
+            HandleSendButtonClicked();
+            MessageEntry.Focus();
         }
 
         private async void ImgSendBtn_Clicked(object sender, EventArgs e)
         {
+            await HandleSendButtonClicked();
+        }
 
+        private async Task HandleSendButtonClicked()
+        {
             string message = MessageEntry.Text;
 
             MessageEntry.Text = "";
 
-            // Handle the button click event here
-            // await DisplayAlert("", "Send button clicked " + message, "Alright");
-
-            // Use the 'message' variable to process the entered text
-
             var msg = new Message
             {
-                Sender = null,
-                // Time = "12:11",
-                Time = DateTime.Now.ToString("HH:mm"),
-                Text = message,
+            Sender = null,
+            Time = DateTime.Now.ToString("HH:mm"),
+            Text = message,
             };
 
-            //   MessageService.Instance.User1MessageList.Add(msg);
-
-            //   MessageService.Instance.User1MessageList.Add(msg);
-
             await AddMessage(msg);
-
 
             string response = await GetChatbotResponseAsync(message);
             Console.WriteLine($"Chatbot response: {response}");
@@ -59,15 +62,6 @@ namespace ChatApp.Views
                 Console.WriteLine($"Response from server: {voiceresponse}");
             }
 
-
-            // Device.BeginInvokeOnMainThread(() =>
-            // {
-            //     MessageService.Instance.User1MessageList.Add(msg);
-            // });
-
-            // await ChatApp.Views.MessagesCollectionView.ScrollToAsync(msg, position: ScrollToPosition.End, animate: true);
-
-            // ChatApp.Views.DetailView.
         }
 
         // This method simulates getting user text, calling the chatbot service, and returning the response.

@@ -207,6 +207,7 @@
                                 Placeholder="Type your message..."
                                 Style="{StaticResource ChatEntryStyle}"
                                 x:Name="MessageEntry"
+                                Completed="MessageEntry_Completed"
                                 Text="{Binding MessageText, Mode=TwoWay}" />
                             <Grid 
                                 Grid.Column="1"
