@@ -159,6 +159,7 @@
                     Grid.Row="1"
                     ColumnDefinitions="*, Auto">
                     <Image Source="rachel_green.png" Aspect="AspectFit" x:Name="ProfileImage" />
+
                     <Label
                         Text="{Binding User.Name}" 
                         Style="{StaticResource UsernameTextStyle}"/>
@@ -196,7 +197,11 @@
                             x:Name="MessagesCollectionView"
                             ItemsSource="{Binding Messages}"
                             ItemTemplate="{StaticResource MessageDataTemplateSelector}"
-                            Style="{StaticResource ChatCollectionStyle}" />
+                            Style="{StaticResource ChatCollectionStyle}"
+                            BackgroundColor="Transparent" 
+                            />
+                        
+
                     </Grid>
                     <Frame
                         Grid.Row="1"

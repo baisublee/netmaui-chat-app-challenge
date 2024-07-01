@@ -58,8 +58,13 @@ namespace ChatApp.Views
 
             var imageUrl = await ImageSearchService.Instance.SearchImageAsync(response);
             Console.WriteLine("Best matching image URL: " + imageUrl);
-
-
+            if(
+                imageUrl != null &&
+                imageUrl != "null" &&
+                imageUrl != ""
+            ) {
+                ChangeImage(imageUrl);
+            }
             if(VoiceCheckBox.IsChecked == true) {
                 string text = response;
                 string voiceresponse = await VoiceService.Instance.GenerateVoiceAsync(text);
@@ -111,7 +116,14 @@ namespace ChatApp.Views
 
         private void ChangeImage(string imageName)
         {
-            ProfileImage.Source = imageName;
+            ProfileImage.Source = ImageSource.FromUri(new Uri(imageName));
         }
+
+        // private void ChangeBackgroundImage(string imageName)
+        // {
+        //     RelatedImage.Source = ImageSource.FromUri(new Uri(imageName));
+        // }
+
+
     }
 }
