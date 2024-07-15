@@ -1,6 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
 using ChatApp.Models;
 using ChatApp.Services;
+using System.Text;
+using System.Diagnostics;
 
 namespace ChatApp.Views
 {
@@ -36,36 +38,55 @@ namespace ChatApp.Views
 
             var msg = new Message
             {
-            Sender = null,
-            Time = DateTime.Now.ToString("HH:mm"),
-            Text = message,
+                Sender = null,
+                Time = DateTime.Now.ToString("HH:mm"),
+                Text = message,
             };
 
             await AddMessage(msg);
 
-            string response = await GetChatbotResponseAsync(message);
-            Console.WriteLine($"Chatbot response: {response}");
+            // string response = await GetChatbotResponseAsync(message);
+            // Console.WriteLine($"Chatbot response: {response}");
 
-            var resp = new Message
+            bool IsStreaming = true;
+            string response;
+
+            if (IsStreaming)
             {
-                Sender = MessageService.Instance.user1,
-                // Time = "12:11",
-                Time = DateTime.Now.ToString("HH:mm"),
-                Text = response,
-            };
+                response = await GetStreamChatbotResponseAsync(message);
+                Console.WriteLine($"Chatbot response: {response}");
 
-            await AddMessage(resp);
+            }
+            else
+            {
+                response = await GetChatbotResponseAsync(message);
+                Console.WriteLine($"Chatbot response: {response}");
+
+                var resp = new Message
+                {
+                    Sender = MessageService.Instance.user1,
+                    // Time = "12:11",
+                    Time = DateTime.Now.ToString("HH:mm"),
+                    Text = response,
+                };
+
+                await AddMessage(resp);
+
+            }
+
 
             var imageUrl = await ImageSearchService.Instance.SearchImageAsync(response);
             Console.WriteLine("Best matching image URL: " + imageUrl);
-            if(
+            if (
                 imageUrl != null &&
                 imageUrl != "null" &&
                 imageUrl != ""
-            ) {
+            )
+            {
                 ChangeImage(imageUrl);
             }
-            if(VoiceCheckBox.IsChecked == true) {
+            if (VoiceCheckBox.IsChecked == true)
+            {
                 string text = response;
                 string voiceresponse = await VoiceService.Instance.GenerateVoiceAsync(text);
                 Console.WriteLine($"Response from server: {voiceresponse}");
@@ -81,16 +102,80 @@ namespace ChatApp.Views
             return response;
         }
 
+        private async Task<string> GetStreamChatbotResponseAsync(string userInput)
+        {
+            StringBuilder completeResponse = new StringBuilder();
+
+            await StreamChatBotService.Instance.GenerateResponseAsync(userInput, 0.0, 1000, async chunk =>
+            {
+                Console.Write(chunk);
+                Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
+                completeResponse.Append(chunk);
+            
+                var resp = new Message
+                {
+                    Sender = MessageService.Instance.user1,
+                    // Time = "12:11",
+                    Time = DateTime.Now.ToString("HH:mm"),
+                    Text = chunk,
+                };
+            
+                await UpdateMessage(resp);
+            
+            });
+
+            return completeResponse.ToString();
+        }
+
+        private async Task UpdateMessage(Message msg)
+        {
+
+            // Device.BeginInvokeOnMainThread(async () =>
+            // {
+
+                try
+                {
+                    // await DisplayAlert("Alert", msg.Text, "OK");
+
+                    var lastItem = MessageService.Instance.User1MessageList.LastOrDefault();
+
+                    if (lastItem != null && lastItem.Sender != null)
+                    {
+                        lastItem.Text += msg.Text;
+
+                        // MessageService.Instance.User1MessageList.Remove(lastItem);
+                        
+                        // await AddMessage(lastItem);
+                        // OnPropertyChanged(nameof(lastItem));
+
+                        // OnPropertyChanged(nameof(MessageService.Instance.User1MessageList));
+                        // OnPropertyChanged(nameof(MessageService.Instance.User1MessageList));
+                    } else {
+                        await AddMessage(msg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception here
+                    Console.WriteLine($"Exception caught: {ex.Message}");
+                }
+
+            // });
+
+            // Now that MessagesCollectionView is directly accessible, use it to scroll
+            // await MessagesCollectionView.ScrollToAsync(msg, position: ScrollToPosition.End, animate: true);
+        }
 
 
 
         private async Task AddMessage(Message msg)
         {
-            
-            Device.BeginInvokeOnMainThread(() =>
-            {
 
-                try {
+            // Device.BeginInvokeOnMainThread(() =>
+            // {
+
+                try
+                {
 
                     MessageService.Instance.User1MessageList.Add(msg);
 
@@ -99,19 +184,17 @@ namespace ChatApp.Views
                     {
                         MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: true);
                     }
-                  }
+                }
                 catch (Exception ex)
                 {
                     // Handle the exception here
                     Console.WriteLine($"Exception caught: {ex.Message}");
                 }
 
-            });
+            // });
 
             // Now that MessagesCollectionView is directly accessible, use it to scroll
             // await MessagesCollectionView.ScrollToAsync(msg, position: ScrollToPosition.End, animate: true);
-
-
         }
 
         private void ChangeImage(string imageName)

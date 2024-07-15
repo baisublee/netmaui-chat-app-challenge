@@ -12,15 +12,19 @@
 
             <Color x:Key="MessageColor">#EDEEF7</Color>
 
-            <Style x:Key="MessageShapeStyle" TargetType="BoxView">
-                <Setter Property="Color" Value="{StaticResource MessageColor}" />
-                <Setter Property="CornerRadius" Value="24, 24, 24, 0" />
+            <Style x:Key="MessageShapeStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource MessageColor}" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HasShadow" Value="False" />
             </Style>
 
             <Style x:Key="MessageTextStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
                 <Setter Property="TextColor" Value="Black" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
             </Style>
 
             <Style x:Key="TimeTextStyle" TargetType="Label">
@@ -40,15 +44,15 @@
             <Label
                 Text="{Binding Time}"
                 Style="{StaticResource TimeTextStyle}"/>
-            <Grid 
-                Grid.Column="1">
-                <BoxView
-                    Style="{StaticResource MessageShapeStyle}" />
+            <Frame 
+                Grid.Column="1"
+                Style="{StaticResource MessageShapeStyle}"
+                VerticalOptions="StartAndExpand">
                 <Label 
                     Text="{Binding Text}"
                     Padding="12"
                     Style="{StaticResource MessageTextStyle}"/>
-            </Grid>
+            </Frame>
         </Grid>
     </ContentView.Content>
 </ContentView>

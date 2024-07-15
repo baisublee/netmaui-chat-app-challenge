@@ -11,9 +11,8 @@
             </Style>
             
             <Style x:Key="SenderContainerStyle" TargetType="Grid">
-                <Setter Property="HeightRequest" Value="42" />
                 <Setter Property="WidthRequest" Value="42" />
-                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Start" />
             </Style>
             
             <Style x:Key="SenderEllipseStyle" TargetType="Ellipse">
@@ -31,17 +30,22 @@
             
             <Color x:Key="MessageColor">#F7F7F8</Color>
 
-            <Style x:Key="MessageShapeStyle" TargetType="BoxView">
-                <Setter Property="Color" Value="{StaticResource MessageColor}" />
-                <Setter Property="CornerRadius" Value="24, 24, 0, 24" />
+            <Style x:Key="MessageShapeStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource MessageColor}" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="Padding" Value="12" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
 
             <Style x:Key="MessageTextStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="22" />
                 <Setter Property="FontFamily" Value="Metropolis Regular" />
                 <Setter Property="TextColor" Value="Black" />
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="Padding" Value="12, 0" />
+                <Setter Property="VerticalOptions" Value="Start" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
             </Style>
 
             <Style x:Key="TimeTextStyle" TargetType="Label">
@@ -59,6 +63,7 @@
             ColumnDefinitions="Auto, *, Auto"
             Style="{StaticResource MessageContainerStyle}">
             <Grid
+                Grid.Column="0"
                 Style="{StaticResource SenderContainerStyle}">
                 <Ellipse
                     Fill="{Binding Sender.Color, Converter={StaticResource ColorToBrushConverter}}"
@@ -67,14 +72,13 @@
                     Source="{Binding Sender.Image}"
                     Style="{StaticResource SenderImageStyle}"/>
             </Grid>
-            <Grid
-                Grid.Column="1">
-                <BoxView
-                    Style="{StaticResource MessageShapeStyle}" />
+            <Frame
+                Grid.Column="1"
+                Style="{StaticResource MessageShapeStyle}">
                 <Label 
                     Text="{Binding Text}"
-                    Style="{StaticResource MessageTextStyle}"/>
-            </Grid>
+                    Style="{StaticResource MessageTextStyle}" />
+            </Frame>
             <Label
                 Grid.Column="2"
                 Text="{Binding Time}"

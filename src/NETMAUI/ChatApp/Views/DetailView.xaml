@@ -163,7 +163,6 @@
                     <Label
                         Text="{Binding User.Name}" 
                         Style="{StaticResource UsernameTextStyle}"/>
-                    
                     <!-- <StackLayout 
                         Grid.Column="1" 
                         Style="{StaticResource ButtonsContainerStyle}">
@@ -195,9 +194,12 @@
                     <Grid>
                         <CollectionView 
                             x:Name="MessagesCollectionView"
+                            ItemSizingStrategy="MeasureAllItems"
                             ItemsSource="{Binding Messages}"
                             ItemTemplate="{StaticResource MessageDataTemplateSelector}"
                             Style="{StaticResource ChatCollectionStyle}"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"                             
                             BackgroundColor="Transparent" 
                             />
                         

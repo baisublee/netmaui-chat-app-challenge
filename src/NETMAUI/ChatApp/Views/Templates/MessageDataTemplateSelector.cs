@@ -11,7 +11,7 @@ namespace ChatApp.Views.Templates
         {
             var message = (Message)item;
 
-            if (message.Sender == null)
+            if (message.Sender != null)
                 return ReceiverMessageTemplate;
 
             return SenderMessageTemplate;
