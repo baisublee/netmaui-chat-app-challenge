@@ -32,7 +32,7 @@ namespace ChatApp.Models
             set
             {
                 _text = value;
-                OnPropertyChanged();
+                // OnPropertyChanged();
                 // OnPropertyChanged(nameof(Text));
             }
         }
