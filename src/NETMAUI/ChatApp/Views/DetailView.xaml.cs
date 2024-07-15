@@ -143,6 +143,11 @@ namespace ChatApp.Views
                     {
                         lastItem.Text += msg.Text;
 
+                        MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
+
+                        MessagesCollectionView.ItemsSource = null;
+                        MessagesCollectionView.ItemsSource = MessageService.Instance.User1MessageList;
+
                         // MessageService.Instance.User1MessageList.Remove(lastItem);
                         
                         // await AddMessage(lastItem);
