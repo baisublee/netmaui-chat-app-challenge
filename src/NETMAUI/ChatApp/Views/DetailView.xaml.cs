@@ -13,10 +13,10 @@ namespace ChatApp.Views
             Chatbot,
             StreamChatbot,
 
-            Ollama,
+            OllamaChatbot,
         }
 
-        private static CommunicationOption streamingOption = CommunicationOption.StreamChatbot;
+        private static CommunicationOption streamingOption = CommunicationOption.OllamaChatbot;
 
         public DetailView()
         {
@@ -69,8 +69,10 @@ namespace ChatApp.Views
                     response = await GetStreamChatbotResponseAsync(message);
                     Console.WriteLine($"Chatbot response: {response}");
                     break;
-                case CommunicationOption.Ollama:
-                    throw new NotImplementedException();
+                case CommunicationOption.OllamaChatbot:
+                    response = await GetOllamaChatBotResponseAsync(message);
+                    Console.WriteLine($"Chatbot response: {response}");
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -126,6 +128,31 @@ namespace ChatApp.Views
 
             return completeResponse.ToString();
         }
+
+        private async Task<string> GetOllamaChatBotResponseAsync(string userInput)
+        {
+            StringBuilder completeResponse = new StringBuilder();
+
+            await OllamaChatBotService.Instance.SendMessageAsync(userInput, async chunk =>
+            {
+                Console.Write(chunk);
+                Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
+                completeResponse.Append(chunk);
+
+                var resp = new Message
+                {
+                    Sender = MessageService.Instance.user1,
+                    Time = DateTime.Now.ToString("HH:mm"),
+                    Text = chunk,
+                };
+
+                await UpdateMessage(resp);
+
+            });
+
+            return completeResponse.ToString();
+        }
+
 
         private async Task UpdateMessage(Message msg)
         {
