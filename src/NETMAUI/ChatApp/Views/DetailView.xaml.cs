@@ -18,19 +18,19 @@ namespace ChatApp.Views
 
         }
 
-        private void MessageEntry_Completed(object sender, EventArgs e)
+        private async void MessageEntry_Completed(object sender, EventArgs e)
         {
             // Call the method directly or adapt if it requires parameters
-            HandleSendButtonClicked();
+            await HandleSendButtonClickedAsync();
             MessageEntry.Focus();
         }
 
         private async void ImgSendBtn_Clicked(object sender, EventArgs e)
         {
-            await HandleSendButtonClicked();
+            await HandleSendButtonClickedAsync();
         }
 
-        private async Task HandleSendButtonClicked()
+        private async Task HandleSendButtonClickedAsync()
         {
             string message = MessageEntry.Text;
 
