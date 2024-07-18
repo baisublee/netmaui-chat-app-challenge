@@ -79,6 +79,11 @@ public class OllamaChatBotService
                 while ((line = await reader.ReadLineAsync()) != null)
                 {
                     var chunk = JsonSerializer.Deserialize<StreamedChatResponse>(line);
+
+                    if (chunk?.Done == true)
+                    {
+                        conversationHistory.Add(new ChatMessage { Role = "assistant", Content = chunk.Message.Content });
+                    }
                     if (chunk?.Message != null && !string.IsNullOrEmpty(chunk.Message.Content))
                     {
                         onPartialResponse(chunk.Message.Content);
