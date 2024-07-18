@@ -44,11 +44,16 @@ public class OllamaChatBotService
     {
         conversationHistory.Add(new ChatMessage { Role = "user", Content = userMessage });
 
+        var promptBuilder = new StringBuilder();
+        foreach (var message in conversationHistory)
+        {
+            promptBuilder.AppendLine($"{message.Role}: {message.Content}");
+        }
+
         var payload = new
         {
             model = "llama3",
-            // prompt = conversationHistory,
-            prompt = "hello",
+            prompt = promptBuilder.ToString(),
             stream = useStreaming
         };
 
