@@ -20,6 +20,7 @@ public class OllamaChatBotService
     private OllamaChatBotService()
     {
         conversationHistory = new List<ChatMessage>();
+        conversationHistory.Add(new ChatMessage { Role = "system", Content = "You are Rachel Green from the Friends TV show. Speak and act like her in all your responses, but don't explicitly mention that you are doing so. Also can you make your responses a little shorter like 100 words or so?"});
         useStreaming = true;
     }
 
@@ -53,7 +54,7 @@ public class OllamaChatBotService
         var payload = new
         {
             model = "llama3",
-            prompt = promptBuilder.ToString(),
+            messages = conversationHistory,
             stream = useStreaming
         };
 
@@ -62,7 +63,7 @@ public class OllamaChatBotService
 
         try
         {
-            var request = new HttpRequestMessage(HttpMethod.Post, "api/generate")
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/chat")
             {
                 Content = content
             };
@@ -78,9 +79,9 @@ public class OllamaChatBotService
                 while ((line = await reader.ReadLineAsync()) != null)
                 {
                     var chunk = JsonSerializer.Deserialize<StreamedChatResponse>(line);
-                    if (!string.IsNullOrEmpty(chunk.Response))
+                    if (chunk?.Message != null && !string.IsNullOrEmpty(chunk.Message.Content))
                     {
-                        onPartialResponse(chunk.Response);
+                        onPartialResponse(chunk.Message.Content);
                     }
                 }
             }
@@ -108,8 +109,8 @@ public class OllamaChatBotService
         [JsonPropertyName("created_at")]
         public string CreatedAt { get; set; }
 
-        [JsonPropertyName("response")]
-        public string Response { get; set; }
+        [JsonPropertyName("message")]
+        public ChatMessage Message { get; set; }
 
         [JsonPropertyName("done")]
         public bool Done { get; set; }
