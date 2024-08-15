@@ -1,0 +1,328 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Edge AI Application API",
+      "description": "API for managing characters and interactions in the Edge AI application."
+    },
+    "host": "api.edgeai.com",
+    "basePath": "/v1",
+    "schemes": [
+      "https"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "paths": {
+      "/characters": {
+        "get": {
+          "summary": "Retrieve existing characters",
+          "parameters": [
+            {
+              "name": "x-ua-string",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "User agent string",
+              "default": "EdgeAI/1.0 (Windows NT 10.0; Win64; x64)"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "character_name": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "first_message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Client Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "auth/unauthorized",
+                          "request/invalidParameters",
+                          "request/objectNotFound",
+                          "request/objectExists",
+                          "request/unprocessable"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "server/serverError"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new character",
+          "parameters": [
+            {
+              "name": "x-ua-string",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "User agent string",
+              "default": "EdgeAI/1.0 (Windows NT 10.0; Win64; x64)"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "first_message": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "first_message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Client Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "auth/unauthorized",
+                          "request/invalidParameters",
+                          "request/objectExists",
+                          "request/unprocessable"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "server/serverError"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/characters/{id}/chat": {
+        "post": {
+          "summary": "Start a chat with the selected character",
+          "parameters": [
+            {
+              "name": "x-ua-string",
+              "in": "header",
+              "required": true,
+              "type": "string",
+              "description": "User agent string",
+              "default": "EdgeAI/1.0 (Windows NT 10.0; Win64; x64)"
+            },
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success (Streaming Response)",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "character_id": {
+                    "type": "string"
+                  },
+                  "response": {
+                    "type": "string"
+                  },
+                  "createdAt": {
+                    "type": "integer"
+                  },
+                  "done": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Client Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "auth/unauthorized",
+                          "request/invalidParameters",
+                          "request/objectNotFound",
+                          "request/unprocessable"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error",
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "enum": [
+                          "server/serverError"
+                        ]
+                      },
+                      "message": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "definitions": {}
+  }
+  

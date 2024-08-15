@@ -14,9 +14,11 @@ namespace ChatApp.Views
             StreamChatbot,
 
             OllamaChatbot,
+
+            EdgeAIChatbot,
         }
 
-        private static CommunicationOption streamingOption = CommunicationOption.OllamaChatbot;
+        private static CommunicationOption streamingOption = CommunicationOption.EdgeAIChatbot;
 
         public DetailView()
         {
@@ -71,6 +73,10 @@ namespace ChatApp.Views
                     break;
                 case CommunicationOption.OllamaChatbot:
                     response = await GetOllamaChatBotResponseAsync(message);
+                    Console.WriteLine($"Chatbot response: {response}");
+                    break;
+                case CommunicationOption.EdgeAIChatbot:
+                    response = await GetEdgeAIChatBotResponseAsync(message);
                     Console.WriteLine($"Chatbot response: {response}");
                     break;
                 default:
@@ -153,6 +159,29 @@ namespace ChatApp.Views
             return completeResponse.ToString();
         }
 
+        private async Task<string> GetEdgeAIChatBotResponseAsync(string userInput)
+        {
+            StringBuilder completeResponse = new StringBuilder();
+
+            await EdgeAIService.Instance.StartChatAsync("2", userInput, async chunk =>
+            {
+                Console.Write(chunk);
+                Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
+                completeResponse.Append(chunk);
+
+                var resp = new Message
+                {
+                    Sender = MessageService.Instance.user1,
+                    Time = DateTime.Now.ToString("HH:mm"),
+                    Text = chunk,
+                };
+
+                await UpdateMessage(resp);
+
+            });
+
+            return completeResponse.ToString();
+        }
 
         private async Task UpdateMessage(Message msg)
         {
