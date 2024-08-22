@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatApp.OnboardingWelcome"
+             BackgroundColor="White">
+
+
+    <Grid VerticalOptions="FillAndExpand"
+          RowDefinitions="*, Auto">
+
+        <Grid ColumnDefinitions="Auto,*"
+              BackgroundColor="White"
+              Grid.Row="0">
+            <VerticalStackLayout Margin="64,160,0,0"
+                                 BackgroundColor="White"
+                                 WidthRequest="594">
+                <Label Text="Get ready to meet your gram AI assistant?"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       TextColor="Black"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,20,0,20"/>
+                <Label Text="Gram AI assistants are designed with unique capabilities and personality traits."
+                       FontSize="16"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,0,0,30"/>
+                <Label Text="You can select one or create your own, tailored to your preferences and interests."
+                       FontSize="16"
+                       TextColor="Gray"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,0,0,30"/>
+
+                <Button Text="Get started →"
+                        BackgroundColor="#8C56FF"
+                        TextColor="White"
+                        FontSize="18"
+                        CornerRadius="10"
+                        HeightRequest="50"
+                        WidthRequest="200"
+                        VerticalOptions="End"
+                        Clicked="OnGetStartedButtonClicked"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Column="2"
+                                 BackgroundColor="White"
+                                 VerticalOptions="Center"
+                                 WidthRequest="626"
+                                 Padding="0">
+                <Image Source="onboarding_welcome.png"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
+        </Grid>
+
+
+
+    </Grid>
+
+</ContentPage>

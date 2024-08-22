@@ -21,10 +21,10 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     
 		<!-- Display name -->
-		<ApplicationTitle>ChatApp</ApplicationTitle>
+		<ApplicationTitle>Character Chatbot</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.jsuarezruiz.chatapp</ApplicationId>
+		<ApplicationId>com.lge.characterchatbotapp</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationVersion>1</ApplicationVersion>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatApp.OnboardingSelectCharacter"
+             BackgroundColor="White"
+             Title="">
+
+    <Grid WidthRequest="1220" HeightRequest="600">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Title Section -->
+        <StackLayout Padding="20" Grid.Row="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <Label Text="Select or create a gram AI assistant"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="Black"/>
+            <Label Text="Each assistant has unique capabilities and personality traits. Choose one or create your own, and feel free to switch anytime later."
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   TextColor="Gray"/>초
+        </StackLayout>
+
+        <!-- Circle Image Buttons Section -->
+        <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" Spacing="40">
+            <!-- Assistant 1 -->
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <ImageButton Source="chris_image.png" 
+                             WidthRequest="150" HeightRequest="150"
+                             Aspect="AspectFill"
+                             CornerRadius="75" 
+                             Clicked="OnAssistantClicked"/>
+                <Label Text="Chris"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="Trustful friend AI"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <!-- Assistant 2 -->
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <ImageButton Source="rachel_image.png" 
+                             WidthRequest="150" HeightRequest="150"
+                             Aspect="AspectFill"
+                             CornerRadius="75"
+                             Clicked="OnAssistantClicked"/>
+                <Label Text="Rachel"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="Secretary AI"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <!-- Assistant 3 -->
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <ImageButton Source="olivia_image.jpeg" 
+                             WidthRequest="150" HeightRequest="150"
+                             Aspect="AspectFill"
+                             CornerRadius="75"
+                             Clicked="OnAssistantClicked"/>
+                <Label Text="Olivia"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Label Text="Writing AI buddy"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <!-- Create New Button -->
+            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <ImageButton Source="plus_icon.png" 
+                             WidthRequest="150" HeightRequest="150"
+                             Aspect="AspectFill"
+                             CornerRadius="75"
+                             BorderWidth="2"
+                             BorderColor="Gray"
+                             BackgroundColor="Transparent"
+                             Clicked="OnCreateNewClicked"/>
+                <Label Text="Create new"
+                       FontSize="16"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>
