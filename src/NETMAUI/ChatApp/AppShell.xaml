@@ -18,24 +18,9 @@
         ContentTemplate="{DataTemplate local:OnboardingSelectCharacter}"
         Route="OnboardingSelectCharacter" />
 
-    <!-- <ShellContent
-        Title=""
-        ContentTemplate="{DataTemplate local:OnboardingGenre}"
-        Route="OnboardingGenre" />
-
-    <ShellContent
-        Title=""
-        ContentTemplate="{DataTemplate local:OnboardingMood}"
-        Route="OnboardingMood" />
-
-    <ShellContent
-        Title=""
-        ContentTemplate="{DataTemplate local:OnboardingStyle}"
-        Route="OnboardingStyle" />
-
     <ShellContent
         Title=""
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" /> -->
+        Route="MainPage" />
 
 </Shell>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ChatApp"
+             x:Class="ChatApp.MainPage"
+             BackgroundColor="White">
+
+    <Grid>
+        <!-- Left Menu Panel -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" /> <!-- Fixed width for the menu -->
+            <ColumnDefinition Width="*" /> <!-- Right side takes the remaining width -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Menu -->
+        <StackLayout BackgroundColor="#6F41EC" Padding="20">
+            <Label Text="gram AI assistant" FontSize="20" TextColor="White" />
+            <ListView x:Name="MenuList" BackgroundColor="Transparent" SeparatorVisibility="None" SelectionMode="None" VerticalOptions="StartAndExpand">
+                <ListView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Rachel</x:String>
+                        <x:String>Olivia</x:String>
+                        <x:String>Chris</x:String>
+                        <x:String>Monkey D. Luffy</x:String>
+                        <x:String>Create</x:String>
+                    </x:Array>
+                </ListView.ItemsSource>
+            </ListView>
+        </StackLayout>
+
+        <!-- Right Content Panel -->
+        <ContentView Grid.Column="1" x:Name="ContentFrame">
+            <!-- This will be dynamically populated with ChatPage or CreationPage -->
+        </ContentView>
+    </Grid>
+</ContentPage>

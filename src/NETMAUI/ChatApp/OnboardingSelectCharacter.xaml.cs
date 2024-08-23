@@ -23,6 +23,7 @@ namespace ChatApp
                 else if (button.Source.ToString().Contains("rachel_image"))
                 {
                     assistantName = "Rachel";
+                    await Shell.Current.GoToAsync("//MainPage");
                 }
                 else if (button.Source.ToString().Contains("olivia_image"))
                 {
@@ -31,7 +32,7 @@ namespace ChatApp
 
                 // Navigate to the next page, passing the selected assistant name or ID
                 // await Navigation.PushAsync(new NextPage(assistantName)); // Replace 'NextPage' with your actual next page
-            }
+            } 
         }
 
         private async void OnCreateNewClicked(object sender, EventArgs e)

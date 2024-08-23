@@ -21,7 +21,7 @@
             <Label Text="Each assistant has unique capabilities and personality traits. Choose one or create your own, and feel free to switch anytime later."
                    FontSize="16"
                    HorizontalOptions="Center"
-                   TextColor="Gray"/>초
+                   TextColor="Gray"/>
         </StackLayout>
 
         <!-- Circle Image Buttons Section -->

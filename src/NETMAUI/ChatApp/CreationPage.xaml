@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatApp.CreationPage"
+             BackgroundColor="White">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <Label Text="Create a gram AI assistant" FontSize="24" FontAttributes="Bold" TextColor="Black" />
+            <StackLayout Padding="10">
+                <Label Text="Name" FontSize="16" />
+                <Entry Placeholder="e.g. Albert Einstein" />
+                <Label Text="Gender" FontSize="16" />
+                <Picker>
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Male</x:String>
+                            <x:String>Female</x:String>
+                            <x:String>Other</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label Text="Pronouns" FontSize="16" />
+                <Picker>
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>He/Him</x:String>
+                            <x:String>She/Her</x:String>
+                            <x:String>They/Them</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <!-- Additional fields for creation -->
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentView>
