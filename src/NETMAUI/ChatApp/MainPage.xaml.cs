@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Maui.Controls;
+using ChatApp.Views; 
 
 namespace ChatApp
 {
@@ -10,7 +11,7 @@ namespace ChatApp
             InitializeComponent();
 
             MenuList.ItemTapped += OnMenuTapped;
-            ContentFrame.Content = new ChatPage(); // Default to ChatPage
+            ContentFrame.Content = new ContentView { Content = new DetailView().Content }; // Default to ChatPage
         }
 
         private void OnMenuTapped(object sender, ItemTappedEventArgs e)
@@ -23,7 +24,7 @@ namespace ChatApp
             }
             else
             {
-                ContentFrame.Content = new ChatPage();
+                ContentFrame.Content = new ContentView { Content = new DetailView().Content };
             }
         }
     }
