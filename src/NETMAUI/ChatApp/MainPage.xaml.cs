@@ -1,6 +1,5 @@
-using System;
 using Microsoft.Maui.Controls;
-using ChatApp.Views; 
+using ChatApp.ViewModels;
 
 namespace ChatApp
 {
@@ -9,22 +8,26 @@ namespace ChatApp
         public MainPage()
         {
             InitializeComponent();
-
-            MenuList.ItemTapped += OnMenuTapped;
-            ContentFrame.Content = new ContentView { Content = new DetailView().Content }; // Default to ChatPage
         }
 
-        private void OnMenuTapped(object sender, ItemTappedEventArgs e)
+        private void OnMenuSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string selectedMenu = e.Item as string;
+            if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+            {
+                // Cast the selected item to your data model
+                var selectedCharacter = e.CurrentSelection[0] as Character;
 
-            if (selectedMenu == "Create")
-            {
-                ContentFrame.Content = new CreationPage();
-            }
-            else
-            {
-                ContentFrame.Content = new ContentView { Content = new DetailView().Content };
+                // Navigate to different content based on the selected character
+                if (selectedCharacter != null)
+                {
+                    // Update ContentFrame with the selected character's view
+                    ContentFrame.Content = new Label
+                    {
+                        Text = $"Selected: {selectedCharacter.Name}",
+                        HorizontalOptions = LayoutOptions.Center,
+                        VerticalOptions = LayoutOptions.Center
+                    };
+                }
             }
         }
     }

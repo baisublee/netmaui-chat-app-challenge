@@ -1,36 +1,109 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:ChatApp"
+             xmlns:local="clr-namespace:ChatApp.ViewModels"
              x:Class="ChatApp.MainPage"
              BackgroundColor="White">
 
+    <ContentPage.BindingContext>
+        <local:MainMenuViewModel />
+    </ContentPage.BindingContext>
+
     <Grid>
-        <!-- Left Menu Panel -->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" /> <!-- Fixed width for the menu -->
-            <ColumnDefinition Width="*" /> <!-- Right side takes the remaining width -->
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Menu -->
-        <StackLayout BackgroundColor="#6F41EC" Padding="20">
-            <Label Text="gram AI assistant" FontSize="20" TextColor="White" />
-            <ListView x:Name="MenuList" BackgroundColor="Transparent" SeparatorVisibility="None" SelectionMode="None" VerticalOptions="StartAndExpand">
-                <ListView.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Rachel</x:String>
-                        <x:String>Olivia</x:String>
-                        <x:String>Chris</x:String>
-                        <x:String>Monkey D. Luffy</x:String>
-                        <x:String>Create</x:String>
-                    </x:Array>
-                </ListView.ItemsSource>
-            </ListView>
-        </StackLayout>
+        <!-- Left Panel -->
+        <Frame x:Name="MenuList"
+               BackgroundColor="#8C56FF"
+               Padding="20"
+               Grid.Column="0"
+               CornerRadius="20"
+               Margin="0,0,10,0"
+               HasShadow="False">
+            <StackLayout Spacing="30">
 
-        <!-- Right Content Panel -->
-        <ContentView Grid.Column="1" x:Name="ContentFrame">
-            <!-- This will be dynamically populated with ChatPage or CreationPage -->
+                <!-- App Name -->
+                <Label Text="gram AI assistant"
+                       FontSize="22"
+                       FontAttributes="Bold"
+                       TextColor="White"/>
+
+                <!-- Characters List -->
+                <CollectionView ItemsSource="{Binding Characters}"
+                                SelectionMode="Single"
+                                SelectedItem="{Binding SelectedCharacter}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.OnCharacterTappedCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                          CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+                                <Frame Padding="0"
+                                       CornerRadius="20"
+                                       IsClippedToBounds="True"
+                                       WidthRequest="40"
+                                       HeightRequest="40">
+                                    <Image Source="{Binding Image}"
+                                           WidthRequest="40" HeightRequest="40"
+                                           Aspect="AspectFill"/>
+                                </Frame>
+                                <Label Text="{Binding Name}"
+                                       FontSize="18"
+                                       TextColor="White"
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Create New Character Button -->
+                <StackLayout Orientation="Horizontal" Padding="5">
+                    <ImageButton Source="plus_icon.png"
+                                 WidthRequest="40" HeightRequest="40"
+                                 Aspect="AspectFill"
+                                 BackgroundColor="Transparent"
+                                 Command="{Binding CreateNewCharacterCommand}"/>
+                    <Label Text="Create"
+                           FontSize="18"
+                           TextColor="White"
+                           VerticalOptions="Center"
+                           Margin="10,0,0,0"/>
+                </StackLayout>
+
+                <!-- Separator Line -->
+                <BoxView HeightRequest="1" BackgroundColor="White" Margin="0,20,0,20"/>
+
+                <!-- Applications Section -->
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Padding="5">
+                        <Image Source="music_icon.png" WidthRequest="30" HeightRequest="30"/>
+                        <Label Text="gram music creator"
+                               FontSize="18"
+                               TextColor="White"
+                               VerticalOptions="Center"
+                               Margin="10,0,0,0"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" Padding="5">
+                        <Image Source="video_icon.png" WidthRequest="30" HeightRequest="30"/>
+                        <Label Text="gram video creator"
+                               FontSize="18"
+                               TextColor="White"
+                               VerticalOptions="Center"
+                               Margin="10,0,0,0"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+
+        <!-- Main Content Area -->
+        <ContentView x:Name="ContentFrame" Grid.Column="1">
+            <!-- Your main content goes here -->
         </ContentView>
+
     </Grid>
 </ContentPage>
