@@ -22,12 +22,12 @@ namespace ChatApp
                 if (selectedCharacter != null)
                 {
                     // Update ContentFrame with the selected character's view
-                    ContentFrame.Content = new Label
-                    {
-                        Text = $"Selected: {selectedCharacter.Name}",
-                        HorizontalOptions = LayoutOptions.Center,
-                        VerticalOptions = LayoutOptions.Center
-                    };
+                    // ContentFrame.Content = new Label
+                    // {
+                    //     Text = $"Selected: {selectedCharacter.Name}",
+                    //     HorizontalOptions = LayoutOptions.Center,
+                    //     VerticalOptions = LayoutOptions.Center
+                    // };
                 }
             }
         }
