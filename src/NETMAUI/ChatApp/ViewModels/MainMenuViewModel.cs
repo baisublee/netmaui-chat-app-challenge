@@ -22,7 +22,7 @@ namespace ChatApp.ViewModels
             Characters = new ObservableCollection<Character>
             {
                 new Character { Name = "Rachel", Image = "rachel_image.png" },
-                new Character { Name = "Olivia", Image = "olivia_image.png" },
+                new Character { Name = "Olivia", Image = "olivia_image.jpeg" },
                 new Character { Name = "Chris", Image = "chris_image.png" }
             };
 
