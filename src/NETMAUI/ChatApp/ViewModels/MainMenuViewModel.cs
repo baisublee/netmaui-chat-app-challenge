@@ -8,6 +8,7 @@ namespace ChatApp.ViewModels
     {
         public string Name { get; set; }
         public string Image { get; set; }
+        public bool IsSelected { get; set; }
     }
 
     public class MainMenuViewModel : BindableObject
@@ -28,6 +29,12 @@ namespace ChatApp.ViewModels
             // Command for creating a new character
             CreateNewCharacterCommand = new Command(OnCreateNewCharacter);
 
+            // Command for opening gram music creator
+            OpenMusicCreatorCommand = new Command(OpenMusicCreator);
+
+            // Command for opening gram video creator
+            OpenVideoCreatorCommand = new Command(OpenVideoCreator);
+
             // Command for character tap gesture
             OnCharacterTappedCommand = new Command<Character>(OnCharacterTapped);
         }
@@ -47,20 +54,39 @@ namespace ChatApp.ViewModels
             get => _selectedCharacter;
             set
             {
-                _selectedCharacter = value;
-                OnPropertyChanged();
-                // Handle the character selection
-                OnCharacterSelected(value);
+                if (_selectedCharacter != value)
+                {
+                    if (_selectedCharacter != null)
+                        _selectedCharacter.IsSelected = false;
+                    _selectedCharacter = value;
+                    if (_selectedCharacter != null)
+                        _selectedCharacter.IsSelected = true;
+                    OnPropertyChanged();
+                    // Handle the character selection
+                    OnCharacterSelected(value);
+                }
             }
         }
 
         public ICommand CreateNewCharacterCommand { get; }
+        public ICommand OpenMusicCreatorCommand { get; }
+        public ICommand OpenVideoCreatorCommand { get; }
         public ICommand OnCharacterTappedCommand { get; }
 
         private void OnCreateNewCharacter()
         {
             // Logic for creating a new character
             // For example, you could open a dialog to enter character details
+        }
+
+        private void OpenMusicCreator()
+        {
+            // Logic to open the gram music creator
+        }
+
+        private void OpenVideoCreator()
+        {
+            // Logic to open the gram video creator
         }
 
         private void OnCharacterTapped(Character character)

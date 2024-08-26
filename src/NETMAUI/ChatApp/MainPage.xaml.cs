@@ -8,6 +8,7 @@ namespace ChatApp
         public MainPage()
         {
             InitializeComponent();
+            this.BindingContext = new MainMenuViewModel();
         }
 
         private void OnMenuSelectionChanged(object sender, SelectionChangedEventArgs e)
