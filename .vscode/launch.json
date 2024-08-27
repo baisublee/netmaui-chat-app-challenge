@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": ".NET MAUI macOS - ChatApp",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "maui: Build",
+        "program": "${workspaceFolder}/src/NETMAUI/ChatApp/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/ChatApp.app/Contents/MacOS/ChatApp",
+        "args": [],
+        "cwd": "${workspaceFolder}/src/NETMAUI/ChatApp",
+        "stopAtEntry": false,
+        "console": "internalConsole",
+        "internalConsoleOptions": "openOnSessionStart",
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "sourceFileMap": {
+          "/Views": "${workspaceFolder}/src/NETMAUI/ChatApp"
+        },
+      }
+    ]
+  }
+  
