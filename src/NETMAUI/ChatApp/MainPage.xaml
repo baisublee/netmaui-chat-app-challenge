@@ -40,8 +40,7 @@
                         <StackLayout Orientation="Horizontal" Padding="5" Spacing="10"
                                      BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundConverter}}">
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.OnCharacterTappedCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                                      CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Tapped="OnCharacterTapped" CommandParameter="{Binding .}" />
                             </StackLayout.GestureRecognizers>
                             <Frame Padding="0"
                                    CornerRadius="20"
@@ -65,7 +64,7 @@
             <!-- Create New Character Button -->
             <StackLayout Orientation="Horizontal" Padding="10,5" Spacing="10">
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding CreateNewCharacterCommand}"/>
+                    <TapGestureRecognizer Tapped="OnCreateNewCharacter"/>
                 </StackLayout.GestureRecognizers>
                 <Frame Padding="0"
                        CornerRadius="20"
@@ -90,7 +89,7 @@
             <StackLayout>
                 <StackLayout Orientation="Horizontal" Padding="5,10" Spacing="10">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenMusicCreatorCommand}"/>
+                        <TapGestureRecognizer Tapped="OnOpenMusicCreator"/>
                     </StackLayout.GestureRecognizers>
                     <Image Source="music_icon.png" WidthRequest="30" HeightRequest="30"/>
                     <Label Text="gram music creator"
@@ -101,7 +100,7 @@
 
                 <StackLayout Orientation="Horizontal" Padding="5,10" Spacing="10">
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding OpenVideoCreatorCommand}"/>
+                        <TapGestureRecognizer Tapped="OnOpenVideoCreator"/>
                     </StackLayout.GestureRecognizers>
                     <Image Source="video_icon.png" WidthRequest="30" HeightRequest="30"/>
                     <Label Text="gram video creator"

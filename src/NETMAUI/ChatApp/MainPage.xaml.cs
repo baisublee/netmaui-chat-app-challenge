@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using System;
 using ChatApp.ViewModels;
 
 namespace ChatApp
@@ -8,28 +9,34 @@ namespace ChatApp
         public MainPage()
         {
             InitializeComponent();
-            this.BindingContext = new MainMenuViewModel();
         }
 
-        private void OnMenuSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OnCharacterTapped(object sender, EventArgs e)
         {
-            if (e.CurrentSelection != null && e.CurrentSelection.Count > 0)
+            var tappedCharacter = (sender as View).BindingContext as Character;
+            if (tappedCharacter != null)
             {
-                // Cast the selected item to your data model
-                var selectedCharacter = e.CurrentSelection[0] as Character;
-
-                // Navigate to different content based on the selected character
-                if (selectedCharacter != null)
-                {
-                    // Update ContentFrame with the selected character's view
-                    // ContentFrame.Content = new Label
-                    // {
-                    //     Text = $"Selected: {selectedCharacter.Name}",
-                    //     HorizontalOptions = LayoutOptions.Center,
-                    //     VerticalOptions = LayoutOptions.Center
-                    // };
-                }
+                DisplayAlert("Character Tapped", $"You tapped on {tappedCharacter.Name}", "OK");
+                // Add additional logic here to handle character selection
             }
+        }
+
+        private void OnCreateNewCharacter(object sender, EventArgs e)
+        {
+            DisplayAlert("Create New Character", "Create New Character button tapped", "OK");
+            // Add logic to navigate to character creation page or show a dialog
+        }
+
+        private void OnOpenMusicCreator(object sender, EventArgs e)
+        {
+            DisplayAlert("Open Music Creator", "Music Creator option tapped", "OK");
+            // Add logic to open the music creator page or functionality
+        }
+
+        private void OnOpenVideoCreator(object sender, EventArgs e)
+        {
+            DisplayAlert("Open Video Creator", "Video Creator option tapped", "OK");
+            // Add logic to open the video creator page or functionality
         }
     }
 }
