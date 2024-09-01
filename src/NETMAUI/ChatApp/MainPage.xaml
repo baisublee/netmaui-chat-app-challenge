@@ -17,7 +17,8 @@
         </Grid.ColumnDefinitions>
 
         <!-- Vertical StackLayout with Label and Frame -->
-        <Grid Grid.Column="0" Margin="0,0,10,0">
+        <Grid Grid.Column="0"
+                Margin="0,0,10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -32,28 +33,28 @@
                    BackgroundColor="Transparent"
                    Padding="20,10"
                    Margin="20,10,0,10"/>
-     <!-- Background blocks to simulate the solid corners -->
-            <BoxView Grid.Row="1" 
-                     BackgroundColor="#8C56FF" 
-                     VerticalOptions="Start" 
-                     HorizontalOptions="Start" 
-                     WidthRequest="50" 
+            <!-- Background blocks to simulate the solid corners -->
+            <BoxView Grid.Row="1"
+                     BackgroundColor="#8C56FF"
+                     VerticalOptions="Start"
+                     HorizontalOptions="Start"
+                     WidthRequest="50"
                      HeightRequest="50"
                      Margin="0,0,0,-15"/>
 
-            <BoxView Grid.Row="1" 
-                     BackgroundColor="#8C56FF" 
-                     VerticalOptions="End" 
-                     HorizontalOptions="Start" 
-                     WidthRequest="50" 
+            <BoxView Grid.Row="1"
+                     BackgroundColor="#8C56FF"
+                     VerticalOptions="End"
+                     HorizontalOptions="Start"
+                     WidthRequest="50"
                      HeightRequest="50"
                      Margin="0,-15,0,0"/>
 
-            <BoxView Grid.Row="1" 
-                     BackgroundColor="#8C56FF" 
-                     VerticalOptions="End" 
-                     HorizontalOptions="End" 
-                     WidthRequest="50" 
+            <BoxView Grid.Row="1"
+                     BackgroundColor="#8C56FF"
+                     VerticalOptions="End"
+                     HorizontalOptions="End"
+                     WidthRequest="50"
                      HeightRequest="50"
                      Margin="0,-15,0,0"/>
 
@@ -66,7 +67,9 @@
                    VerticalOptions="FillAndExpand"
                    HorizontalOptions="FillAndExpand">
 
-                <VerticalStackLayout Padding="0" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                <VerticalStackLayout Padding="0"
+                        VerticalOptions="FillAndExpand"
+                        BackgroundColor="Transparent">
 
                     <!-- Characters List -->
                     <CollectionView ItemsSource="{Binding Characters}"
@@ -82,8 +85,8 @@
                                              Margin="0,3"
                                              BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundConverter}}">
                                     <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnCharacterTapped"
-                                                              CommandParameter="{Binding .}"/>
+                                        <!-- <TapGestureRecognizer Tapped="OnCharacterTapped"
+                                                              CommandParameter="{Binding .}"/> -->
                                     </StackLayout.GestureRecognizers>
                                     <Frame Padding="0"
                                            CornerRadius="20"
