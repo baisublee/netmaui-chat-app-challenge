@@ -117,7 +117,7 @@
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnOpenMusicCreator"/>
                             </StackLayout.GestureRecognizers>
-                            <Image Source="music_icon.png"
+                            <Image Source="music_creator_icon.png"
                                    WidthRequest="30"
                                    HeightRequest="30"/>
                             <Label Text="gram music creator"
@@ -132,7 +132,7 @@
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="OnOpenVideoCreator"/>
                             </StackLayout.GestureRecognizers>
-                            <Image Source="video_icon.png"
+                            <Image Source="gram_search_icon.png"
                                    WidthRequest="30"
                                    HeightRequest="30"/>
                             <Label Text="gram video creator"

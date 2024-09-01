@@ -26,7 +26,7 @@ namespace ChatApp.ViewModels
                 new Character { Name = "Rachel", Image = "rachel_image.png" },
                 new Character { Name = "Olivia", Image = "olivia_image.jpeg" },
                 new Character { Name = "Chris", Image = "chris_image.png" },
-                new Character { Name = "Create", Image = "plus_icon.png", IsCreateItem = true }
+                new Character { Name = "Create", Image = "create.png", IsCreateItem = true }
             };
 
             // Command for creating a new character
