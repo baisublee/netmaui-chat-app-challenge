@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using System.Diagnostics;
 
 namespace ChatApp.ViewModels
 {
@@ -9,6 +10,7 @@ namespace ChatApp.ViewModels
         public string Name { get; set; }
         public string Image { get; set; }
         public bool IsSelected { get; set; }
+        public bool IsCreateItem { get; set; } = false;
     }
 
     public class MainMenuViewModel : BindableObject
@@ -23,7 +25,8 @@ namespace ChatApp.ViewModels
             {
                 new Character { Name = "Rachel", Image = "rachel_image.png" },
                 new Character { Name = "Olivia", Image = "olivia_image.jpeg" },
-                new Character { Name = "Chris", Image = "chris_image.png" }
+                new Character { Name = "Chris", Image = "chris_image.png" },
+                new Character { Name = "Create", Image = "plus_icon.png", IsCreateItem = true }
             };
 
             // Command for creating a new character
@@ -77,26 +80,31 @@ namespace ChatApp.ViewModels
         {
             // Logic for creating a new character
             // For example, you could open a dialog to enter character details
+            Debug.WriteLine("Main Menu View CreateNewCharacter");
         }
 
         private void OpenMusicCreator()
         {
             // Logic to open the gram music creator
+            Debug.WriteLine("Main Menu View OpenMusicCreator");
         }
 
         private void OpenVideoCreator()
         {
             // Logic to open the gram video creator
+            Debug.WriteLine("Main Menu View OpenVideoCreator");
         }
 
         private void OnCharacterTapped(Character character)
         {
             // Logic to handle when a character is tapped
             SelectedCharacter = character;
+            Debug.WriteLine($"Main Menu View Tapped character: {character?.Name}");
         }
 
         private void OnCharacterSelected(Character character)
         {
+            Debug.WriteLine($" Main Menu View Selected character: {character?.Name}");
             // Logic to handle when a character is selected
             if (character != null)
             {

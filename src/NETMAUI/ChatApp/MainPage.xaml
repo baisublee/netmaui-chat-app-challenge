@@ -37,10 +37,13 @@
                             BackgroundColor="Transparent">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Orientation="Horizontal" Padding="5" Spacing="10"
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5"
+                                     Spacing="10"
                                      BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundConverter}}">
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnCharacterTapped" CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Tapped="OnCharacterTapped"
+                                                      CommandParameter="{Binding .}"/>
                             </StackLayout.GestureRecognizers>
                             <Frame Padding="0"
                                    CornerRadius="20"
@@ -49,7 +52,8 @@
                                    HeightRequest="40"
                                    BackgroundColor="Transparent">
                                 <Image Source="{Binding Image}"
-                                       WidthRequest="40" HeightRequest="40"
+                                       WidthRequest="40"
+                                       HeightRequest="40"
                                        Aspect="AspectFill"/>
                             </Frame>
                             <Label Text="{Binding Name}"
@@ -61,48 +65,37 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Create New Character Button -->
-            <StackLayout Orientation="Horizontal" Padding="10,5" Spacing="10">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnCreateNewCharacter"/>
-                </StackLayout.GestureRecognizers>
-                <Frame Padding="0"
-                       CornerRadius="20"
-                       IsClippedToBounds="True"
-                       WidthRequest="40"
-                       HeightRequest="40"
-                       BackgroundColor="Transparent">
-                    <Image Source="plus_icon.png"
-                           WidthRequest="40" HeightRequest="40"
-                           Aspect="AspectFill"/>
-                </Frame>
-                <Label Text="Create"
-                       FontSize="18"
-                       TextColor="White"
-                       VerticalOptions="Center"/>
-            </StackLayout>
-
             <!-- Separator Line -->
-            <BoxView HeightRequest="1" BackgroundColor="White" Margin="20,10"/>
+            <BoxView HeightRequest="1"
+                     BackgroundColor="White"
+                     Margin="20,10"/>
 
             <!-- Applications Section -->
             <StackLayout>
-                <StackLayout Orientation="Horizontal" Padding="5,10" Spacing="10">
+                <StackLayout Orientation="Horizontal"
+                             Padding="5,10"
+                             Spacing="10">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnOpenMusicCreator"/>
                     </StackLayout.GestureRecognizers>
-                    <Image Source="music_icon.png" WidthRequest="30" HeightRequest="30"/>
+                    <Image Source="music_icon.png"
+                           WidthRequest="30"
+                           HeightRequest="30"/>
                     <Label Text="gram music creator"
                            FontSize="18"
                            TextColor="White"
                            VerticalOptions="Center"/>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" Padding="5,10" Spacing="10">
+                <StackLayout Orientation="Horizontal"
+                             Padding="5,10"
+                             Spacing="10">
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnOpenVideoCreator"/>
                     </StackLayout.GestureRecognizers>
-                    <Image Source="video_icon.png" WidthRequest="30" HeightRequest="30"/>
+                    <Image Source="video_icon.png"
+                           WidthRequest="30"
+                           HeightRequest="30"/>
                     <Label Text="gram video creator"
                            FontSize="18"
                            TextColor="White"
@@ -112,7 +105,8 @@
         </StackLayout>
 
         <!-- Right Content Panel -->
-        <ContentView Grid.Column="1" x:Name="ContentFrame">
+        <ContentView Grid.Column="1"
+                     x:Name="ContentFrame">
             <!-- This will be dynamically populated with ChatPage or CreationPage -->
         </ContentView>
 
