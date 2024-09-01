@@ -31,12 +31,12 @@
                    TextColor="Black"
                    BackgroundColor="Transparent"
                    Padding="20,10"
-                   Margin="20,10,0,20"/>
+                   Margin="20,10,0,10"/>
 
             <!-- Left Panel inside Frame -->
             <Frame Grid.Row="1"
                    BackgroundColor="#8C56FF"
-                   Padding="0"
+                   Padding="20"
                    CornerRadius="30"
                    HasShadow="False"
                    VerticalOptions="FillAndExpand"
