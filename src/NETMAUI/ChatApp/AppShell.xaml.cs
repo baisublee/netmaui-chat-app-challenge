@@ -14,7 +14,7 @@ public partial class AppShell : Shell
 		// if (isOnboardingFinished)
 		// {
 		// 	Preferences.Set("IsOnboardingFinished", true);
-		 	await GoToAsync("//OnboardingWelcome");
+		 	await GoToAsync("//MainPage");
 		// }
 		// else
 		// {

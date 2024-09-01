@@ -16,99 +16,111 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- App Name -->
-        <Label Text="gram AI assistant"
-               FontSize="22"
-               FontAttributes="Bold"
-               TextColor="Black"
-               BackgroundColor="Transparent"
-               Padding="20,10"
-               Margin="20,10,0,20"
-               Grid.Column="0"/>
+        <!-- Vertical StackLayout with Label and Frame -->
+        <Grid Grid.Column="0" Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <!-- Left Panel -->
-        <Frame BackgroundColor="#8C56FF"
-               Padding="0"
-               Grid.Column="0"
-               Margin="0,0,10,0"
-               CornerRadius="20"
-               HasShadow="False">
+            <!-- App Name -->
+            <Label Grid.Row="0"
+                   Text="gram AI assistant"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="Black"
+                   BackgroundColor="Transparent"
+                   Padding="20,10"
+                   Margin="20,10,0,20"/>
 
-            <StackLayout Padding="0">
-                <!-- Characters List -->
-                <CollectionView ItemsSource="{Binding Characters}"
-                                SelectionMode="Single"
-                                SelectedItem="{Binding SelectedCharacter}"
-                                BackgroundColor="Transparent">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout Orientation="Horizontal"
-                                         Padding="5"
-                                         Spacing="10"
-                                         BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundConverter}}">
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="OnCharacterTapped"
-                                                          CommandParameter="{Binding .}"/>
-                                </StackLayout.GestureRecognizers>
-                                <Frame Padding="0"
-                                       CornerRadius="20"
-                                       IsClippedToBounds="True"
-                                       WidthRequest="40"
-                                       HeightRequest="40"
-                                       BackgroundColor="Transparent">
-                                    <Image Source="{Binding Image}"
+            <!-- Left Panel inside Frame -->
+            <Frame Grid.Row="1"
+                   BackgroundColor="#8C56FF"
+                   Padding="0"
+                   CornerRadius="30"
+                   HasShadow="False"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand">
+
+                <VerticalStackLayout Padding="0" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+                    <!-- Characters List -->
+                    <CollectionView ItemsSource="{Binding Characters}"
+                                    SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedCharacter}"
+                                    BackgroundColor="Transparent"
+                                    VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Padding="5"
+                                             Spacing="10"
+                                             BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundConverter}}">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnCharacterTapped"
+                                                              CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Frame Padding="0"
+                                           CornerRadius="20"
+                                           IsClippedToBounds="True"
                                            WidthRequest="40"
                                            HeightRequest="40"
-                                           Aspect="AspectFill"/>
-                                </Frame>
-                                <Label Text="{Binding Name}"
-                                       FontSize="18"
-                                       TextColor="White"
-                                       VerticalOptions="Center"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                           BackgroundColor="Transparent">
+                                        <Image Source="{Binding Image}"
+                                               WidthRequest="40"
+                                               HeightRequest="40"
+                                               Aspect="AspectFill"/>
+                                    </Frame>
+                                    <Label Text="{Binding Name}"
+                                           FontSize="18"
+                                           TextColor="White"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
 
-                <!-- Separator Line -->
-                <BoxView HeightRequest="1"
-                         BackgroundColor="White"
-                         Margin="20,10"/>
+                    <!-- Separator Line -->
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="White"
+                             Margin="20,10"/>
 
-                <!-- Applications Section -->
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal"
-                                 Padding="5,10"
-                                 Spacing="10">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnOpenMusicCreator"/>
-                        </StackLayout.GestureRecognizers>
-                        <Image Source="music_icon.png"
-                               WidthRequest="30"
-                               HeightRequest="30"/>
-                        <Label Text="gram music creator"
-                               FontSize="18"
-                               TextColor="White"
-                               VerticalOptions="Center"/>
+                    <!-- Applications Section -->
+                    <StackLayout VerticalOptions="End">
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5,10"
+                                     Spacing="10">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnOpenMusicCreator"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="music_icon.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"/>
+                            <Label Text="gram music creator"
+                                   FontSize="18"
+                                   TextColor="White"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5,10"
+                                     Spacing="10">
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnOpenVideoCreator"/>
+                            </StackLayout.GestureRecognizers>
+                            <Image Source="video_icon.png"
+                                   WidthRequest="30"
+                                   HeightRequest="30"/>
+                            <Label Text="gram video creator"
+                                   FontSize="18"
+                                   TextColor="White"
+                                   VerticalOptions="Center"/>
+                        </StackLayout>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal"
-                                 Padding="5,10"
-                                 Spacing="10">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnOpenVideoCreator"/>
-                        </StackLayout.GestureRecognizers>
-                        <Image Source="video_icon.png"
-                               WidthRequest="30"
-                               HeightRequest="30"/>
-                        <Label Text="gram video creator"
-                               FontSize="18"
-                               TextColor="White"
-                               VerticalOptions="Center"/>
-                    </StackLayout>
-                </StackLayout>
-            </StackLayout>
-        </Frame>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
 
         <!-- Right Content Panel -->
         <ContentView Grid.Column="1"
