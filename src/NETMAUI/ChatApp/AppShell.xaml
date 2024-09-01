@@ -11,6 +11,7 @@
     <ShellContent
         Title=""
         ContentTemplate="{DataTemplate local:OnboardingWelcome}"
+        Shell.NavBarIsVisible="False"
         Route="OnboardingWelcome" />
 
     <ShellContent
