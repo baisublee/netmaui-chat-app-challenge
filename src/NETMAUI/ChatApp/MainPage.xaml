@@ -78,7 +78,8 @@
                             <DataTemplate>
                                 <StackLayout Orientation="Horizontal"
                                              Padding="5"
-                                             Spacing="10"
+                                             Spacing="15"
+                                             Margin="0,3"
                                              BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedBackgroundConverter}}">
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="OnCharacterTapped"
