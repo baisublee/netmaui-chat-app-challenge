@@ -103,5 +103,13 @@ namespace ChatApp
             DisplayAlert("Open Video Creator", "Video Creator option tapped", "OK");
             // Add logic to open the video creator page or functionality
         }
+
+        private void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Main Page OnBackButtonClicked");
+            // Handle back button click
+            // Navigate to the previous page or perform any other action
+            // Navigation.PopAsync(); // Example: Navigating back in the navigation stack
+        }
     }
 }

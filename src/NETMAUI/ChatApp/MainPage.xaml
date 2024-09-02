@@ -174,25 +174,57 @@
         <VerticalStackLayout Grid.Column="1"
                 VerticalOptions="FillAndExpand"
                 Padding="10">
-            <!-- HorizontalStackLayout with Profile Info -->
-            <HorizontalStackLayout HeightRequest="32"
-                    Spacing="10"
-                    VerticalOptions="Start">
-                <Frame WidthRequest="28"
-                        HeightRequest="28"
-                        CornerRadius="14"
-                        IsClippedToBounds="True"
-                        Padding="0"
-                        HasShadow="False"
-                        BackgroundColor="Transparent">
-                    <Image Source="{Binding SelectedCharacter.Image}"
-                            Aspect="AspectFill"/>
-                </Frame>
-                <Label Text="{Binding SelectedCharacter.Name}"
-                        VerticalOptions="Center"
-                        TextColor="Black"
-                        FontSize="16"/>
-            </HorizontalStackLayout>
+            <!-- Conditional Layout: Show either Profile Info or Back Button -->
+            <ContentView VerticalOptions="Start">
+                <ContentView.Triggers>
+                    <!-- Trigger to show back button if IsCreateItem is true -->
+                    <DataTrigger TargetType="ContentView"
+                            Binding="{Binding SelectedCharacter.IsCreateItem}"
+                            Value="True">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <!-- Back Button with Image -->
+                                <ImageButton Source="navigation_back_icon.png"
+                                             WidthRequest="32"
+                                             HeightRequest="32"
+                                             BackgroundColor="Transparent"
+                                             HorizontalOptions="Start"
+                                             VerticalOptions="Center"
+                                             Clicked="OnBackButtonClicked"/>
+                                <!-- Handle the click event -->
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <!-- Default: Show Profile Info -->
+                    <DataTrigger TargetType="ContentView"
+                            Binding="{Binding SelectedCharacter.IsCreateItem}"
+                            Value="False">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <!-- Profile Info -->
+                                <HorizontalStackLayout HeightRequest="28"
+                                        Spacing="10"
+                                        VerticalOptions="Start">
+                                    <Frame WidthRequest="28"
+                                            HeightRequest="28"
+                                            CornerRadius="14"
+                                            IsClippedToBounds="True"
+                                            Padding="0"
+                                            HasShadow="False"
+                                            BackgroundColor="Transparent">
+                                        <Image Source="{Binding SelectedCharacter.Image}"
+                                                Aspect="AspectFill"/>
+                                    </Frame>
+                                    <Label Text="{Binding SelectedCharacter.Name}"
+                                            VerticalOptions="Center"
+                                            TextColor="Black"
+                                            FontSize="16"/>
+                                </HorizontalStackLayout>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </ContentView.Triggers>
+            </ContentView>
 
             <!-- ContentView to show dynamic content -->
             <ContentView x:Name="ContentFrame"
@@ -201,6 +233,5 @@
                 <!-- This will be dynamically populated with ChatPage or CreationPage -->
             </ContentView>
         </VerticalStackLayout>
-
     </Grid>
 </ContentPage>
