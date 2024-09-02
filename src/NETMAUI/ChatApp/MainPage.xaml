@@ -230,6 +230,7 @@
             <!-- ContentView to show dynamic content -->
             <ContentView x:Name="ContentFrame"
                     VerticalOptions="FillAndExpand"
+                    HeightRequest="1000"
                     BackgroundColor="White">
                 <!-- This will be dynamically populated with ChatPage or CreationPage -->
             </ContentView>
