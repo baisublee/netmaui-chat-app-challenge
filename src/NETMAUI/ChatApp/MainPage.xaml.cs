@@ -32,24 +32,36 @@ namespace ChatApp
                 // Get the list of characters from CAAService
                 var characters = await CAAService.Instance.GetCharactersAsync();
 
+                var CharacterList = new List<CharacterViewModel>();
                 if (characters != null && characters.Count > 0)
                 {
-                    // Set the characters in the ViewModel
-                    var CharacterList = new List<CharacterViewModel>(
-                        characters.Select(c => new CharacterViewModel
+                    // iterate through the characters and create a CharacterViewModel for each
+                    foreach (var c in characters)
+                    {
+                        CharacterList.Add(new CharacterViewModel
                         {
                             Id = c.Id,
                             Name = c.CharacterName,
-                            Image = "default_character_image.png", // Assuming a default image or map the actual image here
-                            Description = c.Description.Personality // You can expand this as needed
-                        })
-                    );
+                            Image = "rachel_image.png", // Assuming a default image or map the actual image here
+                        });
+                    }
 
-                    ViewModel.Characters = new ObservableCollection<CharacterViewModel>(CharacterList);
-
-                    // Set the left menu character (e.g., the first character)
-                    ViewModel.SelectedCharacter = ViewModel.Characters.FirstOrDefault();
                 }
+
+                CharacterList.Add(new CharacterViewModel
+                {
+                    Name = "Create",
+                    Image = "create.png",
+                    IsCreateItem = true
+                });
+
+                ViewModel.Characters = new ObservableCollection<CharacterViewModel>(CharacterList);
+
+                // Set the left menu character (e.g., the first character)
+                ViewModel.SelectedCharacter = ViewModel.Characters.FirstOrDefault();
+
+
+
             }
             catch (Exception ex)
             {

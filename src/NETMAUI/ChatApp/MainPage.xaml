@@ -7,7 +7,7 @@
              BackgroundColor="White">
 
     <ContentPage.BindingContext>
-        <local:MainMenuViewModel/>
+        <local:MainPageViewModel/>
     </ContentPage.BindingContext>
 
     <Grid>

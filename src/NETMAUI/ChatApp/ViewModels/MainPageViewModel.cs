@@ -43,11 +43,43 @@ namespace ChatApp.ViewModels
         }
     }
 
-    public class CharacterViewModel
+    // public class CharacterViewModel
+    // {
+    //     public string Id { get; set; }
+    //     public string Name { get; set; }
+    //     public string Image { get; set; } // Image path or URL
+    //     public string Description { get; set; } // Character description or personality
+    // }
+
+    public class CharacterViewModel : INotifyPropertyChanged
     {
-        public string Id { get; set; }
+        private bool _isSelected;
+
         public string Name { get; set; }
-        public string Image { get; set; } // Image path or URL
-        public string Description { get; set; } // Character description or personality
+        public string Image { get; set; }
+
+        public string Id { get; set; }
+
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        }
+
+        public bool IsCreateItem { get; set; } = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
