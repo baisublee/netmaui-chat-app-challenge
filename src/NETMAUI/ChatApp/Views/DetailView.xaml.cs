@@ -17,9 +17,11 @@ namespace ChatApp.Views
             OllamaChatbot,
 
             EdgeAIChatbot,
+
+            CAAService,
         }
 
-        private static CommunicationOption streamingOption = CommunicationOption.EdgeAIChatbot;
+        private static CommunicationOption streamingOption = CommunicationOption.CAAService;
 
         public DetailView()
         {
@@ -104,6 +106,10 @@ namespace ChatApp.Views
                     break;
                 case CommunicationOption.EdgeAIChatbot:
                     response = await GetEdgeAIChatBotResponseAsync(message);
+                    Console.WriteLine($"Chatbot response: {response}");
+                    break;
+                case CommunicationOption.CAAService:
+                    response = await GetChatbotResponseFromCAAAsync(message);
                     Console.WriteLine($"Chatbot response: {response}");
                     break;
                 default:
@@ -191,6 +197,30 @@ namespace ChatApp.Views
             StringBuilder completeResponse = new StringBuilder();
 
             await EdgeAIService.Instance.StartChatAsync("2", userInput, async chunk =>
+            {
+                Console.Write(chunk);
+                Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
+                completeResponse.Append(chunk);
+
+                var resp = new Message
+                {
+                    Sender = MessageService.Instance.user1,
+                    Time = DateTime.Now.ToString("HH:mm"),
+                    Text = chunk,
+                };
+
+                await UpdateMessage(resp);
+
+            });
+
+            return completeResponse.ToString();
+        }
+
+        private async Task<string> GetChatbotResponseFromCAAAsync(string userInput)
+        {
+            StringBuilder completeResponse = new StringBuilder();
+
+            await CAAService.Instance.StartChatAsync("2", userInput, async chunk =>
             {
                 Console.Write(chunk);
                 Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
