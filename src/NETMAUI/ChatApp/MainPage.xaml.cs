@@ -2,19 +2,66 @@ using Microsoft.Maui.Controls;
 using System;
 using ChatApp.ViewModels;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace ChatApp
 {
     public partial class MainPage : ContentPage
     {
+
+        public MainPageViewModel ViewModel { get; set; }
         public MainPage()
         {
             InitializeComponent();
+            ViewModel = new MainPageViewModel();
+            BindingContext = ViewModel;
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Load characters when the page appears
+            await LoadCharactersAsync();
+        }
+
+        private async Task LoadCharactersAsync()
+        {
+            try
+            {
+                // Get the list of characters from CAAService
+                var characters = await CAAService.Instance.GetCharactersAsync();
+
+                if (characters != null && characters.Count > 0)
+                {
+                    // Set the characters in the ViewModel
+                    var CharacterList = new List<CharacterViewModel>(
+                        characters.Select(c => new CharacterViewModel
+                        {
+                            Id = c.Id,
+                            Name = c.CharacterName,
+                            Image = "default_character_image.png", // Assuming a default image or map the actual image here
+                            Description = c.Description.Personality // You can expand this as needed
+                        })
+                    );
+
+                    ViewModel.Characters = new ObservableCollection<CharacterViewModel>(CharacterList);
+
+                    // Set the left menu character (e.g., the first character)
+                    ViewModel.SelectedCharacter = ViewModel.Characters.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading characters: {ex.Message}");
+                Debug.WriteLine($"Error loading characters: {ex.Message}");
+            }
+        }
+
 
         private void OnCharacterTapped(object sender, EventArgs e)
         {
-            var tappedCharacter = (sender as View).BindingContext as Character;
+            var tappedCharacter = (sender as View).BindingContext as CharacterViewModel;
             if (tappedCharacter != null)
             {
                 DisplayAlert("Character Tapped", $"You tapped on {tappedCharacter.Name}", "OK");
