@@ -30,6 +30,7 @@
                    FontSize="22"
                    FontAttributes="Bold"
                    TextColor="Black"
+                   HeightRequest="28"
                    BackgroundColor="Transparent"
                    Padding="20,10"
                    Margin="20,10,0,10"/>
@@ -169,10 +170,37 @@
         </Grid>
 
         <!-- Right Content Panel -->
-        <ContentView Grid.Column="1"
-                     x:Name="ContentFrame">
-            <!-- This will be dynamically populated with ChatPage or CreationPage -->
-        </ContentView>
+        <!-- Right Side: Vertical StackLayout with Profile Info on top and ContentView at the bottom -->
+        <VerticalStackLayout Grid.Column="1"
+                VerticalOptions="FillAndExpand"
+                Padding="10">
+            <!-- HorizontalStackLayout with Profile Info -->
+            <HorizontalStackLayout HeightRequest="28"
+                    Spacing="10"
+                    VerticalOptions="Start">
+                <Frame WidthRequest="28"
+                        HeightRequest="28"
+                        CornerRadius="14"
+                        IsClippedToBounds="True"
+                        Padding="0"
+                        HasShadow="False"
+                        BackgroundColor="Transparent">
+                    <Image Source="{Binding SelectedCharacter.Image}"
+                            Aspect="AspectFill"/>
+                </Frame>
+                <Label Text="{Binding SelectedCharacter.Name}"
+                        VerticalOptions="Center"
+                        TextColor="Black"
+                        FontSize="16"/>
+            </HorizontalStackLayout>
+
+            <!-- ContentView to show dynamic content -->
+            <ContentView x:Name="ContentFrame"
+                    VerticalOptions="FillAndExpand"
+                    BackgroundColor="White">
+                <!-- This will be dynamically populated with ChatPage or CreationPage -->
+            </ContentView>
+        </VerticalStackLayout>
 
     </Grid>
 </ContentPage>
