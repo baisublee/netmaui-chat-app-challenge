@@ -102,8 +102,9 @@
                                     <StackLayout Orientation="Horizontal"
                                                  Spacing="15">
                                         <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.OnCharacterTappedCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
-                                                                  CommandParameter="{Binding .}"/>
+                                            <TapGestureRecognizer Tapped="OnCharacterTapped" CommandParameter="{Binding .}" />
+                                            <!-- <TapGestureRecognizer Command="{Binding BindingContext.OnCharacterTappedCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                                  CommandParameter="{Binding .}"/> -->
                                         </StackLayout.GestureRecognizers>
                                         <Frame Padding="0"
                                                CornerRadius="20"

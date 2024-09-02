@@ -2,6 +2,7 @@
 using ChatApp.Services;
 using System.Text;
 using System.Diagnostics;
+using ChatApp.ViewModels; // Assuming CharacterViewModel is in this namespace
 
 namespace ChatApp.Views
 {
@@ -24,6 +25,32 @@ namespace ChatApp.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            // Access the passed CharacterViewModel if needed
+            var character = BindingContext as CharacterViewModel;
+            if (character != null)
+            {
+                Console.WriteLine($"DetailView for {character.Name}");
+                // Update UI or perform actions based on the character
+            }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Access the passed CharacterViewModel if needed
+            var character = BindingContext as CharacterViewModel;
+            if (character != null)
+            {
+                Console.WriteLine($"DetailView for {character.Name}");
+                // Update UI or perform actions based on the character
+            }
         }
 
         private async void MessageEntry_Completed(object sender, EventArgs e)

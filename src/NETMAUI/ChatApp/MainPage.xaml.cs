@@ -3,6 +3,7 @@ using System;
 using ChatApp.ViewModels;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
+using ChatApp.Views; // Assuming DetailView is in this namespace
 
 namespace ChatApp
 {
@@ -71,18 +72,40 @@ namespace ChatApp
         }
 
 
+        // This method is triggered when a character is tapped in the UI
         private void OnCharacterTapped(object sender, EventArgs e)
         {
-            var tappedCharacter = (sender as View).BindingContext as CharacterViewModel;
+            var tappedCharacter = (e as TappedEventArgs)?.Parameter as CharacterViewModel;
             if (tappedCharacter != null)
             {
-                DisplayAlert("Character Tapped", $"You tapped on {tappedCharacter.Name}", "OK");
-                // Add additional logic here to handle character selection
-                Debug.WriteLine("Main Page OnCharacterTapped: " + tappedCharacter.Name);
+                // Handle the character selection in MainPage.xaml.cs
+                Console.WriteLine($"Character Tapped: {tappedCharacter.Name}");
 
+                // Now set the SelectedCharacter in the ViewModel
+                ViewModel.SelectedCharacter = tappedCharacter;
+
+                // Load the appropriate page into the ContentFrame based on the selection
+                if (tappedCharacter.IsCreateItem)
+                {
+                    // Load the CreationPage if IsCreateItem is true
+                    ContentFrame.Content = new CreationPage();
+                }
+                else
+                {
+                    // Load the DetailView and pass the selected CharacterViewModel
+                    var detailView = new DetailView
+                    {
+                        BindingContext = tappedCharacter // Pass the selected character to DetailView
+                    };
+                    var wrapper = new ContentView
+                    {
+                        Content = detailView.Content
+                    };
+                    // Assign the wrapper to the ContentFrame
+                    ContentFrame.Content = wrapper;
+                }
             }
         }
-
         private void OnCreateNewCharacter(object sender, EventArgs e)
         {
             Debug.WriteLine("Main Page OnCreateNewCharacter");

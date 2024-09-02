@@ -23,16 +23,6 @@ namespace ChatApp.ViewModels
             }
         }
 
-        // public CharacterViewModel SelectedCharacter
-        // {
-        //     get => _selectedCharacter;
-        //     set
-        //     {
-        //         _selectedCharacter = value;
-        //         OnPropertyChanged();
-        //     }
-        // }
-
         public CharacterViewModel SelectedCharacter
         {
             get => _selectedCharacter;
@@ -113,14 +103,6 @@ namespace ChatApp.ViewModels
         }
 
     }
-
-    // public class CharacterViewModel
-    // {
-    //     public string Id { get; set; }
-    //     public string Name { get; set; }
-    //     public string Image { get; set; } // Image path or URL
-    //     public string Description { get; set; } // Character description or personality
-    // }
 
     public class CharacterViewModel : INotifyPropertyChanged
     {
