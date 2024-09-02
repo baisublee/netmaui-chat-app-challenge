@@ -23,15 +23,34 @@ namespace ChatApp.ViewModels
             }
         }
 
+        // public CharacterViewModel SelectedCharacter
+        // {
+        //     get => _selectedCharacter;
+        //     set
+        //     {
+        //         _selectedCharacter = value;
+        //         OnPropertyChanged();
+        //     }
+        // }
+
         public CharacterViewModel SelectedCharacter
         {
             get => _selectedCharacter;
             set
             {
-                _selectedCharacter = value;
-                OnPropertyChanged();
+                if (_selectedCharacter != value)
+                {
+                    if (_selectedCharacter != null)
+                        _selectedCharacter.IsSelected = false;
+                    _selectedCharacter = value;
+                    if (_selectedCharacter != null)
+                        _selectedCharacter.IsSelected = true;
+                    OnPropertyChanged();
+                    // Handle the character selection
+                    OnCharacterSelected(value);
+                }
             }
-        }
+        }        
 
         public MainPageViewModel()
         {
@@ -83,7 +102,7 @@ namespace ChatApp.ViewModels
             Debug.WriteLine($"Main Menu View Tapped character: {character?.Name}");
         }
 
-        private void OnCharacterSelected(Character character)
+        private void OnCharacterSelected(CharacterViewModel character)
         {
             Debug.WriteLine($" Main Menu View Selected character: {character?.Name}");
             // Logic to handle when a character is selected
