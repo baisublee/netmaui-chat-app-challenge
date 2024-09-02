@@ -30,7 +30,7 @@
                    FontSize="22"
                    FontAttributes="Bold"
                    TextColor="Black"
-                   HeightRequest="28"
+                   HeightRequest="32"
                    BackgroundColor="Transparent"
                    Padding="20,10"
                    Margin="20,10,0,10"/>
@@ -175,7 +175,7 @@
                 VerticalOptions="FillAndExpand"
                 Padding="10">
             <!-- HorizontalStackLayout with Profile Info -->
-            <HorizontalStackLayout HeightRequest="28"
+            <HorizontalStackLayout HeightRequest="32"
                     Spacing="10"
                     VerticalOptions="Start">
                 <Frame WidthRequest="28"
