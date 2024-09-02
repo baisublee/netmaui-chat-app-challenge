@@ -73,7 +73,7 @@
 
                     <!-- Characters List -->
                     <CollectionView ItemsSource="{Binding Characters}"
-                                    SelectionMode="Single"
+                                    SelectionMode="None"
                                     SelectedItem="{Binding SelectedCharacter}"
                                     BackgroundColor="Transparent"
                                     VerticalOptions="FillAndExpand">
@@ -81,25 +81,29 @@
                             <DataTemplate>
                                 <Frame Padding="5"
                                        Margin="0,3"
-                                       CornerRadius="10"
+                                       CornerRadius="20"
                                        HasShadow="False">
                                     <Frame.Triggers>
                                         <DataTrigger TargetType="Frame"
-                                                Binding="{Binding IsSelected}"
-                                                Value="True">
+                                                     Binding="{Binding IsSelected}"
+                                                     Value="True">
                                             <Setter Property="BackgroundColor"
                                                     Value="#A084F7"/>
                                             <!-- Light Purple -->
                                         </DataTrigger>
                                         <DataTrigger TargetType="Frame"
-                                                Binding="{Binding IsSelected}"
-                                                Value="False">
+                                                     Binding="{Binding IsSelected}"
+                                                     Value="False">
                                             <Setter Property="BackgroundColor"
                                                     Value="Transparent"/>
                                         </DataTrigger>
                                     </Frame.Triggers>
                                     <StackLayout Orientation="Horizontal"
-                                            Spacing="15">
+                                                 Spacing="15">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.OnCharacterTappedCommand, Source={RelativeSource AncestorType={x:Type CollectionView}}}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
                                         <Frame Padding="0"
                                                CornerRadius="20"
                                                IsClippedToBounds="True"
