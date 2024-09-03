@@ -61,6 +61,7 @@ namespace ChatApp
                 // Set the left menu character (e.g., the first character)
                 ViewModel.SelectedCharacter = ViewModel.Characters.FirstOrDefault();
 
+                HandleCharacterSelection(ViewModel.SelectedCharacter);
 
 
             }
@@ -76,6 +77,11 @@ namespace ChatApp
         private void OnCharacterTapped(object sender, EventArgs e)
         {
             var tappedCharacter = (e as TappedEventArgs)?.Parameter as CharacterViewModel;
+            HandleCharacterSelection(tappedCharacter);
+        }
+
+        private void HandleCharacterSelection(CharacterViewModel tappedCharacter)
+        {
             if (tappedCharacter != null)
             {
                 // Handle the character selection in MainPage.xaml.cs
@@ -106,6 +112,7 @@ namespace ChatApp
                 }
             }
         }
+
         private void OnCreateNewCharacter(object sender, EventArgs e)
         {
             Debug.WriteLine("Main Page OnCreateNewCharacter");

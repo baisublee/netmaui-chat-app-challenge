@@ -79,31 +79,27 @@ namespace ChatApp.Services
             Color = Color.FromArgb("#FF95A2")
         };
 
-       
-       public System.Collections.ObjectModel.ObservableCollection<Message> User1MessageList { get; }
 
-        public MessageService() {
+        public System.Collections.ObjectModel.ObservableCollection<Message> User1MessageList { get; }
+
+        public MessageService()
+        {
 
             User1MessageList = new System.Collections.ObjectModel.ObservableCollection<Message> {
-                new Message
-                {
-                    Sender = null,
-                    Time = "18:42",
-                    Text = "Hi",
-                },
-                new Message
-                {
-                    Sender = user1,
-                    Time = "18:39",
-                    Text ="Hi! Just a quick \"hi\"? I'm used to more excitement than that. You know, like a \"hi\" followed by a long, passionate story about my recent shopping spree or a hilarious anecdote from my waitressing days.",
-                }
+                // new Message
+                // {
+                //     Sender = null,
+                //     Time = "18:42",
+                //     Text = "Hi",
+                // },
+                // new Message
+                // {
+                //     Sender = user1,
+                //     Time = "18:39",
+                //     Text ="Hi! Just a quick \"hi\"? I'm used to more excitement than that. You know, like a \"hi\" followed by a long, passionate story about my recent shopping spree or a hilarious anecdote from my waitressing days.",
+                // }
             };
         }
- 
-
-
-
-
 
         public List<User> GetUsers()
         {

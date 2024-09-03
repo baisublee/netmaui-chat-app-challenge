@@ -23,6 +23,8 @@ namespace ChatApp.Views
 
         private static CommunicationOption streamingOption = CommunicationOption.CAAService;
 
+        private CharacterViewModel _character;
+
         public DetailView()
         {
             InitializeComponent();
@@ -39,7 +41,11 @@ namespace ChatApp.Views
             {
                 Console.WriteLine($"DetailView for {character.Name}");
                 // Update UI or perform actions based on the character
+            } else {
+                Console.WriteLine("DetailView for character null");
             }
+
+            _character = character;
         }
 
         protected override void OnAppearing()
@@ -196,7 +202,7 @@ namespace ChatApp.Views
         {
             StringBuilder completeResponse = new StringBuilder();
 
-            await EdgeAIService.Instance.StartChatAsync("2", userInput, async chunk =>
+            await EdgeAIService.Instance.StartChatAsync(_character.Id, userInput, async chunk =>
             {
                 Console.Write(chunk);
                 Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
