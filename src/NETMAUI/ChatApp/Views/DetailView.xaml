@@ -121,7 +121,7 @@
     <ContentPage.Content>
         <Grid      
             BackgroundColor="{StaticResource PrimaryColor}"
-            RowDefinitions="220, *">
+            RowDefinitions="0, *">
             <Grid 
                 Grid.Row="0"
                 RowDefinitions="Auto, 150">

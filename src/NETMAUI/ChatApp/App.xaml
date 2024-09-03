@@ -9,8 +9,8 @@
         <ResourceDictionary>
 
             <!-- COLORS -->
-            <Color x:Key="PrimaryColor">#5B61B9</Color>
-            <Color x:Key="SecondaryColor">White</Color>
+            <Color x:Key="PrimaryColor">White</Color>
+            <Color x:Key="SecondaryColor">Yellow</Color>
             
             <!-- BRUSHES -->
             <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
