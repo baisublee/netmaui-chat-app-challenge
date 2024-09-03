@@ -226,7 +226,7 @@ namespace ChatApp.Views
         {
             StringBuilder completeResponse = new StringBuilder();
 
-            await CAAService.Instance.StartChatAsync("2", userInput, async chunk =>
+            await CAAService.Instance.StartChatAsync(_character.Id, userInput, async chunk =>
             {
                 Console.Write(chunk);
                 Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
