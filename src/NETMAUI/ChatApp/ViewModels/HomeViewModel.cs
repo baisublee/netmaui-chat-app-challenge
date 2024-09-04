@@ -39,8 +39,8 @@ namespace ChatApp.ViewModels
 
         void LoadData()
         {
-            Users = new ObservableCollection<User>(MessageService.Instance.GetUsers());
-            RecentChat = new ObservableCollection<Message>(MessageService.Instance.GetChats());
+            // Users = new ObservableCollection<User>(MessageService.Instance.GetUsers());
+            // RecentChat = new ObservableCollection<Message>(MessageService.Instance.GetChats());
         }
 
         void OnNavigate(object parameter)

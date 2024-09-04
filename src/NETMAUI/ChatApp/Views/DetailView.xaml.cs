@@ -97,8 +97,8 @@ namespace ChatApp.Views
             {
                 _user = new User
                 {
-                    Image = _character.Image,
-                    Name = _character.Name,
+                    AvatarImage = _character.Image,
+                    CharacterName = _character.Name,
                     Color = Color.FromArgb("#A084F7"),
                 };
 
@@ -154,7 +154,7 @@ namespace ChatApp.Views
                     Console.WriteLine($"Chatbot response: {response}");
                     var resp = new Message
                     {
-                        Sender = MessageService.Instance.user1,
+                        Sender = _user,
                         Time = DateTime.Now.ToString("HH:mm"),
                         Text = response,
                     };
@@ -219,7 +219,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
-                    Sender = MessageService.Instance.user1,
+                    Sender = _user,
                     // Time = "12:11",
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
@@ -244,7 +244,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
-                    Sender = MessageService.Instance.user1,
+                    Sender = _user,
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
                 };
@@ -268,7 +268,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
-                    Sender = MessageService.Instance.user1,
+                    Sender = _user,
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
                 };
@@ -310,14 +310,14 @@ namespace ChatApp.Views
             try
             {
 
-                var lastItem = MessageService.Instance.User1MessageList.LastOrDefault();
+                var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
 
                 if (lastItem != null && lastItem.Sender != null)
                 {
                     lastItem.Text += msg.Text;
 
                     MessagesCollectionView.ItemsSource = null;
-                    MessagesCollectionView.ItemsSource = MessageService.Instance.User1MessageList;
+                    MessagesCollectionView.ItemsSource = MessageService.Instance.GetMessagesForUser(_user);
 
                     MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
 
@@ -341,9 +341,9 @@ namespace ChatApp.Views
             try
             {
 
-                MessageService.Instance.User1MessageList.Add(msg);
+                MessageService.Instance.AddMessageToUser(_user, msg);
 
-                var lastItem = MessageService.Instance.User1MessageList.LastOrDefault();
+                var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
                 if (lastItem != null)
                 {
                     MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: true);
