@@ -109,6 +109,12 @@ namespace ChatApp
                     };
                     // Assign the wrapper to the ContentFrame
                     ContentFrame.Content = wrapper;
+
+                    // Set the BindingContext after adding to the visual tree
+                    detailView.BindingContext = tappedCharacter; // Pass the selected character to DetailView
+
+                    // Manually trigger the UI update method
+                    // detailView.UpdateUIBasedOnCharacter();
                 }
             }
         }

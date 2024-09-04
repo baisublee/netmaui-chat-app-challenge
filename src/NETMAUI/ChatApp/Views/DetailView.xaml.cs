@@ -25,27 +25,85 @@ namespace ChatApp.Views
 
         private CharacterViewModel _character;
 
+        // public CharacterViewModel Character
+        // {
+        //     get { return _character; }
+        //     set
+        //     {
+        //         _character = value;
+        //         _user = new User
+        //         {
+        //             Image = value.Image,
+        //             Name = value.Name,
+        //             Color = Color.FromArgb("#A084F7"),
+        //         };
+        //     }
+        // }
+
+        private User _user;
+
         public DetailView()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            // NavigationPage.SetHasNavigationBar(this, false);
         }
 
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
+            // Your custom logic here
+            System.Diagnostics.Debug.WriteLine("BindingContext changed to: " + BindingContext);
 
-            // Access the passed CharacterViewModel if needed
+            var character = BindingContext as CharacterViewModel;
+
+            if (character != null)
+            {
+                Console.WriteLine($"DetailView for {character.Name}");
+                // Update UI or perform actions based on the character
+            }
+            else
+            {
+                Console.WriteLine("DetailView for character null");
+            }
+            _character = character;
+        }
+
+
+        // protected override void OnBindingContextChanged()
+        // {
+        //     base.OnBindingContextChanged();
+        //     UpdateUIBasedOnCharacter();
+        // }
+
+        // Method to update the UI based on the current BindingContext
+        public void UpdateUIBasedOnCharacter()
+        {
             var character = BindingContext as CharacterViewModel;
             if (character != null)
             {
                 Console.WriteLine($"DetailView for {character.Name}");
                 // Update UI or perform actions based on the character
-            } else {
+            }
+            else
+            {
                 Console.WriteLine("DetailView for character null");
             }
-
             _character = character;
+            if (_character == null)
+            {
+                _user = null;
+            }
+            else
+            {
+                _user = new User
+                {
+                    Image = _character.Image,
+                    Name = _character.Name,
+                    Color = Color.FromArgb("#A084F7"),
+                };
+
+            }
+
         }
 
         protected override void OnAppearing()
@@ -234,7 +292,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
-                    Sender = MessageService.Instance.user1,
+                    Sender = _user,
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
                 };

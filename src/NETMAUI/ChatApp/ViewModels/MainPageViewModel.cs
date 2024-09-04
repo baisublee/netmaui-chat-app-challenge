@@ -40,7 +40,7 @@ namespace ChatApp.ViewModels
                     OnCharacterSelected(value);
                 }
             }
-        }        
+        }
 
         public MainPageViewModel()
         {
@@ -133,6 +133,18 @@ namespace ChatApp.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public CharacterViewModel Clone()
+        {
+            return new CharacterViewModel
+            {
+                Name = this.Name,
+                Image = this.Image,
+                Id = this.Id,
+                IsSelected = this.IsSelected,
+                IsCreateItem = this.IsCreateItem
+            };
         }
     }
 }
