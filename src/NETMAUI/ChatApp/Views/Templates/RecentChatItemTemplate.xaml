@@ -76,7 +76,7 @@
                 ColumnDefinitions="*, Auto">
                 <StackLayout>
                     <Label        
-                        Text="{Binding Sender.Name}"
+                        Text="{Binding Sender.CharacterName}"
                         Style="{StaticResource NameTextStyle}"/>
                     <Label         
                         Text="{Binding Text}"

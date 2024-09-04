@@ -4,6 +4,7 @@ using ChatApp.ViewModels;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
 using ChatApp.Views; // Assuming DetailView is in this namespace
+using ChatApp.Services;
 
 namespace ChatApp
 {
@@ -98,11 +99,10 @@ namespace ChatApp
                 }
                 else
                 {
+                    CharacterSelectionService.Instance.SetSelectedCharacter(tappedCharacter);
+
                     // Load the DetailView and pass the selected CharacterViewModel
-                    var detailView = new DetailView
-                    {
-                        BindingContext = tappedCharacter // Pass the selected character to DetailView
-                    };
+                    var detailView = new DetailView();
                     var wrapper = new ContentView
                     {
                         Content = detailView.Content
@@ -111,8 +111,6 @@ namespace ChatApp
                     ContentFrame.Content = wrapper;
 
                     // Set the BindingContext after adding to the visual tree
-                    detailView.BindingContext = tappedCharacter; // Pass the selected character to DetailView
-
                     // Manually trigger the UI update method
                     // detailView.UpdateUIBasedOnCharacter();
                 }
