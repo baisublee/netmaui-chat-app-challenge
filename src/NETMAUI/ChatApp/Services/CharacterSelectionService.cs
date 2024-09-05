@@ -1,32 +1,34 @@
 using ChatApp.ViewModels;
+using System.Threading.Tasks;
 
 namespace ChatApp.Services
 {
     public class CharacterSelectionService
     {
-        // Singleton instance
         private static CharacterSelectionService _instance;
         public static CharacterSelectionService Instance => _instance ??= new CharacterSelectionService();
 
-        // Property to store the selected character globally
         public CharacterViewModel SelectedCharacterViewModel { get; private set; }
 
-        // Private constructor for singleton pattern
         private CharacterSelectionService() { }
 
-        // Method to update the selected character
-        public void SetSelectedCharacter(CharacterViewModel character)
+        // Method to update the selected character and persist it
+        public async Task SetSelectedCharacterAsync(CharacterViewModel character)
         {
             SelectedCharacterViewModel = character;
+            await ChatPersistService.Instance.SaveSelectedCharacterAsync(character.Id);
         }
 
-        // Method to retrieve the selected character
-        public CharacterViewModel GetSelectedCharacter()
+        // Method to load the selected character from the database
+        public async Task LoadSelectedCharacterAsync(List<CharacterViewModel> allCharacters)
         {
-            return SelectedCharacterViewModel;
+            var selectedCharacterId = await ChatPersistService.Instance.LoadSelectedCharacterIdAsync();
+            if (selectedCharacterId.HasValue)
+            {
+                SelectedCharacterViewModel = allCharacters.Find(c => c.Id == selectedCharacterId.Value);
+            }
         }
 
-        // Optional method to clear the selected character
         public void ClearSelectedCharacter()
         {
             SelectedCharacterViewModel = null;
