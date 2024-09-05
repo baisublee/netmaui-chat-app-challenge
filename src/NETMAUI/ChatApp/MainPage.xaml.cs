@@ -32,7 +32,9 @@ namespace ChatApp
             try
             {
                 // Get the list of characters from CAAService
-                var characters = await CAAService.Instance.GetCharactersAsync();
+                // var characters = await CAAService.Instance.GetCharactersAsync();
+                await MessageService.Instance.InitializeCharactersAsync();
+                var characters = MessageService.Instance.GetCharactersInMemory();
 
                 var CharacterList = new List<CharacterViewModel>();
                 if (characters != null && characters.Count > 0)
