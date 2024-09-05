@@ -226,8 +226,9 @@ namespace ChatApp.Views
 
             MessageEntry.Text = "";
 
-            var msg = new Message
+            var msg = new Message()
             {
+                CharacterId = _character.Id,
                 Sender = null,
                 Time = DateTime.Now.ToString("HH:mm"),
                 Text = message,
@@ -243,6 +244,7 @@ namespace ChatApp.Views
                     Console.WriteLine($"Chatbot response: {response}");
                     var resp = new Message
                     {
+                        CharacterId = _character.Id,
                         Sender = _user,
                         Time = DateTime.Now.ToString("HH:mm"),
                         Text = response,
@@ -308,6 +310,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
+                    CharacterId = _character.Id,
                     Sender = _user,
                     // Time = "12:11",
                     Time = DateTime.Now.ToString("HH:mm"),
@@ -333,6 +336,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
+                    CharacterId = _character.Id,
                     Sender = _user,
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
@@ -357,6 +361,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
+                    CharacterId = _character.Id,
                     Sender = _user,
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
@@ -381,6 +386,7 @@ namespace ChatApp.Views
 
                 var resp = new Message
                 {
+                    CharacterId = _character.Id,
                     Sender = _user,
                     Time = DateTime.Now.ToString("HH:mm"),
                     Text = chunk,
@@ -429,8 +435,7 @@ namespace ChatApp.Views
 
             try
             {
-
-                MessageService.Instance.AddMessageToUser(_user, msg);
+                MessageService.Instance.AddMessageToCharacterId(_character.Id, msg);
 
                 var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
                 if (lastItem != null)

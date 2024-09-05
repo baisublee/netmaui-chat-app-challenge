@@ -1,20 +1,24 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using SQLite;
 
 namespace ChatApp.Models
 {
-    // public class Message
-    // {
-    //     public User Sender { get; set; }
-    //     public string Text { get; set; }
-    //     public string Time { get; set; }
-    // }
-
     public class Message : INotifyPropertyChanged
     {
         private User _sender;
         private string _text;
         private string _time;
+
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
+
+        // CharacterId to store the associated character's ID
+        public string CharacterId { get; set; }
+
+        // CreatedAt to store message creation time (default to current epoch time in milliseconds)
+        public int CreatedAt { get; set; }
 
         public User Sender
         {
@@ -32,8 +36,7 @@ namespace ChatApp.Models
             set
             {
                 _text = value;
-                // OnPropertyChanged();
-                // OnPropertyChanged(nameof(Text));
+                OnPropertyChanged();
             }
         }
 
@@ -54,6 +57,16 @@ namespace ChatApp.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-    }
+        // Constructor to initialize CreatedAt with the current epoch time
+        public Message()
+        {
+            CreatedAt = GetCurrentEpochTimeInMilliseconds();
+        }
 
+        // Method to get the current time in epoch milliseconds
+        private int GetCurrentEpochTimeInMilliseconds()
+        {
+            return (int)(DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+        }
+    }
 }

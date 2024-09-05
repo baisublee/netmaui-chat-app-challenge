@@ -1,4 +1,7 @@
 using ChatApp.ViewModels;
+using ChatApp.Models;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChatApp.Services
@@ -10,28 +13,39 @@ namespace ChatApp.Services
 
         public CharacterViewModel SelectedCharacterViewModel { get; private set; }
 
-        private CharacterSelectionService() { }
-
-        // Method to update the selected character and persist it
-        public async Task SetSelectedCharacterAsync(CharacterViewModel character)
+        // Set the selected character
+        public async void SetSelectedCharacter(CharacterViewModel character)
         {
             SelectedCharacterViewModel = character;
-            await ChatPersistService.Instance.SaveSelectedCharacterAsync(character.Id);
+
+            // Persist the selected character ID
+            await ChatPersistService.Instance.SaveSelectedCharacterId(character.Id);
         }
 
-        // Method to load the selected character from the database
-        public async Task LoadSelectedCharacterAsync(List<CharacterViewModel> allCharacters)
+        // Load the selected character from persisted ID
+        public async Task<CharacterViewModel> LoadSelectedCharacterAsync(List<Character> characters)
         {
-            var selectedCharacterId = await ChatPersistService.Instance.LoadSelectedCharacterIdAsync();
-            if (selectedCharacterId.HasValue)
+            var characterId = await ChatPersistService.Instance.GetPersistedSelectedCharacterId();
+
+            if (!string.IsNullOrEmpty(characterId))
             {
-                SelectedCharacterViewModel = allCharacters.Find(c => c.Id == selectedCharacterId.Value);
-            }
-        }
+                // Find the matching Character from the provided list
+                var selectedCharacter = characters.FirstOrDefault(c => c.Id == characterId);
+                if (selectedCharacter != null)
+                {
+                    // Convert the Character to CharacterViewModel
+                    var selectedCharacterViewModel = new CharacterViewModel
+                    {
+                        Id = selectedCharacter.Id,
+                        Name = selectedCharacter.CharacterName,
+                        Image = "rachel_green.png",
+                    };
 
-        public void ClearSelectedCharacter()
-        {
-            SelectedCharacterViewModel = null;
+                    SetSelectedCharacter(selectedCharacterViewModel);
+                    return selectedCharacterViewModel;
+                }
+            }
+            return null;
         }
     }
 }

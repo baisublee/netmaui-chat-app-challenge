@@ -1,6 +1,7 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using ChatApp.Models;
 
@@ -11,56 +12,61 @@ namespace ChatApp.Services
         private static ChatPersistService _instance;
         public static ChatPersistService Instance => _instance ??= new ChatPersistService();
 
-        private SQLiteAsyncConnection _database;
+        private readonly SQLiteAsyncConnection _database;
+        private const string SelectedCharacterTable = "SelectedCharacter";
+        private const string SelectedCharacterIdKey = "SelectedCharacterId";
 
-        private const string DatabaseFilename = "ChatApp.db3";
-
+        // Constructor to initialize SQLite connection
         private ChatPersistService()
         {
-            string dbPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DatabaseFilename);
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ChatApp.db3");
             _database = new SQLiteAsyncConnection(dbPath);
-            InitializeDatabaseAsync().Wait();
+
+            // Create tables for messages and selected character
+            _database.CreateTableAsync<Message>().Wait();
+            _database.CreateTableAsync<SelectedCharacter>().Wait();
         }
 
-        private async Task InitializeDatabaseAsync()
-        {
-            // Only create tables for Message and SelectedCharacter
-            await _database.CreateTableAsync<Message>();
-            await _database.CreateTableAsync<SelectedCharacter>();
-        }
-
-        // Add a single message to the database
-        public async Task AddMessageAsync(Message message)
+        // Save a message to the database
+        public async Task SaveMessageAsync(Message message)
         {
             await _database.InsertAsync(message);
         }
 
-        // Load all messages from the database
+        // Get messages for a specific user (Character ID)
+        public async Task<List<Message>> GetMessagesForUserAsync(string userId)
+        {
+            return await _database.Table<Message>().Where(m => m.CharacterId == userId).ToListAsync();
+        }
+
+        // **NEW** Get all messages from the database
         public async Task<List<Message>> LoadAllMessagesAsync()
         {
             return await _database.Table<Message>().ToListAsync();
         }
-
-        // Save the selected Character ID
-        public async Task SaveSelectedCharacterAsync(int selectedCharacterId)
+        // Save the selected character's ID
+        public async Task SaveSelectedCharacterId(string characterId)
         {
-            await _database.DeleteAllAsync<SelectedCharacter>(); // Clear previous selection
-            await _database.InsertAsync(new SelectedCharacter { CharacterId = selectedCharacterId });
+            var selectedCharacter = new SelectedCharacter
+            {
+                CharacterId = characterId
+            };
+
+            await _database.InsertOrReplaceAsync(selectedCharacter);
         }
 
-        // Load the selected Character ID
-        public async Task<int?> LoadSelectedCharacterIdAsync()
+        // Get the persisted selected character's ID
+        public async Task<string> GetPersistedSelectedCharacterId()
         {
             var selectedCharacter = await _database.Table<SelectedCharacter>().FirstOrDefaultAsync();
             return selectedCharacter?.CharacterId;
         }
-    }
 
-    // Model for persisting the selected Character
-    public class SelectedCharacter
-    {
-        [PrimaryKey, AutoIncrement]
-        public int Id { get; set; }
-        public int CharacterId { get; set; }
+        // Model class for SelectedCharacter in SQLite
+        public class SelectedCharacter
+        {
+            [PrimaryKey]
+            public string CharacterId { get; set; }
+        }
     }
 }

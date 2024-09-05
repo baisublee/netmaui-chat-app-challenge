@@ -31,6 +31,31 @@ namespace ChatApp.Models
             return Id?.GetHashCode() ?? 0;
         }
 
+        // Static method to create a User from a Character object
+        public static User FromCharacter(Character character)
+        {
+            if (character == null)
+                throw new ArgumentNullException(nameof(character));
+
+            // Map Character to User
+            return new User
+            {
+                Id = character.Id,
+                CharacterName = character.CharacterName,
+                Description = new Description
+                {
+                    Gender = character.Description?.Gender,
+                    Pronouns = character.Description?.Pronouns,
+                    StageOfLife = character.Description?.StageOfLife,
+                    Personality = character.Description?.Personality,
+                    Details = character.Description?.Details,
+                    GreetingMessage = character.Description?.GreetingMessage
+                }
+                // Email and AvatarImage are not mapped from Character
+                // Set other fields in User as needed (like AvatarImage, Email, etc.)
+            };
+        }
+
     }
 
     // Class for detailed descriptions of the user

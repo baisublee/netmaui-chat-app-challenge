@@ -158,6 +158,22 @@ public class Character
 
     [JsonPropertyName("is_user_defined_character")]
     public bool IsUserDefinedCharacter { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Character otherUser)
+        {
+            return this.Id == otherUser.Id;
+        }
+        return false;
+    }
+
+    // Override GetHashCode to use the Id for generating hash code
+    public override int GetHashCode()
+    {
+        return Id?.GetHashCode() ?? 0;
+    }
+
 }
 
 // Data model for chat response

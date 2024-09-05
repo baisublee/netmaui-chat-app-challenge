@@ -43,7 +43,7 @@ namespace ChatApp.Services
 
             foreach (var message in messages)
             {
-                var character = _charactersInMemory.Find(c => c.Id == message.UserId); // Match with in-memory characters
+                var character = _charactersInMemory.Find(c => c.Id == message.CharacterId); // Match with in-memory characters
                 if (character != null)
                 {
                     AddMessageToCharacter(character, message, persist: false);
@@ -67,7 +67,24 @@ namespace ChatApp.Services
             // Persist the message in the database
             if (persist)
             {
-                await ChatPersistService.Instance.AddMessageAsync(message);
+                await ChatPersistService.Instance.SaveMessageAsync(message);
+            }
+        }
+
+        public void AddMessageToCharacterId(string characterId, Message message, bool persist = true)
+        {
+            // Find the character with the matching characterId in the _characterMessages dictionary
+            var character = _characterMessages.Keys.FirstOrDefault(c => c.Id == characterId);
+
+            if (character != null)
+            {
+                // Call the existing method to add the message
+                AddMessageToCharacter(character, message, persist);
+            }
+            else
+            {
+                // Throw an exception if the character is not found
+                throw new ArgumentException($"Character with ID {characterId} not found.");
             }
         }
 
@@ -79,6 +96,15 @@ namespace ChatApp.Services
             }
 
             return new ObservableCollection<Message>();
+        }
+
+        public ObservableCollection<Message> GetMessagesForUser(User user)
+        {
+            // Check if there's any Character with the same Id as the User
+            var matchingCharacter = _charactersInMemory.FirstOrDefault(c => c.Id == user.Id);
+
+            return GetMessagesForCharacter(matchingCharacter);
+
         }
 
         // New Method to Create a Character and Update In-Memory List
@@ -95,19 +121,19 @@ namespace ChatApp.Services
                     _charactersInMemory.Add(createdCharacter); // Add to the in-memory list
 
                     // Create the greeting message for the new character
-                    var greetingMessage = new Message
+                    var greetingMessage = new Message()
                     {
-                        UserId = createdCharacter.Id,  // Assuming 'Id' is the identifier for the character
+                        CharacterId = createdCharacter.Id,
                         Text = createdCharacter.Description.GreetingMessage ?? "Hello!", // Use greeting message if available
                         Time = DateTime.Now.ToString("HH:mm"),
-                        Sender = createdCharacter // The character is the sender of the greeting message
+                        Sender = User.FromCharacter(createdCharacter) // The character is the sender of the greeting message
                     };
 
                     // Add the greeting message to the new character's messages and persist it
                     AddMessageToCharacter(createdCharacter, greetingMessage);
 
                     // Persist the new message in the database
-                    await ChatPersistService.Instance.AddMessageAsync(greetingMessage);
+                    await ChatPersistService.Instance.SaveMessageAsync(greetingMessage);
                 }
 
                 return createdCharacter;
@@ -120,12 +146,13 @@ namespace ChatApp.Services
             }
         }
 
-        public async Task SaveAllMessagesAsync()
-        {
-            foreach (var character in _characterMessages.Keys)
-            {
-                await ChatPersistService.Instance.SaveMessagesForUserAsync(character, _characterMessages[character]);
-            }
-        }
+        // public async Task SaveAllMessagesAsync()
+        // {
+        //     foreach (var character in _characterMessages.Keys)
+        //     {
+        //         await ChatPersistService.Instance.SaveMessagesForUserAsync(character, _characterMessages[character]);
+
+        //     }
+        // }
     }
 }
