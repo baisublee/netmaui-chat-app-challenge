@@ -52,7 +52,7 @@ namespace ChatApp.Views
             // Let's get selected character from the CharacterSelectionService
             var selectedCharacter = CharacterSelectionService.Instance.SelectedCharacterViewModel;
 
-            if(selectedCharacter != null)
+            if (selectedCharacter != null)
             {
                 _character = selectedCharacter;
                 _user = new User
@@ -63,6 +63,24 @@ namespace ChatApp.Views
                 };
                 _viewModel = new DetailViewModel();
                 _viewModel.LoadMessagesForUser(_user);
+
+
+                var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
+
+                MessagesCollectionView.ItemsSource = null;
+                MessagesCollectionView.ItemsSource = MessageService.Instance.GetMessagesForUser(_user);
+
+                // MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
+
+                // Defer the scrolling operation to ensure the layout is complete
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
+                    if (lastItem != null)
+                    {
+                        MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
+                    }
+                });
 
             }
 
@@ -76,6 +94,22 @@ namespace ChatApp.Views
 
 
         }
+
+        // Override OnAppearing to refresh data when the view appears
+        // protected override void OnAppearing()
+        // {
+        //     base.OnAppearing();
+
+        //     // Ensure ViewModel is still properly set
+        //     if (_viewModel != null)
+        //     {
+        //         Debug.WriteLine("DetailView appearing, refreshing data.");
+        //         _viewModel.LoadMessagesForUser(_user);
+
+        //         // Optionally refresh CollectionView data
+        //         //MessagesCollectionView.ItemsSource = viewModel.Messages;
+        //     }
+        // }
 
         protected override void OnBindingContextChanged()
         {
@@ -166,10 +200,10 @@ namespace ChatApp.Views
             base.OnAppearing();
 
             // Access the passed CharacterViewModel if needed
-            var character = BindingContext as CharacterViewModel;
-            if (character != null)
+            if (_viewModel != null && _viewModel.User != null)
             {
-                Console.WriteLine($"DetailView for {character.Name}");
+                Debug.WriteLine("DetailView appearing, refreshing data.");
+                _viewModel.LoadMessagesForUser(_viewModel.User);
                 // Update UI or perform actions based on the character
             }
         }
