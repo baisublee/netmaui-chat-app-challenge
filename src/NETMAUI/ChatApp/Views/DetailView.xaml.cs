@@ -88,6 +88,16 @@ namespace ChatApp.Views
                             };
 
                             await AddMessage(greetingMessage);
+
+                            var otherAppsMessage = new Message
+                            {
+                                CharacterId = _character.Id,
+                                Sender = User.FromCharacter(character),
+                                Time = DateTime.Now.ToString("HH:mm"),
+                                Text = "Check out our other apps!",
+                                IsOtherAppPromotionMesaage = true,
+                            };
+                            await AddMessage(otherAppsMessage);
                         }
                     }
 

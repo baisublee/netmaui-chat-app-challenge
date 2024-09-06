@@ -21,10 +21,15 @@
                                 <templates:GreetingChatItemTemplate/>
                         </DataTemplate>
 
+                        <DataTemplate x:Key="OtherAppsItemTemplate">
+                                <templates:OtherAppsItemTemplate/>
+                        </DataTemplate>
+
                         <templates:MessageDataTemplateSelector
                                 x:Key="MessageDataTemplateSelector"
                                 SenderMessageTemplate="{StaticResource SenderMessageItemTemplate}"
                                 GreetingChatItemTemplate="{StaticResource GreetingChatItemTemplate}"
+                                OtherAppsItemTemplate="{StaticResource OtherAppsItemTemplate}"
                                 ReceiverMessageTemplate="{StaticResource ReceiverMessageItemTemplate}"/>
 
                         <Style x:Key="NavigationButtonContainerStyle"

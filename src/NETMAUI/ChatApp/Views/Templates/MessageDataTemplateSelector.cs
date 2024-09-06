@@ -9,12 +9,18 @@ namespace ChatApp.Views.Templates
 
         public DataTemplate GreetingChatItemTemplate { get; set; }
 
+        public DataTemplate OtherAppsItemTemplate { get; set; }
+
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var message = (Message)item;
 
             if(message.IsGreetingMessage) {
                 return GreetingChatItemTemplate;
+            }
+
+            if(message.IsOtherAppPromotionMesaage) {
+                return OtherAppsItemTemplate;
             }
 
             if (message.Sender == null)

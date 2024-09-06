@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatApp.Views.Templates.OtherAppsItemTemplate">
+
+    <ContentView.Content>
+        <!-- A Grid layout for centering two buttons -->
+        <Grid Padding="20"
+              ColumnDefinitions="*, *, *"
+              HorizontalOptions="Center"
+              VerticalOptions="Center"
+              RowDefinitions="Auto">
+
+            <!-- First Button with Image and Text -->
+            <Frame Grid.Column="0"
+                   Padding="20"
+                   CornerRadius="10"
+                   BackgroundColor="LightGray"
+                   HasShadow="False"
+                   Margin="10"
+                   HorizontalOptions="End">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CreateMusicCommand}"/>
+                </Frame.GestureRecognizers>
+                <VerticalStackLayout>
+                    <Frame Padding="20,0,20,0"
+                           BackgroundColor="Transparent"
+                           CornerRadius="0"
+                           HasShadow="False">
+
+                        <Image Source="other_app_card_1.png"
+                               HeightRequest="150"
+                               WidthRequest="250"
+                               Margin="10"
+                               Aspect="AspectFit"/>
+                    </Frame>
+                    <Label Text="Create instrumental music"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="Black"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Create peaceful piano music for study at cafe"
+                           FontSize="12"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Space between the two buttons -->
+            <BoxView Grid.Column="1"
+                     WidthRequest="10"
+                     HorizontalOptions="Center"/>
+
+            <!-- Second Button with Image and Text -->
+            <Frame Grid.Column="2"
+                   Padding="20"
+                   CornerRadius="10"
+                   BackgroundColor="LightGray"
+                   HasShadow="False"
+                   Margin="10"
+                   HorizontalOptions="Start">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SearchDocumentsCommand}"/>
+                </Frame.GestureRecognizers>
+                <VerticalStackLayout>
+                    <Frame Padding="20,0,20,0"
+                           BackgroundColor="Transparent"
+                           CornerRadius="0"
+                           HasShadow="False">
+                        <Image Source="other_app_card_2.png"
+                               HeightRequest="150"
+                               WidthRequest="250"
+                               Margin="10"
+                               Aspect="AspectFit"/>
+                    </Frame>
+                    <Label Text="Search everything in gram"
+                           FontAttributes="Bold"
+                           FontSize="16"
+                           TextColor="Black"
+                           HorizontalOptions="Center"/>
+                    <Label Text="Please find Apple-related documents."
+                           FontSize="12"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>
