@@ -20,7 +20,7 @@ namespace ChatApp.Services
         // Constructor to initialize SQLite connection
         private ChatPersistService()
         {
-            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ChatApp.db3");
+            string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "/ai/character-chat", "ChatApp.db3");
             Debug.WriteLine($"Database path: {dbPath}");
             _database = new SQLiteAsyncConnection(dbPath);
 

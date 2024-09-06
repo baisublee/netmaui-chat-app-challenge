@@ -294,10 +294,10 @@ namespace ChatApp.Views
         {
             StringBuilder completeResponse = new StringBuilder();
 
-            await CAAService.Instance.StartChatAsync(_character.Id, userInput, async chunk =>
+            await CAAService.Instance.StartChatAsync(_character.Id, userInput, async (chunk, done) =>
             {
-                Console.Write(chunk);
-                Debug.WriteLine(chunk + DateTime.Now.ToString("HH:mm:ss:fff"));
+
+                Debug.WriteLine($"{done} {chunk} {DateTime.Now.ToString("HH:mm:ss:fff")}");
                 completeResponse.Append(chunk);
 
                 var resp = new Message
@@ -310,7 +310,20 @@ namespace ChatApp.Views
 
                 await UpdateMessage(resp);
 
+                if (done)
+                {
+                    var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
+
+                    if (lastItem != null && lastItem.Sender != null)
+                    {
+                        Debug.WriteLine("Since message is completed, will persist it");
+                        await ChatPersistService.Instance.SaveMessageAsync(lastItem);
+                    }
+                }
+
             });
+
+
 
             return completeResponse.ToString();
         }
@@ -325,6 +338,7 @@ namespace ChatApp.Views
 
                 if (lastItem != null && lastItem.Sender != null)
                 {
+                    Debug.WriteLine("Updating last message" + msg.Text);
                     lastItem.Text += msg.Text;
 
                     MessagesCollectionView.ItemsSource = null;
@@ -335,7 +349,7 @@ namespace ChatApp.Views
                 }
                 else
                 {
-                    await AddMessage(msg);
+                    await AddMessage(msg, false);
                 }
             }
             catch (Exception ex)
@@ -346,12 +360,12 @@ namespace ChatApp.Views
 
         }
 
-        private async Task AddMessage(Message msg)
+        private async Task AddMessage(Message msg, bool persist = true)
         {
 
             try
             {
-                await MessageService.Instance.AddMessageToCharacterId(_character.Id, msg);
+                await MessageService.Instance.AddMessageToCharacterId(_character.Id, msg, persist);
 
                 var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
                 if (lastItem != null)

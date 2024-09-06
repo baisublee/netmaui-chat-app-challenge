@@ -60,7 +60,7 @@ public class CAAService
     }
 
     // Method to start a chat with a selected character, handling streaming responses
-    public async Task StartChatAsync(string characterId, string message, Action<string> onPartialResponse)
+    public async Task StartChatAsync(string characterId, string message, Action<string, bool> onPartialResponse)
     {
         try
         {
@@ -92,7 +92,7 @@ public class CAAService
                     if (chatResponse != null && chatResponse.Data != null)
                     {
                         // Invoke the callback with the partial response
-                        onPartialResponse(chatResponse.Data.Response);
+                        onPartialResponse(chatResponse.Data.Response, chatResponse.Data.Done);
                     }
                 }
             }
