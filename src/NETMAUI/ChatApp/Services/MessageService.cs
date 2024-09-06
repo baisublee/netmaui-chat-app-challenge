@@ -31,14 +31,6 @@ namespace ChatApp.Services
             _charactersInMemory = characters; // Store characters in memory
         }
 
-        public void InitializeCharacterMessages()
-        {
-            // foreach (var character in _charactersInMemory)
-            // {
-            //     _characterMessages[character] = new ObservableCollection<Message>();
-            // }
-        }
-
         // Get characters from memory
         public List<Character> GetCharactersInMemory()
         {
@@ -149,7 +141,7 @@ namespace ChatApp.Services
                     };
 
                     // Add the greeting message to the new character's messages and persist it
-                    AddMessageToCharacter(createdCharacter, greetingMessage);
+                    await AddMessageToCharacter(createdCharacter, greetingMessage);
 
                     // Persist the new message in the database
                     await ChatPersistService.Instance.SaveMessageAsync(greetingMessage);

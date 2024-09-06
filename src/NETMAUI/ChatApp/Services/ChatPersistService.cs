@@ -67,17 +67,31 @@ namespace ChatApp.Services
 
         }
         // Save the selected character's ID
+        // Save the selected character's ID
+        // Save the selected character's ID
         public async Task SaveSelectedCharacterId(string characterId)
         {
-            var selectedCharacter = new SelectedCharacter
+            // First, check if a record already exists
+            var existingCharacter = await _database.Table<SelectedCharacter>().FirstOrDefaultAsync();
+
+            if (existingCharacter != null)
             {
-                CharacterId = characterId
-            };
+                // Update the existing record with the new character ID
+                existingCharacter.CharacterId = characterId;
 
-            await _database.InsertOrReplaceAsync(selectedCharacter);
-        }
-
-        // Get the persisted selected character's ID
+                // Ensure that the record has a valid primary key before updating
+                await _database.UpdateAsync(existingCharacter);
+            }
+            else
+            {
+                // If no record exists, insert a new one
+                var selectedCharacter = new SelectedCharacter
+                {
+                    CharacterId = characterId
+                };
+                await _database.InsertAsync(selectedCharacter);
+            }
+        }        // Get the persisted selected character's ID
         public async Task<string> GetPersistedSelectedCharacterId()
         {
             var selectedCharacter = await _database.Table<SelectedCharacter>().FirstOrDefaultAsync();
@@ -87,7 +101,9 @@ namespace ChatApp.Services
         // Model class for SelectedCharacter in SQLite
         public class SelectedCharacter
         {
-            [PrimaryKey]
+            [PrimaryKey, AutoIncrement]
+            public int Id { get; set; } // This is the primary key
+
             public string CharacterId { get; set; }
         }
     }

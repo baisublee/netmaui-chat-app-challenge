@@ -65,16 +65,14 @@ namespace ChatApp.Views
                 _viewModel.LoadMessagesForUser(_user);
 
 
-                var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
-
-                MessagesCollectionView.ItemsSource = null;
-                MessagesCollectionView.ItemsSource = MessageService.Instance.GetMessagesForUser(_user);
 
                 // MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
 
                 // Defer the scrolling operation to ensure the layout is complete
                 Device.BeginInvokeOnMainThread(() =>
                 {
+                    MessagesCollectionView.ItemsSource = null;
+                    MessagesCollectionView.ItemsSource = MessageService.Instance.GetMessagesForUser(_user);
                     var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
                     if (lastItem != null)
                     {

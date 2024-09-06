@@ -54,17 +54,27 @@ namespace ChatApp
 
                 CharacterList.Add(new CharacterViewModel
                 {
+                    Id = "create",
                     Name = "Create",
                     Image = "create.png",
-                    IsCreateItem = true
+                    IsCreateItem = true,
                 });
 
+                var selectedCharacterId = await ChatPersistService.Instance.GetPersistedSelectedCharacterId();
+                CharacterViewModel selectedCharacter = null;
+                if(selectedCharacterId != null)
+                {
+                    selectedCharacter = CharacterList.Find(c => c.Id == selectedCharacterId);
+                }
+                if(selectedCharacter == null)
+                {
+                    selectedCharacter = CharacterList.FirstOrDefault();
+                }
+
                 ViewModel.Characters = new ObservableCollection<CharacterViewModel>(CharacterList);
+                ViewModel.SelectedCharacter = selectedCharacter;
 
-                // Set the left menu character (e.g., the first character)
-                ViewModel.SelectedCharacter = ViewModel.Characters.FirstOrDefault();
-
-                HandleCharacterSelection(ViewModel.SelectedCharacter);
+                await HandleCharacterSelection(ViewModel.SelectedCharacter);
 
 
             }
@@ -77,18 +87,25 @@ namespace ChatApp
 
 
         // This method is triggered when a character is tapped in the UI
-        private void OnCharacterTapped(object sender, EventArgs e)
+        private async void OnCharacterTapped(object sender, EventArgs e)
         {
             var tappedCharacter = (e as TappedEventArgs)?.Parameter as CharacterViewModel;
-            HandleCharacterSelection(tappedCharacter);
+            await HandleCharacterSelection(tappedCharacter);
         }
 
-        private void HandleCharacterSelection(CharacterViewModel tappedCharacter)
+        private async Task HandleCharacterSelection(CharacterViewModel tappedCharacter)
         {
             if (tappedCharacter != null)
             {
                 // Handle the character selection in MainPage.xaml.cs
                 Console.WriteLine($"Character Tapped: {tappedCharacter.Name}");
+                Debug.WriteLine($"Character Tapped: {tappedCharacter.Name}");
+
+                if(tappedCharacter.Id != "create")
+                {
+                    Debug.WriteLine($"Persist Selected Character: {tappedCharacter.Name}");
+                    await ChatPersistService.Instance.SaveSelectedCharacterId(tappedCharacter.Id);
+                }
 
                 // Now set the SelectedCharacter in the ViewModel
                 ViewModel.SelectedCharacter = tappedCharacter;
