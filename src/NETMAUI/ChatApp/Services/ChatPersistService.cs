@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using ChatApp.Models;
+using System.Diagnostics;
 
 namespace ChatApp.Services
 {
@@ -20,29 +21,50 @@ namespace ChatApp.Services
         private ChatPersistService()
         {
             string dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ChatApp.db3");
+            Debug.WriteLine($"Database path: {dbPath}");
             _database = new SQLiteAsyncConnection(dbPath);
 
             // Create tables for messages and selected character
-            _database.CreateTableAsync<Message>().Wait();
+            _database.CreateTableAsync<MessageFlat>().Wait();
             _database.CreateTableAsync<SelectedCharacter>().Wait();
         }
 
         // Save a message to the database
         public async Task SaveMessageAsync(Message message)
         {
-            await _database.InsertAsync(message);
+            var messageFlat = MessageFlat.FromMessage(message);
+            await _database.InsertAsync(messageFlat);
         }
 
         // Get messages for a specific user (Character ID)
         public async Task<List<Message>> GetMessagesForUserAsync(string userId)
         {
-            return await _database.Table<Message>().Where(m => m.CharacterId == userId).ToListAsync();
+            var messageFlats = await _database.Table<MessageFlat>().Where(m => m.CharacterId == userId).ToListAsync();
+            var messages = new List<Message>();
+
+            foreach (var messageFlat in messageFlats)
+            {
+
+                messages.Add(MessageFlat.ToMessage(messageFlat));
+            }
+
+            return messages;
         }
 
         // **NEW** Get all messages from the database
         public async Task<List<Message>> LoadAllMessagesAsync()
         {
-            return await _database.Table<Message>().ToListAsync();
+            var messageFlats = await _database.Table<MessageFlat>().ToListAsync();
+            var messages = new List<Message>();
+
+            foreach (var messageFlat in messageFlats)
+            {
+
+                messages.Add(MessageFlat.ToMessage(messageFlat));
+            }
+
+            return messages;
+
         }
         // Save the selected character's ID
         public async Task SaveSelectedCharacterId(string characterId)

@@ -18,6 +18,9 @@ public partial class App : Application
 		// Initialize characters from the network and store them in memory
 		await MessageService.Instance.InitializeCharactersAsync();
 
+		// Initialize messages for each character
+		MessageService.Instance.InitializeCharacterMessages();
+
 		// Load persisted messages from the database and map them to the in-memory characters
 		await MessageService.Instance.LoadDataFromDatabaseAsync();
 

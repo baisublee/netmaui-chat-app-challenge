@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ChatApp.Models;
@@ -30,6 +31,14 @@ namespace ChatApp.Services
             _charactersInMemory = characters; // Store characters in memory
         }
 
+        public void InitializeCharacterMessages()
+        {
+            // foreach (var character in _charactersInMemory)
+            // {
+            //     _characterMessages[character] = new ObservableCollection<Message>();
+            // }
+        }
+
         // Get characters from memory
         public List<Character> GetCharactersInMemory()
         {
@@ -46,13 +55,13 @@ namespace ChatApp.Services
                 var character = _charactersInMemory.Find(c => c.Id == message.CharacterId); // Match with in-memory characters
                 if (character != null)
                 {
-                    AddMessageToCharacter(character, message, persist: false);
+                    await AddMessageToCharacter(character, message, persist: false);
                 }
             }
         }
 
         // Add a message to a character and persist it in the database
-        public async void AddMessageToCharacter(Character character, Message message, bool persist = true)
+        public async Task AddMessageToCharacter(Character character, Message message, bool persist = true)
         {
             if (_characterMessages.ContainsKey(character))
             {
@@ -67,19 +76,29 @@ namespace ChatApp.Services
             // Persist the message in the database
             if (persist)
             {
-                await ChatPersistService.Instance.SaveMessageAsync(message);
+                try
+                {
+                    await ChatPersistService.Instance.SaveMessageAsync(message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error saving message: {ex.Message}");
+                    Debug.WriteLine($"Error saving message: {ex.Message}");
+                }
             }
         }
 
-        public void AddMessageToCharacterId(string characterId, Message message, bool persist = true)
+        public async Task AddMessageToCharacterId(string characterId, Message message, bool persist = true)
         {
             // Find the character with the matching characterId in the _characterMessages dictionary
-            var character = _characterMessages.Keys.FirstOrDefault(c => c.Id == characterId);
+            // var character = _characterMessages.Keys.FirstOrDefault(c => c.Id == characterId);
+
+            var character = _charactersInMemory.FirstOrDefault(c => c.Id == characterId);
 
             if (character != null)
             {
                 // Call the existing method to add the message
-                AddMessageToCharacter(character, message, persist);
+                await AddMessageToCharacter(character, message, persist);
             }
             else
             {

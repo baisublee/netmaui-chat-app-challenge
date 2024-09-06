@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using SQLite;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ChatApp.Models
 {
@@ -20,12 +22,18 @@ namespace ChatApp.Models
         // CreatedAt to store message creation time (default to current epoch time in milliseconds)
         public int CreatedAt { get; set; }
 
+        public string SenderId { get; set; } = null;
+
         public User Sender
         {
             get { return _sender; }
             set
             {
                 _sender = value;
+                if (value != null)
+                {
+                    SenderId = value.Id;
+                }
                 OnPropertyChanged();
             }
         }

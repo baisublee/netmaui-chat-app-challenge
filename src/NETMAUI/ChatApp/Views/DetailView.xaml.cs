@@ -111,90 +111,6 @@ namespace ChatApp.Views
         //     }
         // }
 
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            // Your custom logic here
-            // System.Diagnostics.Debug.WriteLine("BindingContext changed to: " + BindingContext);
-
-            // var viewModelFromContext = this.BindingContext as DetailViewModel;
-            // if (viewModelFromContext != null)
-            // {
-            //     viewModel = this.BindingContext as DetailViewModel;
-            //     Debug.WriteLine($"View model assigned");
-            //     // if (viewModel != null && viewModel.SelectedCharacterViewModel != null)
-            //     // {
-            //     //     var character = viewModel.SelectedCharacterViewModel;
-            //     //     Debug.WriteLine($"DetailView loaded for {viewModel.SelectedCharacterViewModel.Name}");
-            //     //     if (character != null)
-            //     //     {
-            //     //         Console.WriteLine($"DetailView for {character.Name}");
-            //     //         // Update UI or perform actions based on the character
-            //     //         _character = character;
-            //     //         _user = new User
-            //     //         {
-            //     //             Id = character.Id,
-            //     //             AvatarImage = character.Image,
-            //     //             CharacterName = character.Name,
-            //     //         };
-            //     //         viewModel.LoadMessagesForUser(_user);
-            //     //     }
-
-            //     // }
-
-            // }
-            // else
-            // {
-            //     viewModel = this.BindingContext as DetailViewModel;
-            //     Debug.WriteLine($"View model not assigned");
-            //     // UpdateUIBasedOnCharacter();
-            // }
-
-
-
-        }
-
-
-        // protected override void OnBindingContextChanged()
-        // {
-        //     base.OnBindingContextChanged();
-        //     UpdateUIBasedOnCharacter();
-        // }
-
-        // Method to update the UI based on the current BindingContext
-        public void UpdateUIBasedOnCharacter()
-        {
-            // var character = BindingContext as CharacterViewModel;
-
-            // if (character != null)
-            // {
-            //     Console.WriteLine($"DetailView for {character.Name}");
-            //     // Update UI or perform actions based on the character
-            //     _character = character;
-            //     _user = new User
-            //     {
-            //         Id = character.Id,
-            //         AvatarImage = character.Image,
-            //         CharacterName = character.Name,
-            //     };
-            //     viewModel.LoadMessagesForUser(_user);
-            // }
-            // else
-            // {
-            //     Console.WriteLine("DetailView for character null");
-
-            // }
-
-
-            // Use the ViewModel to load messages for the selected User
-            // var viewModel = BindingContext as DetailViewModel;
-            // if (viewModel != null)
-            // {
-            //     viewModel.LoadMessagesForUser(_user);
-            // }
-
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -435,7 +351,7 @@ namespace ChatApp.Views
 
             try
             {
-                MessageService.Instance.AddMessageToCharacterId(_character.Id, msg);
+                await MessageService.Instance.AddMessageToCharacterId(_character.Id, msg);
 
                 var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
                 if (lastItem != null)
