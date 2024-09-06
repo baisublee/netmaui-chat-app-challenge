@@ -50,6 +50,7 @@ namespace ChatApp.Services
                     await AddMessageToCharacter(character, message, persist: false);
                 }
             }
+
         }
 
         // Add a message to a character and persist it in the database

@@ -42,6 +42,7 @@ namespace ChatApp.Models
             {
                 Id = character.Id,
                 CharacterName = character.CharacterName,
+                AvatarImage = character.AvatarImage,
                 Description = new Description
                 {
                     Gender = character.Description?.Gender,

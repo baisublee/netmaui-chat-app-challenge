@@ -144,6 +144,8 @@ public class CharacterDescription
 // Data model for character
 public class Character
 {
+    public string AvatarImage { get; set; } = "rachel_image.png";
+
     [JsonPropertyName("id")]
     public string Id { get; set; }
 

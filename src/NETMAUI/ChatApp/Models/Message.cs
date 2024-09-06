@@ -24,6 +24,10 @@ namespace ChatApp.Models
 
         public string SenderId { get; set; } = null;
 
+        public bool IsGreetingMessage { get; set; } = false;
+
+        public bool IsOtherAppPromotionMesaage { get; set; } = false;
+
         public User Sender
         {
             get { return _sender; }

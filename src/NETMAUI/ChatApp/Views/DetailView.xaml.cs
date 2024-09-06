@@ -65,12 +65,31 @@ namespace ChatApp.Views
                 _viewModel.LoadMessagesForUser(_user);
 
 
-
                 // MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
 
                 // Defer the scrolling operation to ensure the layout is complete
-                Device.BeginInvokeOnMainThread(() =>
+                Device.BeginInvokeOnMainThread(async () =>
                 {
+
+                    // If there is no message, we will add a greeting message as the first message
+                    if (MessageService.Instance.GetMessagesForUser(_user).Count == 0)
+                    {
+                        var character = MessageService.Instance.GetCharactersInMemory().FirstOrDefault(c => c.Id == _user.Id);
+                        if (character != null)
+                        {
+
+                            var greetingMessage = new Message
+                            {
+                                CharacterId = _character.Id,
+                                Sender = User.FromCharacter(character),
+                                Time = DateTime.Now.ToString("HH:mm"),
+                                Text = character.Description.GreetingMessage ?? "Hello!",
+                            };
+
+                            await AddMessage(greetingMessage);
+                        }
+                    }
+
                     MessagesCollectionView.ItemsSource = null;
                     MessagesCollectionView.ItemsSource = MessageService.Instance.GetMessagesForUser(_user);
                     var lastItem = MessageService.Instance.GetMessagesForUser(_user).LastOrDefault();
