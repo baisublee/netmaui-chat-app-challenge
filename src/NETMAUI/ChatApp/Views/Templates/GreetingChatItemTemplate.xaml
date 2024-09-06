@@ -19,7 +19,7 @@
             <StackLayout Grid.Column="1"
                     VerticalOptions="Center">
                 <!-- Greeting Title -->
-                <Label Text="{Binding SenderCharacterName}"
+                <Label Text="{Binding Sender.CharacterName}"
                        FontAttributes="Bold"
                        FontSize="24"
                        TextColor="Black"/>

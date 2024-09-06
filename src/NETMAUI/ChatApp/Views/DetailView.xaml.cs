@@ -84,6 +84,7 @@ namespace ChatApp.Views
                                 Sender = User.FromCharacter(character),
                                 Time = DateTime.Now.ToString("HH:mm"),
                                 Text = character.Description.GreetingMessage ?? "Hello!",
+                                IsGreetingMessage = true,
                             };
 
                             await AddMessage(greetingMessage);

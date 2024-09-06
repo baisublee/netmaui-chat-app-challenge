@@ -1,231 +1,236 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="ChatApp.Views.DetailView"
-    xmlns:controls="clr-namespace:ChatApp.Controls"
-    xmlns:templates="clr-namespace:ChatApp.Views.Templates"
-    xmlns:viewmodel="clr-namespace:ChatApp.ViewModels">
-    <ContentPage.Resources>
-        <ResourceDictionary>
+        xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        x:Class="ChatApp.Views.DetailView"
+        xmlns:controls="clr-namespace:ChatApp.Controls"
+        xmlns:templates="clr-namespace:ChatApp.Views.Templates"
+        xmlns:viewmodel="clr-namespace:ChatApp.ViewModels">
+        <ContentPage.Resources>
+                <ResourceDictionary>
 
-            <DataTemplate x:Key="SenderMessageItemTemplate">
-                <templates:SenderChatMessageItemTemplate/>
-            </DataTemplate>
+                        <DataTemplate x:Key="SenderMessageItemTemplate">
+                                <templates:SenderChatMessageItemTemplate/>
+                        </DataTemplate>
 
-            <DataTemplate x:Key="ReceiverMessageItemTemplate">
-                <templates:ReceiverChatMessageItemTemplate/>
-            </DataTemplate>
+                        <DataTemplate x:Key="ReceiverMessageItemTemplate">
+                                <templates:ReceiverChatMessageItemTemplate/>
+                        </DataTemplate>
 
-            <templates:MessageDataTemplateSelector
-                x:Key="MessageDataTemplateSelector"
-                SenderMessageTemplate="{StaticResource SenderMessageItemTemplate}"
-                ReceiverMessageTemplate="{StaticResource ReceiverMessageItemTemplate}"/>
+                        <DataTemplate x:Key="GreetingChatItemTemplate">
+                                <templates:GreetingChatItemTemplate/>
+                        </DataTemplate>
 
-            <Style x:Key="NavigationButtonContainerStyle"
-                   TargetType="Grid">
-                <Setter Property="Margin"
-                        Value="24, 12"/>
-                <Setter Property="VerticalOptions"
-                        Value="Start"/>
-            </Style>
+                        <templates:MessageDataTemplateSelector
+                                x:Key="MessageDataTemplateSelector"
+                                SenderMessageTemplate="{StaticResource SenderMessageItemTemplate}"
+                                GreetingChatItemTemplate="{StaticResource GreetingChatItemTemplate}"
+                                ReceiverMessageTemplate="{StaticResource ReceiverMessageItemTemplate}"/>
 
-            <Color x:Key="NavigationButtonColor">#A2A4D6</Color>
+                        <Style x:Key="NavigationButtonContainerStyle"
+                               TargetType="Grid">
+                                <Setter Property="Margin"
+                                        Value="24, 12"/>
+                                <Setter Property="VerticalOptions"
+                                        Value="Start"/>
+                        </Style>
 
-            <Style x:Key="NavigationButtonStyle"
-                   TargetType="Label">
-                <Setter Property="TextColor"
-                        Value="{StaticResource NavigationButtonColor}"/>
-                <Setter Property="FontSize"
-                        Value="12"/>
-                <Setter Property="FontFamily"
-                        Value="Metropolis Regular"/>
-            </Style>
+                        <Color x:Key="NavigationButtonColor">#A2A4D6</Color>
 
-            <Style x:Key="UsernameTextStyle"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="26"/>
-                <Setter Property="TextColor"
-                        Value="White"/>
-                <Setter Property="FontFamily"
-                        Value="Metropolis Medium"/>
-                <Setter Property="FontAttributes"
-                        Value="Bold"/>
-                <Setter Property="WidthRequest"
-                        Value="150"/>
-                <Setter Property="HorizontalOptions"
-                        Value="Start"/>
-                <Setter Property="Margin"
-                        Value="24, 36"/>
-            </Style>
+                        <Style x:Key="NavigationButtonStyle"
+                               TargetType="Label">
+                                <Setter Property="TextColor"
+                                        Value="{StaticResource NavigationButtonColor}"/>
+                                <Setter Property="FontSize"
+                                        Value="12"/>
+                                <Setter Property="FontFamily"
+                                        Value="Metropolis Regular"/>
+                        </Style>
 
-            <Style x:Key="ButtonsContainerStyle"
-                   TargetType="StackLayout">
-                <Setter Property="HeightRequest"
-                        Value="120"/>
-                <Setter Property="Orientation"
-                        Value="Horizontal"/>
-                <Setter Property="Margin"
-                        Value="24, 12"/>
-            </Style>
+                        <Style x:Key="UsernameTextStyle"
+                               TargetType="Label">
+                                <Setter Property="FontSize"
+                                        Value="26"/>
+                                <Setter Property="TextColor"
+                                        Value="White"/>
+                                <Setter Property="FontFamily"
+                                        Value="Metropolis Medium"/>
+                                <Setter Property="FontAttributes"
+                                        Value="Bold"/>
+                                <Setter Property="WidthRequest"
+                                        Value="150"/>
+                                <Setter Property="HorizontalOptions"
+                                        Value="Start"/>
+                                <Setter Property="Margin"
+                                        Value="24, 36"/>
+                        </Style>
 
-            <Color x:Key="CircularButtonEllipseColor">#868BCB</Color>
+                        <Style x:Key="ButtonsContainerStyle"
+                               TargetType="StackLayout">
+                                <Setter Property="HeightRequest"
+                                        Value="120"/>
+                                <Setter Property="Orientation"
+                                        Value="Horizontal"/>
+                                <Setter Property="Margin"
+                                        Value="24, 12"/>
+                        </Style>
 
-            <Style x:Key="CircularButtonEllipseStyle"
-                   TargetType="BoxView">
-                <Setter Property="CornerRadius"
-                        Value="40"/>
-                <Setter Property="HeightRequest"
-                        Value="40"/>
-                <Setter Property="WidthRequest"
-                        Value="40"/>
-                <Setter Property="VerticalOptions"
-                        Value="Center"/>
-                <Setter Property="Margin"
-                        Value="6, 0, 0, 0"/>
-            </Style>
+                        <Color x:Key="CircularButtonEllipseColor">#868BCB</Color>
 
-            <Style x:Key="CircularButtonImageStyle"
-                   TargetType="Image">
-                <Setter Property="HeightRequest"
-                        Value="40"/>
-                <Setter Property="Aspect"
-                        Value="AspectFit"/>
-                <Setter Property="HorizontalOptions"
-                        Value="Center"/>
-                <Setter Property="VerticalOptions"
-                        Value="Center"/>
-            </Style>
+                        <Style x:Key="CircularButtonEllipseStyle"
+                               TargetType="BoxView">
+                                <Setter Property="CornerRadius"
+                                        Value="40"/>
+                                <Setter Property="HeightRequest"
+                                        Value="40"/>
+                                <Setter Property="WidthRequest"
+                                        Value="40"/>
+                                <Setter Property="VerticalOptions"
+                                        Value="Center"/>
+                                <Setter Property="Margin"
+                                        Value="6, 0, 0, 0"/>
+                        </Style>
 
-            <Style x:Key="ChatAdornerStyle"
-                   TargetType="BoxView">
-                <Setter Property="Color"
-                        Value="White"/>
-                <Setter Property="CornerRadius"
-                        Value="24, 24, 0, 0"/>
-            </Style>
+                        <Style x:Key="CircularButtonImageStyle"
+                               TargetType="Image">
+                                <Setter Property="HeightRequest"
+                                        Value="40"/>
+                                <Setter Property="Aspect"
+                                        Value="AspectFit"/>
+                                <Setter Property="HorizontalOptions"
+                                        Value="Center"/>
+                                <Setter Property="VerticalOptions"
+                                        Value="Center"/>
+                        </Style>
 
-            <Style x:Key="ChatCollectionStyle"
-                   TargetType="CollectionView">
-                <Setter Property="Margin"
-                        Value="18, 32, 18, 0"/>
-            </Style>
+                        <Style x:Key="ChatAdornerStyle"
+                               TargetType="BoxView">
+                                <Setter Property="Color"
+                                        Value="White"/>
+                                <Setter Property="CornerRadius"
+                                        Value="24, 24, 0, 0"/>
+                        </Style>
 
-            <Color x:Key="ChatEntryBackgroundColor">#F7F7F8</Color>
+                        <Style x:Key="ChatCollectionStyle"
+                               TargetType="CollectionView">
+                                <Setter Property="Margin"
+                                        Value="18, 32, 18, 0"/>
+                        </Style>
 
-            <Style x:Key="ChatEntryContainerStyle"
-                   TargetType="Frame">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource ChatEntryBackgroundColor}"/>
-                <Setter Property="HeightRequest"
-                        Value="72"/>
-                <Setter Property="CornerRadius"
-                        Value="32"/>
-                <Setter Property="HasShadow"
-                        Value="False"/>
-                <Setter Property="Padding"
-                        Value="4"/>
-                <Setter Property="Margin"
-                        Value="12"/>
-            </Style>
+                        <Color x:Key="ChatEntryBackgroundColor">#F7F7F8</Color>
 
-            <Style x:Key="ChatEntryStyle"
-                   TargetType="controls:BorderlessEntry">
-                <Setter Property="FontSize"
-                        Value="22"/>
-                <Setter Property="VerticalOptions"
-                        Value="Center"/>
-                <Setter Property="Margin"
-                        Value="6, 0"/>
-            </Style>
-            <Style x:Key="SearchButtonContainerStyle"
-                   TargetType="Grid">
-                <Setter Property="HorizontalOptions"
-                        Value="End"/>
-                <Setter Property="WidthRequest"
-                        Value="40"/>
-            </Style>
+                        <Style x:Key="ChatEntryContainerStyle"
+                               TargetType="Frame">
+                                <Setter Property="BackgroundColor"
+                                        Value="{StaticResource ChatEntryBackgroundColor}"/>
+                                <Setter Property="HeightRequest"
+                                        Value="72"/>
+                                <Setter Property="CornerRadius"
+                                        Value="32"/>
+                                <Setter Property="HasShadow"
+                                        Value="False"/>
+                                <Setter Property="Padding"
+                                        Value="4"/>
+                                <Setter Property="Margin"
+                                        Value="12"/>
+                        </Style>
 
-            <Style x:Key="SearchButtonEllipseStyle"
-                   TargetType="BoxView">
-                <Setter Property="Color"
-                        Value="{StaticResource PrimaryColor}"/>
-                <Setter Property="CornerRadius"
-                        Value="32"/>
-                <Setter Property="HeightRequest"
-                        Value="32"/>
-                <Setter Property="WidthRequest"
-                        Value="32"/>
-                <Setter Property="VerticalOptions"
-                        Value="Center"/>
-            </Style>
+                        <Style x:Key="ChatEntryStyle"
+                               TargetType="controls:BorderlessEntry">
+                                <Setter Property="FontSize"
+                                        Value="22"/>
+                                <Setter Property="VerticalOptions"
+                                        Value="Center"/>
+                                <Setter Property="Margin"
+                                        Value="6, 0"/>
+                        </Style>
+                        <Style x:Key="SearchButtonContainerStyle"
+                               TargetType="Grid">
+                                <Setter Property="HorizontalOptions"
+                                        Value="End"/>
+                                <Setter Property="WidthRequest"
+                                        Value="40"/>
+                        </Style>
 
-            <Style x:Key="SearchButtonImageStyle"
-                   TargetType="Image">
-                <Setter Property="HeightRequest"
-                        Value="40"/>
-                <Setter Property="Aspect"
-                        Value="AspectFit"/>
-                <Setter Property="HorizontalOptions"
-                        Value="Center"/>
-                <Setter Property="VerticalOptions"
-                        Value="Center"/>
-            </Style>
+                        <Style x:Key="SearchButtonEllipseStyle"
+                               TargetType="BoxView">
+                                <Setter Property="Color"
+                                        Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="CornerRadius"
+                                        Value="32"/>
+                                <Setter Property="HeightRequest"
+                                        Value="32"/>
+                                <Setter Property="WidthRequest"
+                                        Value="32"/>
+                                <Setter Property="VerticalOptions"
+                                        Value="Center"/>
+                        </Style>
 
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    <ContentPage.BindingContext>
-        <viewmodel:DetailViewModel/>
-    </ContentPage.BindingContext>
-    <ContentPage.Content>
-        <Grid
-            BackgroundColor="{StaticResource PrimaryColor}"
-            RowDefinitions="0, *">
-            <Grid
-                Grid.Row="0"
-                RowDefinitions="Auto, 150">
+                        <Style x:Key="SearchButtonImageStyle"
+                               TargetType="Image">
+                                <Setter Property="HeightRequest"
+                                        Value="40"/>
+                                <Setter Property="Aspect"
+                                        Value="AspectFit"/>
+                                <Setter Property="HorizontalOptions"
+                                        Value="Center"/>
+                                <Setter Property="VerticalOptions"
+                                        Value="Center"/>
+                        </Style>
+
+                </ResourceDictionary>
+        </ContentPage.Resources>
+        <ContentPage.BindingContext>
+                <viewmodel:DetailViewModel/>
+        </ContentPage.BindingContext>
+        <ContentPage.Content>
                 <Grid
-                    ColumnDefinitions="Auto, *"
-                    Style="{StaticResource NavigationButtonContainerStyle}">
-                    <Label
-                        Text="Back"
-                        Style="{StaticResource NavigationButtonStyle}">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding BackCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <StackLayout
-                        Grid.Column="2"
-                        Orientation="Horizontal"
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="End">
-                        <Label
-                            Text="Voice"
-                            VerticalOptions="Center"
-                            Style="{StaticResource NavigationButtonStyle}"/>
-                        <Label WidthRequest="10"/>
-                        <CheckBox x:Name="VoiceCheckBox"/>
-                        <!-- <CheckBox x:Name="VoiceCheckBox" IsChecked="{Binding IsVoiceEnabled, Mode=TwoWay}" /> -->
-                    </StackLayout>
-                    <!-- <Label                    
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        RowDefinitions="0, *">
+                        <Grid
+                                Grid.Row="0"
+                                RowDefinitions="Auto, 150">
+                                <Grid
+                                        ColumnDefinitions="Auto, *"
+                                        Style="{StaticResource NavigationButtonContainerStyle}">
+                                        <Label
+                                                Text="Back"
+                                                Style="{StaticResource NavigationButtonStyle}">
+                                                <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer
+                                                                Command="{Binding BackCommand}"/>
+                                                </Label.GestureRecognizers>
+                                        </Label>
+                                        <StackLayout
+                                                Grid.Column="2"
+                                                Orientation="Horizontal"
+                                                VerticalOptions="CenterAndExpand"
+                                                HorizontalOptions="End">
+                                                <Label
+                                                        Text="Voice"
+                                                        VerticalOptions="Center"
+                                                        Style="{StaticResource NavigationButtonStyle}"/>
+                                                <Label WidthRequest="10"/>
+                                                <CheckBox x:Name="VoiceCheckBox"/>
+                                                <!-- <CheckBox x:Name="VoiceCheckBox" IsChecked="{Binding IsVoiceEnabled, Mode=TwoWay}" /> -->
+                                        </StackLayout>
+                                        <!-- <Label                    
                         Grid.Column="1"
                         Text="Search"
                         HorizontalOptions="End"
                         Style="{StaticResource NavigationButtonStyle}"/> -->
-                </Grid>
-                <Grid
-                    Grid.Row="1"
-                    ColumnDefinitions="*, Auto">
-                    <Image Source="rachel_green.png"
-                           Aspect="AspectFit"
-                           x:Name="ProfileImage"/>
+                                </Grid>
+                                <Grid
+                                        Grid.Row="1"
+                                        ColumnDefinitions="*, Auto">
+                                        <Image Source="rachel_green.png"
+                                               Aspect="AspectFit"
+                                               x:Name="ProfileImage"/>
 
-                    <Label
-                        Text="{Binding User.Name}"
-                        Style="{StaticResource UsernameTextStyle}"/>
-                    <!-- <StackLayout 
+                                        <Label
+                                                Text="{Binding User.Name}"
+                                                Style="{StaticResource UsernameTextStyle}"/>
+                                        <!-- <StackLayout 
                         Grid.Column="1" 
                         Style="{StaticResource ButtonsContainerStyle}">
                         <Grid>
@@ -245,27 +250,26 @@
                                 Style="{StaticResource CircularButtonImageStyle}"/>
                         </Grid>
                     </StackLayout> -->
-                </Grid>
-            </Grid>
-            <Grid
-                Grid.Row="1">
-                <BoxView
-                    Style="{StaticResource ChatAdornerStyle}"/>
-                <Grid
-                    RowDefinitions="*, Auto">
-                    <Grid>
-                        <CollectionView 
-                            x:Name="MessagesCollectionView"
-                            ItemSizingStrategy="MeasureAllItems"
-                            ItemsSource="{Binding Messages}"
-                            ItemTemplate="{StaticResource MessageDataTemplateSelector}"
-                            Style="{StaticResource ChatCollectionStyle}"
-                            VerticalOptions="FillAndExpand"
-                            HorizontalOptions="FillAndExpand"                             
-                            BackgroundColor="Transparent" 
-                            />
+                                </Grid>
+                        </Grid>
+                        <Grid
+                                Grid.Row="1">
+                                <BoxView
+                                        Style="{StaticResource ChatAdornerStyle}"/>
+                                <Grid
+                                        RowDefinitions="*, Auto">
+                                        <Grid>
+                                                <CollectionView
+                                                        x:Name="MessagesCollectionView"
+                                                        ItemSizingStrategy="MeasureAllItems"
+                                                        ItemsSource="{Binding Messages}"
+                                                        ItemTemplate="{StaticResource MessageDataTemplateSelector}"
+                                                        Style="{StaticResource ChatCollectionStyle}"
+                                                        VerticalOptions="FillAndExpand"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        BackgroundColor="Transparent"/>
 
-                        <!-- <CollectionView x:Name="MessagesCollectionView"
+                                                <!-- <CollectionView x:Name="MessagesCollectionView"
                                         ItemsSource="{Binding Messages}"
                                         SelectionMode="None"
                                         HeightRequest="300"
@@ -284,39 +288,39 @@
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView> -->
-                    </Grid>
-                    <Frame
-                        Grid.Row="1"
-                        Style="{StaticResource ChatEntryContainerStyle}">
-                        <Grid
-                            ColumnDefinitions="*, Auto">
-                            <controls:BorderlessEntry
-                                Placeholder="Type your message..."
-                                Style="{StaticResource ChatEntryStyle}"
-                                x:Name="MessageEntry"
-                                Completed="MessageEntry_Completed"
-                                Text="{Binding MessageText, Mode=TwoWay}"/>
-                            <Grid
-                                Grid.Column="1"
-                                Style="{StaticResource SearchButtonContainerStyle}">
-                                <Ellipse
-                                    Fill="{StaticResource PrimaryBrush}"
-                                    Style="{StaticResource SearchButtonEllipseStyle}"/>
-                                <Image
-                                    Source="send.png"
-                                    Style="{StaticResource SearchButtonImageStyle}"/>
-                                <ImageButton Grid.Column="0"
-                                             x:Name="ImgBackBtn"
-                                             Source="left_arrow_icon"
-                                             HeightRequest="30"
-                                             WidthRequest="30"
-                                             HorizontalOptions="Center"
-                                             Clicked="ImgSendBtn_Clicked"/>
-                            </Grid>
+                                        </Grid>
+                                        <Frame
+                                                Grid.Row="1"
+                                                Style="{StaticResource ChatEntryContainerStyle}">
+                                                <Grid
+                                                        ColumnDefinitions="*, Auto">
+                                                        <controls:BorderlessEntry
+                                                                Placeholder="Type your message..."
+                                                                Style="{StaticResource ChatEntryStyle}"
+                                                                x:Name="MessageEntry"
+                                                                Completed="MessageEntry_Completed"
+                                                                Text="{Binding MessageText, Mode=TwoWay}"/>
+                                                        <Grid
+                                                                Grid.Column="1"
+                                                                Style="{StaticResource SearchButtonContainerStyle}">
+                                                                <Ellipse
+                                                                        Fill="{StaticResource PrimaryBrush}"
+                                                                        Style="{StaticResource SearchButtonEllipseStyle}"/>
+                                                                <Image
+                                                                        Source="send.png"
+                                                                        Style="{StaticResource SearchButtonImageStyle}"/>
+                                                                <ImageButton Grid.Column="0"
+                                                                             x:Name="ImgBackBtn"
+                                                                             Source="left_arrow_icon"
+                                                                             HeightRequest="30"
+                                                                             WidthRequest="30"
+                                                                             HorizontalOptions="Center"
+                                                                             Clicked="ImgSendBtn_Clicked"/>
+                                                        </Grid>
+                                                </Grid>
+                                        </Frame>
+                                </Grid>
                         </Grid>
-                    </Frame>
                 </Grid>
-            </Grid>
-        </Grid>
-    </ContentPage.Content>
+        </ContentPage.Content>
 </ContentPage>
