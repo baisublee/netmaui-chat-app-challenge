@@ -9,7 +9,7 @@
         <ResourceDictionary>
 
             <!-- COLORS -->
-            <Color x:Key="PrimaryColor">White</Color>
+            <Color x:Key="PrimaryColor">#F4F4F4</Color>
             <Color x:Key="SecondaryColor">Yellow</Color>
             
             <!-- BRUSHES -->

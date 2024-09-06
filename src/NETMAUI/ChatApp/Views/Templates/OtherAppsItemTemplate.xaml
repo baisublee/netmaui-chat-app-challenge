@@ -15,7 +15,7 @@
             <Frame Grid.Column="0"
                    Padding="20"
                    CornerRadius="10"
-                   BackgroundColor="LightGray"
+                   BackgroundColor="White"
                    HasShadow="False"
                    Margin="10"
                    HorizontalOptions="End">
@@ -55,7 +55,7 @@
             <Frame Grid.Column="2"
                    Padding="20"
                    CornerRadius="10"
-                   BackgroundColor="LightGray"
+                   BackgroundColor="White"
                    HasShadow="False"
                    Margin="10"
                    HorizontalOptions="Start">

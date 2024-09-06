@@ -12,6 +12,7 @@
                    CornerRadius="40"
                    HeightRequest="80"
                    WidthRequest="80"
+                   HasShadow="False"
                    IsClippedToBounds="True"
                    HorizontalOptions="Center"
                    Margin="0,0,15,0"

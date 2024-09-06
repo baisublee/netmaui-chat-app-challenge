@@ -111,7 +111,7 @@
                         <Style x:Key="ChatAdornerStyle"
                                TargetType="BoxView">
                                 <Setter Property="Color"
-                                        Value="White"/>
+                                        Value="{StaticResource PrimaryColor}"/>
                                 <Setter Property="CornerRadius"
                                         Value="24, 24, 0, 0"/>
                         </Style>
@@ -272,7 +272,7 @@
                                                         Style="{StaticResource ChatCollectionStyle}"
                                                         VerticalOptions="FillAndExpand"
                                                         HorizontalOptions="FillAndExpand"
-                                                        BackgroundColor="Transparent"/>
+                                                        BackgroundColor="{StaticResource PrimaryColor}"/>
 
                                                 <!-- <CollectionView x:Name="MessagesCollectionView"
                                         ItemsSource="{Binding Messages}"

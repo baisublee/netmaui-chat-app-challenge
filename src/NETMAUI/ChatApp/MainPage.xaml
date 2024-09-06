@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ChatApp.ViewModels"
              x:Class="ChatApp.MainPage"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="White">
+             BackgroundColor="{StaticResource PrimaryColor}">
 
     <ContentPage.BindingContext>
         <local:MainPageViewModel/>
@@ -233,7 +233,7 @@
             <ContentView x:Name="ContentFrame"
                     VerticalOptions="FillAndExpand"
                     HeightRequest="1020"
-                    BackgroundColor="White">
+                    BackgroundColor="{StaticResource PrimaryColor}">
                 <!-- This will be dynamically populated with ChatPage or CreationPage -->
             </ContentView>
         </VerticalStackLayout>
