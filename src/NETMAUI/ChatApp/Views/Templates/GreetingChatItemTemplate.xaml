@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              x:Class="ChatApp.Views.Templates.GreetingChatItemTemplate">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatApp.Views.Templates.GreetingChatItemTemplate">
     <ContentView.Content>
         <Grid Padding="10"
-                ColumnDefinitions="Auto, *, Auto"
-                VerticalOptions="Start">
+              ColumnDefinitions="Auto, *, Auto"
+              VerticalOptions="Start">
             <!-- Profile Picture -->
-            <Image Grid.Column="0"
-                   Source="{Binding Sender.AvatarImage}"
+            <Frame Grid.Column="0"
+                   Padding="0"
+                   CornerRadius="40"
                    HeightRequest="80"
                    WidthRequest="80"
-                   Aspect="AspectFill"
-                   Margin="0,10,10,10"
-                   Clip="Ellipse"/>
+                   IsClippedToBounds="True"
+                   HorizontalOptions="Center"
+                   Margin="0,0,15,0"
+                   VerticalOptions="Center">
+                <Image Source="{Binding Sender.AvatarImage}"
+                       Aspect="AspectFill"/>
+            </Frame>
 
             <!-- Greeting Text Area -->
             <StackLayout Grid.Column="1"
-                    VerticalOptions="Center">
+                         VerticalOptions="Center">
                 <!-- Greeting Title -->
                 <Label Text="{Binding Sender.CharacterName}"
                        FontAttributes="Bold"
