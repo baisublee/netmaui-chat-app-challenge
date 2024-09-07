@@ -29,7 +29,7 @@
                 <Setter Property="Margin" Value="12" />
             </Style>
             
-            <Color x:Key="MessageColor">#F7F7F8</Color>
+            <Color x:Key="MessageColor">#FFFFFF</Color>
 
             <Style x:Key="MessageShapeStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="{StaticResource MessageColor}" />

@@ -61,6 +61,9 @@ namespace ChatApp.ViewModels
 
         public ICommand BackCommand => new Command(OnBack);
 
+        // Command for the first button (Create Music)
+
+
         public override Task InitializeAsync(object navigationData)
         {
             if (navigationData is Message message)

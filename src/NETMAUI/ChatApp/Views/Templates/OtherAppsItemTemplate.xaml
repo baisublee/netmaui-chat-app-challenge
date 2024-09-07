@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ChatApp.Views.Templates.OtherAppsItemTemplate">
-
+             x:Class="ChatApp.Views.Templates.OtherAppsItemTemplate"
+             xmlns:viewmodel="clr-namespace:ChatApp.ViewModels">
     <ContentView.Content>
         <!-- A Grid layout for centering two buttons -->
         <Grid Padding="20"
