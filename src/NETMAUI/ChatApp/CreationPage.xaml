@@ -23,6 +23,8 @@
                        IsClippedToBounds="True"
                        HasShadow="False"> <!-- No shadow -->
                     <Image Source="user_profile_placeholder.png"
+                            HeightRequest="60"
+                            WidthRequest="60"
                            Aspect="AspectFill" />
                 </Frame>
                 <Button Text="Edit"
@@ -112,10 +114,10 @@
                     Command="{Binding CreateCommand}"
                     HorizontalOptions="Center"
                     VerticalOptions="End"
-                    BackgroundColor="{StaticResource GradientPurpleColor}"
+                    BackgroundColor="{StaticResource SecondaryColor}"
                     TextColor="White"
                     FontAttributes="Bold"
-                    CornerRadius="30" 
+                    CornerRadius="20" 
                     WidthRequest="200"
                     HeightRequest="50"/> 
 

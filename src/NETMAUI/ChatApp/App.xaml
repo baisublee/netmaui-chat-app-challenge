@@ -10,7 +10,7 @@
 
             <!-- COLORS -->
             <Color x:Key="PrimaryColor">#F4F4F4</Color>
-            <Color x:Key="SecondaryColor">Yellow</Color>
+            <Color x:Key="SecondaryColor">#A084F7</Color>
 
             <!-- BRUSHES -->
             <SolidColorBrush x:Key="PrimaryBrush"
