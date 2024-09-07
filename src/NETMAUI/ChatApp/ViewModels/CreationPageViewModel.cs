@@ -5,6 +5,7 @@ using ChatApp.ViewModels;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls;
+using System.Diagnostics;
 
 namespace ChatApp.ViewModels
 {
@@ -53,11 +54,13 @@ namespace ChatApp.ViewModels
         private void OnCreateCharacter()
         {
             // Add logic to send the form data to the API
+            Debug.WriteLine("Creating character...");
         }
 
         private void OnEditImage()
         {
             // Handle image editing logic
+            Debug.WriteLine("Editing image...");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
