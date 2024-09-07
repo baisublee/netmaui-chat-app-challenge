@@ -115,7 +115,8 @@ namespace ChatApp
                 {
                     // Load the CreationPage if IsCreateItem is true
                     // ContentFrame.Content = new CreationPage();
-                    var creationPage = new CreationPage();
+                    var creationPage = new CreationPage ();
+                    
                     var wrapper = new ContentView
                     {
                         Content = creationPage.Content

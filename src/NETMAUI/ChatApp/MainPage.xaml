@@ -6,9 +6,9 @@
              Shell.NavBarIsVisible="False"
              BackgroundColor="{StaticResource PrimaryColor}">
 
-    <ContentPage.BindingContext>
+    <!-- <ContentPage.BindingContext>
         <local:MainPageViewModel/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext> -->
 
     <Grid>
         <Grid.ColumnDefinitions>

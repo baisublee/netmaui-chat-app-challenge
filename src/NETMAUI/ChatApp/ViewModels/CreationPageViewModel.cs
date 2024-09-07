@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
-using ChatApp.ViewModels;
+using ChatApp.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.Maui.Controls;
@@ -11,8 +11,10 @@ namespace ChatApp.ViewModels
 {
     public class CreationPageViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        public string TestName { get; set; } = "Hello, World! from test name";
+        
         // Fields bound to the form
-        public string CharacterName { get; set; }
+        public string CharacterName { get; set; } = "Hello, World!";
         public string SelectedGender { get; set; }
         public string SelectedPronouns { get; set; }
         public string SelectedStageOfLife { get; set; }
@@ -30,6 +32,10 @@ namespace ChatApp.ViewModels
 
         public CreationPageViewModel()
         {
+            // Initialize commands
+            CreateCommand = new Command(OnCreateCharacter);
+            EditImageCommand = new Command(OnEditImage);
+
             // Initialize lists with enum values from the API
             GenderOptions = new ObservableCollection<string>
             {
@@ -46,9 +52,6 @@ namespace ChatApp.ViewModels
                 "Childhood", "Adolescence", "Young Adult", "Adulthood", "Middle age", "Senior age/elderly", "Other"
             };
 
-            // Initialize commands
-            CreateCommand = new Command(OnCreateCharacter);
-            EditImageCommand = new Command(OnEditImage);
         }
 
         private void OnCreateCharacter()
@@ -63,11 +66,13 @@ namespace ChatApp.ViewModels
             Debug.WriteLine("Editing image...");
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }

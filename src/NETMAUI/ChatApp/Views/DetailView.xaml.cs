@@ -10,7 +10,7 @@ namespace ChatApp.Views
     public partial class DetailView : ContentPage
     {
         // public ObservableCollection<Message> Messages { get; set; }
-        private DetailViewModel _viewModel;
+        // private DetailViewModel _viewModel;
 
         enum CommunicationOption
         {
@@ -61,8 +61,8 @@ namespace ChatApp.Views
                     AvatarImage = selectedCharacter.Image,
                     CharacterName = selectedCharacter.Name,
                 };
-                _viewModel = new DetailViewModel();
-                _viewModel.LoadMessagesForUser(_user);
+                // _viewModel = new DetailViewModel();
+                // _viewModel.LoadMessagesForUser(_user);
 
 
                 // MessagesCollectionView.ScrollTo(lastItem, position: ScrollToPosition.End, animate: false);
@@ -139,18 +139,18 @@ namespace ChatApp.Views
         //     }
         // }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+        // protected override void OnAppearing()
+        // {
+        //     base.OnAppearing();
 
-            // Access the passed CharacterViewModel if needed
-            if (_viewModel != null && _viewModel.User != null)
-            {
-                Debug.WriteLine("DetailView appearing, refreshing data.");
-                _viewModel.LoadMessagesForUser(_viewModel.User);
-                // Update UI or perform actions based on the character
-            }
-        }
+        //     // Access the passed CharacterViewModel if needed
+        //     if (_viewModel != null && _viewModel.User != null)
+        //     {
+        //         Debug.WriteLine("DetailView appearing, refreshing data.");
+        //         _viewModel.LoadMessagesForUser(_viewModel.User);
+        //         // Update UI or perform actions based on the character
+        //     }
+        // }
 
         private async void MessageEntry_Completed(object sender, EventArgs e)
         {
