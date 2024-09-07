@@ -1,14 +1,15 @@
+using System;
 using Microsoft.Maui.Controls;
+using ChatApp.ViewModels;
 
 namespace ChatApp
 {
-    public partial class CreationPage : ContentView
+    public partial class CreationPage : ContentPage
     {
         public CreationPage()
         {
             InitializeComponent();
+            BindingContext = new CreationPageViewModel();
         }
-
-        // Add any event handlers or methods specific to the CreationPage here
     }
 }

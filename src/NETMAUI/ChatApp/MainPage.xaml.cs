@@ -62,11 +62,11 @@ namespace ChatApp
 
                 var selectedCharacterId = await ChatPersistService.Instance.GetPersistedSelectedCharacterId();
                 CharacterViewModel selectedCharacter = null;
-                if(selectedCharacterId != null)
+                if (selectedCharacterId != null)
                 {
                     selectedCharacter = CharacterList.Find(c => c.Id == selectedCharacterId);
                 }
-                if(selectedCharacter == null)
+                if (selectedCharacter == null)
                 {
                     selectedCharacter = CharacterList.FirstOrDefault();
                 }
@@ -101,7 +101,7 @@ namespace ChatApp
                 Console.WriteLine($"Character Tapped: {tappedCharacter.Name}");
                 Debug.WriteLine($"Character Tapped: {tappedCharacter.Name}");
 
-                if(tappedCharacter.Id != "create")
+                if (tappedCharacter.Id != "create")
                 {
                     Debug.WriteLine($"Persist Selected Character: {tappedCharacter.Name}");
                     await ChatPersistService.Instance.SaveSelectedCharacterId(tappedCharacter.Id);
@@ -114,7 +114,13 @@ namespace ChatApp
                 if (tappedCharacter.IsCreateItem)
                 {
                     // Load the CreationPage if IsCreateItem is true
-                    ContentFrame.Content = new CreationPage();
+                    // ContentFrame.Content = new CreationPage();
+                    var creationPage = new CreationPage();
+                    var wrapper = new ContentView
+                    {
+                        Content = creationPage.Content
+                    };
+                    ContentFrame.Content = wrapper;
                 }
                 else
                 {

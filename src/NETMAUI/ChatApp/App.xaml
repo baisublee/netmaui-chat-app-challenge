@@ -1,4 +1,4 @@
-﻿<Application 
+﻿<Application
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
@@ -11,14 +11,87 @@
             <!-- COLORS -->
             <Color x:Key="PrimaryColor">#F4F4F4</Color>
             <Color x:Key="SecondaryColor">Yellow</Color>
-            
+
             <!-- BRUSHES -->
-            <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
-            <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
-            
+            <SolidColorBrush x:Key="PrimaryBrush"
+                    Color="{StaticResource PrimaryColor}"/>
+            <SolidColorBrush x:Key="SecondaryBrush"
+                    Color="{StaticResource SecondaryColor}"/>
+
             <!-- CONVERTERS -->
-            <converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-            
+            <converters:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+
+            <!-- Outlined Entry Style -->
+            <Style x:Key="OutlinedEntryStyle"
+                    TargetType="Entry">
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
+                <Setter Property="TextColor"
+                        Value="Black"/>
+                <Setter Property="HeightRequest"
+                        Value="50"/>
+                <!-- <Setter Property="BorderColor"
+                        Value="LightGray"/> -->
+                <!-- <Setter Property="CornerRadius"
+                        Value="10"/> -->
+                <!-- <Setter Property="Padding"
+                        Value="10"/> -->
+                <Setter Property="FontSize"
+                        Value="16"/>
+            </Style>
+
+            <!-- Outlined Picker Style -->
+            <Style x:Key="OutlinedPickerStyle"
+                    TargetType="Picker">
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
+                <Setter Property="TextColor"
+                        Value="Black"/>
+                <Setter Property="HeightRequest"
+                        Value="50"/>
+                <!-- <Setter Property="BorderColor"
+                        Value="LightGray"/> -->
+                <!-- <Setter Property="CornerRadius"
+                        Value="10"/> -->
+                <!-- <Setter Property="Padding"
+                        Value="10"/> -->
+                <Setter Property="FontSize"
+                        Value="16"/>
+            </Style>
+
+            <!-- Outlined Editor Style -->
+            <Style x:Key="OutlinedEditorStyle"
+                    TargetType="Editor">
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
+                <Setter Property="TextColor"
+                        Value="Black"/>
+                <Setter Property="HeightRequest"
+                        Value="100"/>
+                <!-- <Setter Property="BorderColor"
+                        Value="LightGray"/>
+                <Setter Property="CornerRadius"
+                        Value="10"/>
+                <Setter Property="Padding"
+                        Value="10"/> -->
+                <Setter Property="FontSize"
+                        Value="16"/>
+            </Style>
+
+            <!-- Gradient Purple Color -->
+            <LinearGradientBrush x:Key="GradientPurpleColor">
+                <GradientStop Color="#8A2BE2"
+                        Offset="0.0"/>
+                <GradientStop Color="#9370DB"
+                        Offset="1.0"/>
+            </LinearGradientBrush>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="PlaceholderColor" Value="Gray" />
+                <!-- Remove or replace the BorderColor property -->
+                <!-- <Setter Property="BorderColor" Value="Gray" /> -->
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
