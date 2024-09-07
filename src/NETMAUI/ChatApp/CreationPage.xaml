@@ -5,159 +5,155 @@
              xmlns:viewmodel="clr-namespace:ChatApp.ViewModels"
              x:Class="ChatApp.CreationPage"
              Title="Create a gram AI assistant">
-    <ContentPage.BindingContext>
+       <!-- <ContentPage.BindingContext>
         <viewmodel:CreationPageViewModel/>
-    </ContentPage.BindingContext>
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Padding="20"
-                         Spacing="20">
+    </ContentPage.BindingContext> -->
+       <ContentPage.Content>
+              <ScrollView HeightRequest="1020">
+                     <StackLayout Padding="20"
+                                  Spacing="20">
 
-                <!-- Header -->
-                <Label Text="Create a gram AI assistant"
-                       FontSize="Large"
-                       HorizontalOptions="Center"
-                       TextColor="Black"
-                       FontAttributes="Bold"/>
+                            <!-- Header -->
+                            <Label Text="Create a gram AI assistant"
+                                   FontSize="Large"
+                                   HorizontalOptions="Center"
+                                   TextColor="Black"
+                                   FontAttributes="Bold"/>
 
-                <!-- User Image Section -->
-                <StackLayout HorizontalOptions="Center">
-                    <Frame CornerRadius="50"
-                           Padding="0"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           IsClippedToBounds="True"
-                           HasShadow="False">
-                        <!-- No shadow -->
-                        <Image Source="user_profile_placeholder.png"
-                               HeightRequest="60"
-                               WidthRequest="60"
-                               Aspect="AspectFill"/>
-                    </Frame>
-                    <Button Text="Edit"
-                            Command="{Binding EditImageCommand}"
-                            VerticalOptions="End"
-                            HorizontalOptions="Center"/>
-                </StackLayout>
-
-                <!-- Basic Information Section -->
-                <Frame Padding="20"
-                       HasShadow="False">
-                    <!-- Remove shadow -->
-                    <StackLayout Spacing="15">
-                        <Label Text="{Binding TestName}"
-                               FontSize="Medium"
-                               FontAttributes="Bold"
-                               TextColor="Black"/>
-                        <!-- Basic Information Title -->
-                        <Label Text="Basic Information"
-                               FontSize="Medium"
-                               FontAttributes="Bold"
-                               TextColor="Gray"/>
-
-                        <!-- Name, Gender, Pronouns, and Stage of Life -->
-                        <Grid ColumnDefinitions="*, *"
-                              RowDefinitions="Auto, Auto"
-                              ColumnSpacing="20">
-
-                            <!-- First Row: Name and Gender -->
-                            <StackLayout Grid.Column="0"
-                                         Spacing="5">
-                                <Label Text="Name*"
-                                       VerticalOptions="Center"/>
-                                <Entry Placeholder="e.g. Albert Einstein"
-                                       Text="{Binding CharacterName}"
-                                       Style="{StaticResource OutlinedEntryStyle}"/>
-                                <!-- Outlined style -->
+                            <!-- User Image Section -->
+                            <StackLayout HorizontalOptions="Center">
+                                   <Frame CornerRadius="50"
+                                          Padding="0"
+                                          HeightRequest="100"
+                                          WidthRequest="100"
+                                          IsClippedToBounds="True"
+                                          HasShadow="False">
+                                          <!-- No shadow -->
+                                          <Image Source="user_profile_placeholder.png"
+                                                 HeightRequest="60"
+                                                 WidthRequest="60"
+                                                 Aspect="AspectFill"/>
+                                   </Frame>
+                                   <Button Text="Edit"
+                                           Command="{Binding EditImageCommand}"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="Center"/>
                             </StackLayout>
 
-                            <StackLayout Grid.Column="1"
-                                         Spacing="5">
-                                <Label Text="Gender"
-                                       VerticalOptions="Center"/>
-                                <Picker Title="Select"
-                                        ItemsSource="{Binding GenderOptions}"
-                                        SelectedItem="{Binding SelectedGender}"
-                                        Style="{StaticResource OutlinedPickerStyle}"/>
-                                <!-- Outlined Picker -->
-                            </StackLayout>
+                            <!-- Basic Information Section -->
+                            <Frame Padding="20"
+                                   HasShadow="False">
+                                   <!-- Remove shadow -->
+                                   <StackLayout Spacing="15">
+                                          <!-- Basic Information Title -->
+                                          <Label Text="Basic Information"
+                                                 FontSize="Medium"
+                                                 FontAttributes="Bold"
+                                                 TextColor="Gray"/>
 
-                            <!-- Second Row: Pronouns and Stage of Life -->
-                            <StackLayout Grid.Row="1"
-                                         Grid.Column="0"
-                                         Spacing="5">
-                                <Label Text="Pronouns"
-                                       VerticalOptions="Center"/>
-                                <Picker Title="Select"
-                                        ItemsSource="{Binding PronounsOptions}"
-                                        SelectedItem="{Binding SelectedPronouns}"
-                                        Style="{StaticResource OutlinedPickerStyle}"/>
-                                <!-- Outlined Picker -->
-                            </StackLayout>
+                                          <!-- Name, Gender, Pronouns, and Stage of Life -->
+                                          <Grid ColumnDefinitions="*, *"
+                                                RowDefinitions="Auto, Auto"
+                                                ColumnSpacing="20">
 
-                            <StackLayout Grid.Row="1"
-                                         Grid.Column="1"
-                                         Spacing="5">
-                                <Label Text="Stage of life"
-                                       VerticalOptions="Center"/>
-                                <Picker Title="Select"
-                                        ItemsSource="{Binding StageOfLifeOptions}"
-                                        SelectedItem="{Binding SelectedStageOfLife}"
-                                        Style="{StaticResource OutlinedPickerStyle}"/>
-                                <!-- Outlined Picker -->
-                            </StackLayout>
-                        </Grid>
+                                                 <!-- First Row: Name and Gender -->
+                                                 <StackLayout Grid.Column="0"
+                                                              Spacing="5">
+                                                        <Label Text="Name*"
+                                                               VerticalOptions="Center"/>
+                                                        <Entry Placeholder="e.g. Albert Einstein"
+                                                               Text="{Binding CharacterName}"
+                                                               Style="{StaticResource OutlinedEntryStyle}"/>
+                                                        <!-- Outlined style -->
+                                                 </StackLayout>
 
-                    </StackLayout>
-                </Frame>
+                                                 <StackLayout Grid.Column="1"
+                                                              Spacing="5">
+                                                        <Label Text="Gender"
+                                                               VerticalOptions="Center"/>
+                                                        <Picker 
+                                                                ItemsSource="{Binding GenderOptions}"
+                                                                SelectedItem="{Binding SelectedGender}"
+                                                                Style="{StaticResource OutlinedPickerStyle}"/>
+                                                        <!-- Outlined Picker -->
+                                                 </StackLayout>
 
-                <!-- Core Description Section -->
-                <Frame Padding="20"
-                       HasShadow="False">
-                    <!-- Remove shadow -->
-                    <StackLayout Spacing="10">
-                        <Label Text="Core description*"
-                               VerticalOptions="Center"/>
-                        <Editor Placeholder="Enter core description"
-                                Text="{Binding CoreDescription}"
-                                AutoSize="TextChanges"
-                                MaxLength="32000"
-                                HeightRequest="100"
-                                Style="{StaticResource OutlinedEditorStyle}"/>
-                        <!-- Outlined Editor -->
-                    </StackLayout>
-                </Frame>
+                                                 <!-- Second Row: Pronouns and Stage of Life -->
+                                                 <StackLayout Grid.Row="1"
+                                                              Grid.Column="0"
+                                                              Spacing="5">
+                                                        <Label Text="Pronouns"
+                                                               VerticalOptions="Center"/>
+                                                        <Picker 
+                                                                ItemsSource="{Binding PronounsOptions}"
+                                                                SelectedItem="{Binding SelectedPronouns}"
+                                                                Style="{StaticResource OutlinedPickerStyle}"/>
+                                                        <!-- Outlined Picker -->
+                                                 </StackLayout>
 
-                <!-- Greeting Message Section -->
-                <Frame Padding="20"
-                       HasShadow="False">
-                    <!-- Remove shadow -->
-                    <StackLayout Spacing="10">
-                        <Label Text="Greeting message"
-                               VerticalOptions="Center"/>
-                        <Editor Placeholder="Enter greeting message"
-                                Text="{Binding GreetingMessage}"
-                                AutoSize="TextChanges"
-                                MaxLength="500"
-                                HeightRequest="100"
-                                Style="{StaticResource OutlinedEditorStyle}"/>
-                        <!-- Outlined Editor -->
-                    </StackLayout>
-                </Frame>
+                                                 <StackLayout Grid.Row="1"
+                                                              Grid.Column="1"
+                                                              Spacing="5">
+                                                        <Label Text="Stage of life"
+                                                               VerticalOptions="Center"/>
+                                                        <Picker 
+                                                                ItemsSource="{Binding StageOfLifeOptions}"
+                                                                SelectedItem="{Binding SelectedStageOfLife}"
+                                                                Style="{StaticResource OutlinedPickerStyle}"/>
+                                                        <!-- Outlined Picker -->
+                                                 </StackLayout>
+                                          </Grid>
 
-                <!-- Create Button -->
-                <Button Text="Create"
-                        Command="{Binding CreateCommand}"
-                        HorizontalOptions="Center"
-                        VerticalOptions="End"
-                        BackgroundColor="{StaticResource SecondaryColor}"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        CornerRadius="20"
-                        WidthRequest="200"
-                        HeightRequest="50"/>
+                                   </StackLayout>
+                            </Frame>
 
-            </StackLayout>
-        </ScrollView>
-    </ContentPage.Content>
+                            <!-- Core Description Section -->
+                            <Frame Padding="20"
+                                   HasShadow="False">
+                                   <!-- Remove shadow -->
+                                   <StackLayout Spacing="10">
+                                          <Label Text="Core description*"
+                                                 VerticalOptions="Center"/>
+                                          <Editor Placeholder="Enter core description"
+                                                  Text="{Binding CoreDescription}"
+                                                  AutoSize="TextChanges"
+                                                  MaxLength="32000"
+                                                  HeightRequest="100"
+                                                  Style="{StaticResource OutlinedEditorStyle}"/>
+                                          <!-- Outlined Editor -->
+                                   </StackLayout>
+                            </Frame>
+
+                            <!-- Greeting Message Section -->
+                            <Frame Padding="20"
+                                   HasShadow="False">
+                                   <!-- Remove shadow -->
+                                   <StackLayout Spacing="10">
+                                          <Label Text="Greeting message"
+                                                 VerticalOptions="Center"/>
+                                          <Editor Placeholder="Enter greeting message"
+                                                  Text="{Binding GreetingMessage}"
+                                                  AutoSize="TextChanges"
+                                                  MaxLength="500"
+                                                  HeightRequest="100"
+                                                  Style="{StaticResource OutlinedEditorStyle}"/>
+                                          <!-- Outlined Editor -->
+                                   </StackLayout>
+                            </Frame>
+
+                            <!-- Create Button -->
+                            <Button Text="Create"
+                                    Command="{Binding CreateCommand}"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="End"
+                                    BackgroundColor="{StaticResource SecondaryColor}"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="20"
+                                    WidthRequest="200"
+                                    HeightRequest="50"/>
+
+                     </StackLayout>
+              </ScrollView>
+       </ContentPage.Content>
 </ContentPage>
