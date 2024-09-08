@@ -217,5 +217,20 @@ namespace ChatApp
             // ViewModel.Characters.Add(newCharacter);
             // await ChatPersistService.Instance.SaveSelectedCharacterId(newCharacter.Id);
         }
+
+        // Method from IMainPageActions for creating an image
+        public async Task<string> CreateImage()
+        {
+            // Placeholder implementation for creating or retrieving an image
+            Debug.WriteLine("CreateImage called");
+
+            // Simulate image creation process (this could be image download, generation, etc.)
+            string imageUrl = "https://example.com/created_image.png";  // Example URL
+
+            // Return the image URL or path
+            return await Task.FromResult(imageUrl);
+        }
+
+
     }
 }

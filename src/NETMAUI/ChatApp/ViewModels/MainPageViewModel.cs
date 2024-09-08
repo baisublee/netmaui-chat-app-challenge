@@ -46,8 +46,8 @@ namespace ChatApp.ViewModels
 
         public MainPageViewModel(IMainPageActions mainPageActions)
         {
-            
-             _mainPageActions = mainPageActions;
+
+            _mainPageActions = mainPageActions;
 
             Characters = new ObservableCollection<CharacterViewModel>();
             // Command for creating a new character
@@ -132,7 +132,7 @@ namespace ChatApp.ViewModels
         {
             // Initialize commands
             CreateCommand = new Command(async (object obj) => await OnCreateCharacter());
-            EditImageCommand = new Command(OnEditImage);
+            EditImageCommand = new Command(async (object obj) => await OnEditImage() );
 
             // Initialize lists with enum values from the API
             GenderOptions = new ObservableCollection<string>
@@ -160,16 +160,16 @@ namespace ChatApp.ViewModels
             if (string.IsNullOrEmpty(CharacterName) || string.IsNullOrEmpty(CoreDescription))
             {
                 Debug.WriteLine("Please fill in the required fields");
-                
+
                 // Show alert
                 await _mainPageActions.ShowAlert("Create Character", "Please fill in the required fields", "OK");
-        
+
                 return;
             }
-        
+
             // Add logic to send the form data to the API
             Debug.WriteLine("Creating character...");
-            
+
             var requestObject = new
             {
                 character_name = CharacterName,
@@ -190,16 +190,18 @@ namespace ChatApp.ViewModels
             // var requestObject = {
             //     CharacterName: CharacterName,
             // }
-        
-        
-        
-            
+
+
+
+
         }
 
-        private void OnEditImage()
+        private async Task OnEditImage()
         {
             // Handle image editing logic
             Debug.WriteLine("Editing image...");
+            // Create an image for the new character
+            var imageUrl = await _mainPageActions.CreateImage();
         }
 
 
