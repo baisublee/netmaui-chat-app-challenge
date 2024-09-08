@@ -112,12 +112,12 @@ namespace ChatApp.ViewModels
         /* This part comes from Creation Page View Model */
 
         // Fields bound to the form
-        public string CharacterName { get; set; }
-        public string SelectedGender { get; set; }
-        public string SelectedPronouns { get; set; }
-        public string SelectedStageOfLife { get; set; }
-        public string CoreDescription { get; set; }
-        public string GreetingMessage { get; set; }
+        public string CharacterName { get; set; } = "Princess Mononoke";
+        public string SelectedGender { get; set; } = "Female";
+        public string SelectedPronouns { get; set; } = "She/her";
+        public string SelectedStageOfLife { get; set; } = "Adulthood";
+        public string CoreDescription { get; set; } = "Prince Ashitaka's companion and protector of the forest spirits";
+        public string GreetingMessage { get; set; } = "Hello, I am Princess Mononoke";
 
         // Gender, Pronouns, and Stage of Life options from API spec
         public ObservableCollection<string> GenderOptions { get; set; }
@@ -170,6 +170,23 @@ namespace ChatApp.ViewModels
             // Add logic to send the form data to the API
             Debug.WriteLine("Creating character...");
             
+            var requestObject = new
+            {
+                character_name = CharacterName,
+                description = new
+                {
+                    gender = SelectedGender,
+                    pronouns = SelectedPronouns,
+                    stage_of_life = SelectedStageOfLife,
+                    personality = CoreDescription,
+                    details = "",
+                    greeting_message = GreetingMessage
+                }
+            };
+            Debug.WriteLine($"Request object: {requestObject}");
+            await _mainPageActions.AddNewCharacter(requestObject);
+            Debug.WriteLine("Character created successfully");
+
             // var requestObject = {
             //     CharacterName: CharacterName,
             // }

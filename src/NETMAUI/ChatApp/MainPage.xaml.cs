@@ -179,21 +179,33 @@ namespace ChatApp
         }
 
         // Method from IMainPageActions interface for adding a new character
-        public async Task AddNewCharacter(string characterName)
+        public async Task AddNewCharacter(object requestObject)
         {
             // Add new character logic (you can update this as per your app logic)
-            Debug.WriteLine($"Adding new character: {characterName}");
+            Debug.WriteLine($"Adding new character: {requestObject}");
 
-            // For example, you could call a service to add the new character and update the list:
-            var newCharacter = new CharacterViewModel
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = characterName,
-                Image = "new_character_image.png"
-            };
+            // now call api to create a new character
+            var newCharacter = await CAAService.Instance.CreateCharacterAsync(requestObject);
 
-            ViewModel.Characters.Add(newCharacter);
+            Debug.WriteLine($"Character created: {newCharacter.CharacterName}");
+
             await ChatPersistService.Instance.SaveSelectedCharacterId(newCharacter.Id);
+            Debug.WriteLine($"Persist Selected Character: {newCharacter.CharacterName}");
+
+            await LoadCharactersAsync();
+            Debug.WriteLine("Characters reloaded after adding new character");
+
+
+            // // For example, you could call a service to add the new character and update the list:
+            // var newCharacter = new CharacterViewModel
+            // {
+            //     Id = Guid.NewGuid().ToString(),
+            //     Name = characterName,
+            //     Image = "new_character_image.png"
+            // };
+
+            // ViewModel.Characters.Add(newCharacter);
+            // await ChatPersistService.Instance.SaveSelectedCharacterId(newCharacter.Id);
         }        
     }
 }

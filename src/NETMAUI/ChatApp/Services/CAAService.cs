@@ -35,7 +35,7 @@ public class CAAService
         // Get the raw JSON string response
         var responseBody = await response.Content.ReadAsStringAsync();
         Debug.WriteLine("Main Page GetCharactersAsync: " + responseBody);
-        var characterResponse = JsonSerializer.Deserialize<CharacterResponse>(responseBody);
+        var characterResponse = JsonSerializer.Deserialize<CharacterListResponse>(responseBody);
         Debug.WriteLine("Main Page GetCharactersAsync: " + characterResponse.Data.Count);
 
         // var responseBody = await response.Content.ReadAsStringAsync();
@@ -54,9 +54,9 @@ public class CAAService
         response.EnsureSuccessStatusCode();
 
         var responseBody = await response.Content.ReadAsStringAsync();
-        var createdCharacter = JsonSerializer.Deserialize<Character>(responseBody);
+        var createdCharacterResponse = JsonSerializer.Deserialize<CharacterResponse>(responseBody);
 
-        return createdCharacter;
+        return createdCharacterResponse.Data;
     }
 
     // Method to start a chat with a selected character, handling streaming responses
@@ -210,8 +210,14 @@ public class ImageGenerationResponse
     public string ImageData { get; set; } // Base64 encoded image data
 }
 
-public class CharacterResponse
+public class CharacterListResponse
 {
     [JsonPropertyName("data")]
     public List<Character> Data { get; set; }
+}
+
+public class CharacterResponse
+{
+    [JsonPropertyName("data")]
+    public Character Data { get; set; }
 }
