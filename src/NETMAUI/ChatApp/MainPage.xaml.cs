@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Collections.ObjectModel;
 using ChatApp.Views; // Assuming DetailView is in this namespace
 using ChatApp.Services;
+using CommunityToolkit.Maui.Views;
 
 namespace ChatApp
 {
@@ -223,6 +224,10 @@ namespace ChatApp
         {
             // Placeholder implementation for creating or retrieving an image
             Debug.WriteLine("CreateImage called");
+
+            var popup = new CreateAvatarPopup();  // Create an instance of the popup
+            this.ShowPopup(popup);  // Display the popup in the center of the screen
+
 
             // Simulate image creation process (this could be image download, generation, etc.)
             string imageUrl = "https://example.com/created_image.png";  // Example URL

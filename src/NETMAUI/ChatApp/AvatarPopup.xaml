@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+               x:Class="ChatApp.Views.CreateAvatarPopup">
+
+    <Frame CornerRadius="10"
+           Padding="20"
+           HorizontalOptions="Center"
+           VerticalOptions="Center"
+           WidthRequest="300"
+           HeightRequest="400"
+           BackgroundColor="White">
+        <StackLayout Spacing="20">
+            <!-- Avatar Placeholder -->
+            <Frame BorderColor="#E0E0E0"
+                   BackgroundColor="#F5F5F5"
+                   CornerRadius="10"
+                   Padding="20"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   HeightRequest="120"
+                   WidthRequest="120">
+                <Image Source="placeholder_image.png" Aspect="AspectFill" />
+            </Frame>
+
+            <!-- Editor for Image Description -->
+            <Editor Placeholder="Enter image description here"
+                    HeightRequest="100"
+                    BackgroundColor="#F5F5F5"
+                    FontSize="14"
+                    TextColor="Black"/>
+
+            <!-- Buttons Section -->
+            <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
+                <Button Text="Create an image" TextColor="#8C56FF" FontAttributes="Bold" />
+                <Button Text="Cancel" TextColor="Gray" Clicked="OnCancelClicked" />
+                <Button Text="Add" BackgroundColor="#8C56FF" TextColor="White" CornerRadius="20" Clicked="OnAddClicked" />
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</toolkit:Popup>
