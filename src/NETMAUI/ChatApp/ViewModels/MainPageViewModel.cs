@@ -13,6 +13,8 @@ namespace ChatApp.ViewModels
         private ObservableCollection<CharacterViewModel> _characters;
         private CharacterViewModel _selectedCharacter;
 
+        private readonly IMainPageActions _mainPageActions;
+
         public ObservableCollection<CharacterViewModel> Characters
         {
             get => _characters;
@@ -42,8 +44,11 @@ namespace ChatApp.ViewModels
             }
         }
 
-        public MainPageViewModel()
+        public MainPageViewModel(IMainPageActions mainPageActions)
         {
+            
+             _mainPageActions = mainPageActions;
+
             Characters = new ObservableCollection<CharacterViewModel>();
             // Command for creating a new character
             CreateNewCharacterCommand = new Command(OnCreateNewCharacter);
@@ -106,10 +111,8 @@ namespace ChatApp.ViewModels
 
         /* This part comes from Creation Page View Model */
 
-       public string TestName { get; set; } = "Hello, World! from test name";
-        
         // Fields bound to the form
-        public string CharacterName { get; set; } = "Hello, World!";
+        public string CharacterName { get; set; }
         public string SelectedGender { get; set; }
         public string SelectedPronouns { get; set; }
         public string SelectedStageOfLife { get; set; }
@@ -128,7 +131,7 @@ namespace ChatApp.ViewModels
         public void InitCreationPageViewModel()
         {
             // Initialize commands
-            CreateCommand = new Command(OnCreateCharacter);
+            CreateCommand = new Command(async (object obj) => await OnCreateCharacter());
             EditImageCommand = new Command(OnEditImage);
 
             // Initialize lists with enum values from the API
@@ -149,10 +152,31 @@ namespace ChatApp.ViewModels
 
         }
 
-        private void OnCreateCharacter()
+        private async Task OnCreateCharacter()
         {
             // Add logic to send the form data to the API
             Debug.WriteLine("Creating character...");
+            // If CharacterName or CoreDescription is empty, show Alert saying "Please fill in the required fields" 
+            if (string.IsNullOrEmpty(CharacterName) || string.IsNullOrEmpty(CoreDescription))
+            {
+                Debug.WriteLine("Please fill in the required fields");
+                
+                // Show alert
+                await _mainPageActions.ShowAlert("Create Character", "Please fill in the required fields", "OK");
+        
+                return;
+            }
+        
+            // Add logic to send the form data to the API
+            Debug.WriteLine("Creating character...");
+            
+            // var requestObject = {
+            //     CharacterName: CharacterName,
+            // }
+        
+        
+        
+            
         }
 
         private void OnEditImage()

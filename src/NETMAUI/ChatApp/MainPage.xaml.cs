@@ -8,14 +8,14 @@ using ChatApp.Services;
 
 namespace ChatApp
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : ContentPage, IMainPageActions
     {
 
         public MainPageViewModel ViewModel { get; set; }
         public MainPage()
         {
             InitializeComponent();
-            ViewModel = new MainPageViewModel();
+            ViewModel = new MainPageViewModel(this);
             BindingContext = ViewModel;
         }
 
@@ -171,5 +171,29 @@ namespace ChatApp
             // Navigate to the previous page or perform any other action
             // Navigation.PopAsync(); // Example: Navigating back in the navigation stack
         }
+
+        // Method from IMainPageActions interface for showing alert
+        public async Task ShowAlert(string title, string message, string cancel)
+        {
+            await DisplayAlert(title, message, cancel);
+        }
+
+        // Method from IMainPageActions interface for adding a new character
+        public async Task AddNewCharacter(string characterName)
+        {
+            // Add new character logic (you can update this as per your app logic)
+            Debug.WriteLine($"Adding new character: {characterName}");
+
+            // For example, you could call a service to add the new character and update the list:
+            var newCharacter = new CharacterViewModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = characterName,
+                Image = "new_character_image.png"
+            };
+
+            ViewModel.Characters.Add(newCharacter);
+            await ChatPersistService.Instance.SaveSelectedCharacterId(newCharacter.Id);
+        }        
     }
 }
