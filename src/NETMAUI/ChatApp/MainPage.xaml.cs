@@ -115,8 +115,8 @@ namespace ChatApp
                 {
                     // Load the CreationPage if IsCreateItem is true
                     // ContentFrame.Content = new CreationPage();
-                    var creationPage = new CreationPage ();
-                    
+                    var creationPage = new CreationPage();
+
                     var wrapper = new ContentView
                     {
                         Content = creationPage.Content
@@ -167,6 +167,16 @@ namespace ChatApp
         private void OnBackButtonClicked(object sender, EventArgs e)
         {
             Debug.WriteLine("Main Page OnBackButtonClicked");
+
+            LoadCharactersAsync().ContinueWith(t =>
+{
+    if (t.IsCompletedSuccessfully)
+    {
+        Debug.WriteLine("Characters reloaded after adding new character");
+    }
+}, TaskScheduler.FromCurrentSynchronizationContext());
+
+            Debug.WriteLine("Characters reloaded after adding new character");
             // Handle back button click
             // Navigate to the previous page or perform any other action
             // Navigation.PopAsync(); // Example: Navigating back in the navigation stack
@@ -206,6 +216,6 @@ namespace ChatApp
 
             // ViewModel.Characters.Add(newCharacter);
             // await ChatPersistService.Instance.SaveSelectedCharacterId(newCharacter.Id);
-        }        
+        }
     }
 }
