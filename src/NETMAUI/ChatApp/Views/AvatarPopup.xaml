@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="ChatApp.Views.AvatarPopup">
+
+    <!-- Wrap everything in a VerticalStackLayout -->
+    <VerticalStackLayout Spacing="20" Padding="20">
+
+        <!-- Grid for Title and Close Button -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Title -->
+            <Label Grid.Column="0"
+                   Text="Create an avatar image"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Center"/>
+
+            <!-- Close Button -->
+            <Button Grid.Column="1"
+                    Text="X"
+                    BackgroundColor="Transparent"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    Clicked="OnCancelClicked"/>
+        </Grid>
+
+        <!-- Content Layout -->
+        <StackLayout Spacing="20">
+
+            <!-- Image Placeholder -->
+            <Frame HeightRequest="120"
+                   WidthRequest="120"
+                   BorderColor="LightGray"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   HasShadow="False"
+                   BackgroundColor="White">
+                <Image Source="image_placeholder.png"
+                        Aspect="AspectFit"/>
+            </Frame>
+
+            <!-- Editor for Avatar Description -->
+            <Editor x:Name="AvatarDescriptionEditor"
+                    Placeholder="Describe your avatar..."
+                    HeightRequest="150"
+                    FontSize="Medium"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    VerticalOptions="Start"
+                    HorizontalOptions="FillAndExpand"/>
+
+            <!-- Create an Image Button with Icon -->
+            <Button BackgroundColor="Transparent"
+                    Text="Create an image"
+                    TextColor="#7A49E6"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    Clicked="OnCreateImageClicked">
+                <!-- Bind click event -->
+                <Button.ImageSource>
+                    <FontImageSource Glyph="&#xf05e;"
+                                     FontFamily="FontAwesome"
+                                     Color="#7A49E6"/>
+                </Button.ImageSource>
+            </Button>
+
+            <!-- Footer with Cancel and Add Buttons -->
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="End"
+                         VerticalOptions="End"
+                         Spacing="20"
+                         Padding="0,0,0,10">
+
+                <!-- Cancel Button -->
+                <Button Text="Cancel"
+                        TextColor="Black"
+                        BackgroundColor="Transparent"
+                        Clicked="OnCancelClicked"/>
+
+                <!-- Add Button -->
+                <Button Text="Add"
+                        BackgroundColor="#7A49E6"
+                        TextColor="White"
+                        CornerRadius="25"
+                        WidthRequest="80"
+                        Clicked="OnAddClicked"/>
+            </StackLayout>
+
+        </StackLayout>
+        
+    </VerticalStackLayout>
+</toolkit:Popup>
