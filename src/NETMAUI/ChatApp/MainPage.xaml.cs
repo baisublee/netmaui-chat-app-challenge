@@ -225,7 +225,7 @@ namespace ChatApp
             // Placeholder implementation for creating or retrieving an image
             Debug.WriteLine("CreateImage called");
 
-            var popup = new CreateAvatarPopup();  // Create an instance of the popup
+            var popup = new AvatarPopup();  // Create an instance of the popup
             this.ShowPopup(popup);  // Display the popup in the center of the screen
 
 
