@@ -43,7 +43,8 @@
                    HasShadow="False"
                    BackgroundColor="White">
                 <Image Source="image_placeholder.png"
-                        Aspect="AspectFit"/>
+                        Aspect="AspectFit"
+                        x:Name="ImageControl"/>
             </Frame>
 
             <!-- Editor for Avatar Description -->

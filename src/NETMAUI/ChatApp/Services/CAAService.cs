@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using AVFoundation;
 
 public class CAAService
 {
@@ -104,8 +105,11 @@ public class CAAService
     }
 
     // Method to generate an image
-    public async Task<ImageGenerationResponse> GenerateImageAsync(object imageRequest)
+    public async Task<ImageGenerationResponse> GenerateImageAsync(int size, string prompt)
     {
+        var imageRequest = new { width = size,
+            height = size,
+            prompt };
         var jsonPayload = JsonSerializer.Serialize(imageRequest);
         var content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
@@ -113,9 +117,9 @@ public class CAAService
         response.EnsureSuccessStatusCode();
 
         var responseBody = await response.Content.ReadAsStringAsync();
-        var imageResponse = JsonSerializer.Deserialize<ImageGenerationResponse>(responseBody);
+        var imageResponse = JsonSerializer.Deserialize<ImageGenerationDataResponse>(responseBody);
 
-        return imageResponse;
+        return imageResponse.Data;
     }
 }
 
@@ -220,4 +224,9 @@ public class CharacterResponse
 {
     [JsonPropertyName("data")]
     public Character Data { get; set; }
+}
+
+public class ImageGenerationDataResponse {
+    [JsonPropertyName("data")]
+    public ImageGenerationResponse Data { get; set; }
 }
